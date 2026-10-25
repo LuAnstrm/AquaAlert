@@ -1,0 +1,94 @@
+======================================================================
+  AquaAlert – Data Quality Report
+  Generated : 2026-10-25 22:06:13
+  Input     : data\raw\aquaalert_raw.csv
+  Output    : data\processed\aquaalert_features.csv
+======================================================================
+
+PROTOTYPE NOTICE
+  This report documents a student capstone prototype pipeline.
+  It does not constitute an official flood data product.
+
+──────────────────────────────────────────────────────────────────────
+1. ROW COUNTS
+──────────────────────────────────────────────────────────────────────
+  Rows in raw file                 : 305
+  Rows after removing duplicates   : 303
+  Rows removed (duplicates)        : 2
+  Rows in final processed file     : 300
+  Total rows removed overall       : 5
+
+──────────────────────────────────────────────────────────────────────
+2. MISSING-VALUE HANDLING
+──────────────────────────────────────────────────────────────────────
+  flood_risk                               no missing values
+  river_water_level_m                      61 missing → strategy=sentinel=-999.0, flag_col=river_water_level_m_missing, fill=sentinel=-999.0, flag_col=river_water_level_m_missing
+  water_level_change_1h_m                  61 missing → strategy=sentinel=-999.0, flag_col=water_level_change_1h_m_missing, fill=sentinel=-999.0, flag_col=water_level_change_1h_m_missing
+  rainfall_last_3h_mm                      4 missing → strategy=median, fill=12.95
+  rainfall_last_24h_mm                     no missing values
+  forecast_rainfall_next_3h_mm             no missing values
+  elevation_m                              no missing values
+  citizen_report_count                     4 missing → strategy=median, fill=18.0
+  average_reported_flood_depth_cm          no missing values
+  flood_hazard_level                       no missing values
+  drainage_condition                       no missing values
+  barangay                                 no missing values
+  municipality                             no missing values
+
+──────────────────────────────────────────────────────────────────────
+3. CATEGORICAL VALIDATION
+──────────────────────────────────────────────────────────────────────
+  flood_hazard_level             invalid rows dropped: 1
+  drainage_condition             invalid rows dropped: 1
+  flood_risk                     invalid rows dropped: 1
+
+──────────────────────────────────────────────────────────────────────
+4. FINAL FEATURE COLUMNS  (use these as X in model training)
+──────────────────────────────────────────────────────────────────────
+    1. rainfall_last_3h_mm
+    2. rainfall_last_24h_mm
+    3. forecast_rainfall_next_3h_mm
+    4. river_water_level_m
+    5. water_level_change_1h_m
+    6. elevation_m
+    7. citizen_report_count
+    8. average_reported_flood_depth_cm
+    9. obs_hour
+   10. obs_month
+   11. obs_dayofweek
+   12. is_typhoon_season
+   13. river_water_level_m_missing
+   14. water_level_change_1h_m_missing
+   15. flood_hazard_level_enc
+   16. drainage_condition_enc
+   17. rainfall_intensity_3h_cat
+   18. rainfall_ratio_3h_24h
+   19. water_level_rise_cat
+   20. report_density_per_km2
+   21. combined_rain_drainage_risk
+
+──────────────────────────────────────────────────────────────────────
+5. TARGET COLUMN
+──────────────────────────────────────────────────────────────────────
+  Text  : flood_risk      (Low / Moderate / High)
+  Numeric: flood_risk_enc (0=Low, 1=Moderate, 2=High)
+
+──────────────────────────────────────────────────────────────────────
+6. CLASS DISTRIBUTION (flood_risk)
+──────────────────────────────────────────────────────────────────────
+  Low             129 rows  (43.0%)
+  Moderate        153 rows  (51.0%)
+  High             18 rows  (6.0%)
+
+──────────────────────────────────────────────────────────────────────
+7. NOTES FOR THE TEAM
+──────────────────────────────────────────────────────────────────────
+  All numeric thresholds used in feature engineering are PROTOTYPE
+  ASSUMPTIONS. Validate them against local NCR historical data
+  before using this dataset in a production system.
+  The flood_risk target was labeled using proxy sources (NDRRMC
+  sitreps, news archives, LGU bulletins). Treat label accuracy as
+  approximate and document your annotation log alongside this
+  report.
+
+======================================================================

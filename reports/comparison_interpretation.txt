@@ -46,7 +46,7 @@ SECTION 4 – METRIC-BY-METRIC COMPARISON
   Moderate Recall  ⚠ safety               0.689           0.867       RF
   High Recall  ⚠⚠ key metric              1.000           0.667       LR
   High Precision                          0.545           1.000       RF
-  Pred. time (ms, 90 rows)                 41.7            26.1       RF
+  Pred. time (ms, 90 rows)                 54.5            38.0       RF
   ────────────────────────────────────────────────────────────────────
 
 SECTION 5 – SAFETY TARGET ASSESSMENT

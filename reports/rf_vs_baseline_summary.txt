@@ -1,0 +1,32 @@
+======================================================================
+  AquaAlert – Random Forest vs Logistic Regression Baseline
+  (Both models evaluated on the same time-based test set)
+======================================================================
+
+  Metric                                LR Baseline  Random Forest   Δ (RF−LR)
+  ──────────────────────────────────────────────────────────────────
+  Low / precision                             0.795          0.850  ▲ +0.055
+  Low / recall                                0.897          0.872  ▼ -0.025
+  Low / f1-score                              0.843          0.861  ▲ +0.018
+
+  Moderate / precision                        0.886          0.848  ▼ -0.038
+  Moderate / recall                           0.689          0.867  ▲ +0.178
+  Moderate / f1-score                         0.775          0.857  ▲ +0.082
+
+  High / precision                            0.545          1.000  ▲ +0.455
+  High / recall                               1.000          0.667  ▼ -0.333
+  High / f1-score                             0.706          0.800  ▲ +0.094
+
+  macro avg / precision                       0.742          0.899  ▲ +0.157
+  macro avg / recall                          0.862          0.802  ▼ -0.060
+  macro avg / f1-score                        0.775          0.839  ▲ +0.064
+
+──────────────────────────────────────────────────────────────────────
+  Mean metric improvement (RF − LR) : +0.054
+  Verdict : RF outperforms the baseline overall (mean Δ > 0).
+
+  PROTOTYPE NOTICE
+  Results are from a synthetic prototype dataset.  Do not
+  generalise these numbers to real NCR flood patterns without
+  validating on real labelled observations.
+======================================================================
