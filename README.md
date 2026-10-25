@@ -526,13 +526,6 @@ If you reference this project in a paper or report, please state clearly that re
 
 ## 17. Contributors
 
-| Name | Role |
-|---|---|
-| *[Your name here]* | Project lead, ML pipeline, app prototype |
-| *[Teammate name]* | Data engineering, preprocessing |
-| *[Teammate name]* | UI design, app screens |
-| *[Adviser name]* | Faculty adviser |
-
 **Tools and libraries used:**
 - [scikit-learn](https://scikit-learn.org/) — machine learning
 - [imbalanced-learn](https://imbalanced-learn.org/) — SMOTE oversampling
