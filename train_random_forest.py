@@ -67,10 +67,6 @@ OUTPUTS (all in models/ and reports/):
     reports/rf_vs_baseline_summary.txt     – comparison table vs. Logistic Regression
 """
 
-# =============================================================================
-# IMPORTS
-# =============================================================================
-
 import warnings
 import textwrap
 from pathlib import Path
@@ -85,7 +81,7 @@ import pandas as pd
 import seaborn as sns
 
 from imblearn.over_sampling import SMOTE
-from imblearn.pipeline import Pipeline as ImbPipeline   # supports SMOTE in a pipeline
+from imblearn.pipeline import Pipeline as ImbPipeline  
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
@@ -97,13 +93,9 @@ from sklearn.metrics import (
     recall_score,
 )
 from sklearn.model_selection import StratifiedKFold, GridSearchCV
-from sklearn.preprocessing import StandardScaler        # kept for feature-weight parity
+from sklearn.preprocessing import StandardScaler       
 
 warnings.filterwarnings("ignore")
-
-# =============================================================================
-# CONFIGURATION
-# =============================================================================
 
 DATA_FILE   = Path("data/processed/aquaalert_features.csv")
 MODEL_FILE  = Path("models/rf_pipeline_final.pkl")
@@ -113,92 +105,43 @@ FI_PNG      = Path("reports/rf_feature_importance.png")
 FI_CSV      = Path("reports/rf_feature_importance.csv")
 CV_CSV      = Path("reports/rf_cv_results.csv")
 CMP_TXT     = Path("reports/rf_vs_baseline_summary.txt")
-LR_CR_CSV   = Path("reports/lr_classification_report.csv")   # baseline to compare
+LR_CR_CSV   = Path("reports/lr_classification_report.csv")  
 
 CLASS_ORDER = ["Low", "Moderate", "High"]
 
-# ── Time-based split ──────────────────────────────────────────────────────────
-# Same 70/30 ratio used in the Logistic Regression baseline so the test sets
-# are identical and comparisons are fair.
-# PROTOTYPE ASSUMPTION – adjust if you collect more data.
 TRAIN_RATIO = 0.70
 
-# ── SMOTE settings ────────────────────────────────────────────────────────────
-# SMOTE (Synthetic Minority Over-sampling Technique) creates new synthetic rows
-# for the minority class (High risk) so the model sees more examples of it.
-#
-# WHY SMOTE INSTEAD OF class_weight='balanced'?
-# class_weight just re-weights the loss function.  SMOTE actually adds new
-# data points, which helps a Random Forest build more reliable decision trees
-# for the rare class.  We apply SMOTE INSIDE the cross-validation loop so
-# synthetic rows are never created from test-fold data – that would be leakage.
-#
-# k_neighbors: how many real neighbours to use when generating a synthetic row.
-# We use 3 (instead of the default 5) because our minority class has very few
-# real examples (~12 rows in the training split).
-# PROTOTYPE ASSUMPTION – increase when you collect more High-risk observations.
 SMOTE_K_NEIGHBORS = 3
 
-# ── Random Forest hyperparameter search grid ──────────────────────────────────
-# We only search a small, focused grid because:
-#   1. Our dataset is small (300 rows) so exhaustive tuning is unreliable.
-#   2. A large grid takes a long time and can overfit the cross-validation.
-# After collecting more data, expand this grid or switch to RandomizedSearchCV.
-# PROTOTYPE ASSUMPTION – document whatever you change.
 PARAM_GRID = {
-    # n_estimators: number of trees.  More trees = more stable predictions
-    # but slower.  100–300 is the practical range for small datasets.
+
+
     "classifier__n_estimators": [100, 200, 300],
 
-    # max_depth: how deep each tree can grow.  None = unlimited (can overfit).
-    # Limiting depth is the main regularisation knob for Random Forest.
-    # PROTOTYPE ASSUMPTION.
+
     "classifier__max_depth": [None, 10, 20],
 
-    # min_samples_leaf: a leaf node must represent at least this many rows.
-    # Higher values = smoother decision boundaries = less overfitting.
-    # PROTOTYPE ASSUMPTION.
+
     "classifier__min_samples_leaf": [1, 2, 4],
 }
 
-# ── Cross-validation ──────────────────────────────────────────────────────────
-# StratifiedKFold keeps the class proportions in every fold so the rare
-# High-risk class appears in every train/validation partition.
-# We use 5 folds on the training data only; the test set is never touched.
-# PROTOTYPE ASSUMPTION – use 10 folds when you have more data.
 CV_FOLDS = 5
 
-# Primary metric for choosing the best hyperparameter combination.
-# "f1_macro" treats every class equally and penalises missing the rare High class.
-# PROTOTYPE ASSUMPTION – consider "recall_macro" if you prefer maximum sensitivity.
+
 CV_SCORING = "f1_macro"
 
-# Random seed – set once so every run produces the same result.
 RANDOM_STATE = 42
 
-# Number of top features to show in the importance chart.
 TOP_N_FEATURES = 15
-
-# =============================================================================
-# STEP 0 – Create output directories
-# =============================================================================
 
 for p in [MODEL_FILE, CR_CSV, CM_PNG, FI_PNG, CMP_TXT]:
     p.parent.mkdir(parents=True, exist_ok=True)
 
 
-# =============================================================================
-# HELPER
-# =============================================================================
-
 def banner(title: str) -> None:
     w = 65
     print(f"\n{'=' * w}\n  {title}\n{'=' * w}")
 
-
-# =============================================================================
-# STEP 1 – LOAD AND VALIDATE
-# =============================================================================
 
 def load_and_validate(filepath: Path) -> pd.DataFrame:
     """
@@ -225,7 +168,6 @@ def load_and_validate(filepath: Path) -> pd.DataFrame:
           f"{df['timestamp'].max().date()}")
     print()
 
-    # ── Check required columns exist ────────────────────────────────────────
     required = [
         "timestamp", "flood_risk",
         "rainfall_last_3h_mm", "rainfall_last_24h_mm",
@@ -239,7 +181,6 @@ def load_and_validate(filepath: Path) -> pd.DataFrame:
         )
     print("  Required columns present ✓")
 
-    # ── Check target column ──────────────────────────────────────────────────
     bad_labels = set(df["flood_risk"].unique()) - set(CLASS_ORDER)
     if bad_labels:
         raise ValueError(
@@ -248,7 +189,6 @@ def load_and_validate(filepath: Path) -> pd.DataFrame:
         )
     print("  Target labels valid ✓")
 
-    # ── Report class counts ──────────────────────────────────────────────────
     counts = df["flood_risk"].value_counts()
     total  = len(df)
     print("\n  Class distribution:")
@@ -258,7 +198,6 @@ def load_and_validate(filepath: Path) -> pd.DataFrame:
         bar = "█" * int(pct / 3)
         print(f"    {lbl:<10}  {n:>4} rows  ({pct:.1f}%)  {bar}")
 
-    # ── Warn if High class is very small ────────────────────────────────────
     n_high = counts.get("High", 0)
     if n_high < 20:
         print(
@@ -269,7 +208,6 @@ def load_and_validate(filepath: Path) -> pd.DataFrame:
             "     PROTOTYPE ASSUMPTION – document this limitation in your report."
         )
 
-    # ── Check for unexpected NaN in feature columns ──────────────────────────
     numeric_check_cols = [
         "rainfall_last_3h_mm", "rainfall_last_24h_mm",
         "elevation_m", "citizen_report_count",
@@ -286,10 +224,6 @@ def load_and_validate(filepath: Path) -> pd.DataFrame:
 
     return df
 
-
-# =============================================================================
-# STEP 2 – SEPARATE FEATURES AND TARGET
-# =============================================================================
 
 def build_feature_matrix(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     """
@@ -308,14 +242,14 @@ def build_feature_matrix(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     banner("STEP 2 – Build feature matrix")
 
     EXCLUDE = {
-        "flood_risk",           # TARGET – text label
-        "flood_risk_enc",       # TARGET – numeric (would be pure leakage)
-        "observation_id",       # row ID – no predictive value
-        "timestamp",            # raw datetime replaced by obs_hour/obs_month
-        "barangay",             # text location – needs further encoding
-        "municipality",         # text location
-        "flood_hazard_level",   # text version (flood_hazard_level_enc is used)
-        "drainage_condition",   # text version (drainage_condition_enc is used)
+        "flood_risk",           
+        "flood_risk_enc",      
+        "observation_id",     
+        "timestamp",           
+        "barangay",            
+        "municipality",        
+        "flood_hazard_level",  
+        "drainage_condition",   
     }
 
     feature_cols = [c for c in df.columns if c not in EXCLUDE]
@@ -327,10 +261,6 @@ def build_feature_matrix(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
         print(f"    • {col}")
     return X, y
 
-
-# =============================================================================
-# STEP 3 – TIME-BASED TRAIN / TEST SPLIT
-# =============================================================================
 
 def time_split(
     df: pd.DataFrame,
@@ -370,10 +300,6 @@ def time_split(
     return X_train, X_test, y_train, y_test
 
 
-# =============================================================================
-# STEP 4 – BUILD THE IMBALANCED-LEARN PIPELINE
-# =============================================================================
-
 def build_pipeline() -> ImbPipeline:
     """
     Assemble a three-step pipeline:
@@ -408,19 +334,12 @@ def build_pipeline() -> ImbPipeline:
     scaler = StandardScaler()
 
     rf = RandomForestClassifier(
-        # These are the fixed settings; n_estimators / max_depth /
-        # min_samples_leaf are tuned by GridSearchCV below.
+
         class_weight="balanced_subsample",
-        # balanced_subsample: re-weight classes inside EACH bootstrap sample.
-        # Stacks on top of SMOTE for double protection against ignoring High risk.
-        # PROTOTYPE ASSUMPTION – compare with class_weight=None in ablation.
 
         oob_score=True,
-        # oob_score: uses out-of-bag samples (rows NOT chosen in a bootstrap)
-        # as a free internal validation set.  Shown in the console after training.
 
         n_jobs=-1,
-        # n_jobs=-1: use all CPU cores to train trees in parallel (faster).
 
         random_state=RANDOM_STATE,
     )
@@ -431,11 +350,6 @@ def build_pipeline() -> ImbPipeline:
         ("classifier", rf),
     ])
     return pipeline
-
-
-# =============================================================================
-# STEP 5 – CROSS-VALIDATED HYPERPARAMETER TUNING
-# =============================================================================
 
 def tune_hyperparameters(
     pipeline: ImbPipeline,
@@ -484,8 +398,8 @@ def tune_hyperparameters(
         estimator=pipeline,
         param_grid=PARAM_GRID,
         cv=cv,
-        scoring=CV_SCORING,      # macro F1 is the optimisation target
-        refit=True,              # after search, retrain best model on full X_train
+        scoring=CV_SCORING,     
+        refit=True,              
         n_jobs=-1,
         verbose=0,
         return_train_score=False,
@@ -500,7 +414,6 @@ def tune_hyperparameters(
     print(f"\n  Best hyperparameters: {best_params}")
     print(f"  Best CV macro F1    : {grid_search.best_score_:.3f}")
 
-    # Build a tidy DataFrame of all CV results for the report
     cv_df = pd.DataFrame(grid_search.cv_results_).sort_values(
         "mean_test_score", ascending=False
     )
@@ -516,11 +429,6 @@ def tune_hyperparameters(
     cv_df = cv_df.round(4).reset_index(drop=True)
 
     return grid_search.best_estimator_, cv_df
-
-
-# =============================================================================
-# STEP 6 – EVALUATE ON THE HELD-OUT TEST SET
-# =============================================================================
 
 def evaluate(
     pipeline: ImbPipeline,
@@ -562,7 +470,6 @@ def evaluate(
     print(f"  Macro Recall    : {macro_r:.3f}")
     print(f"  Macro F1        : {macro_f1:.3f}  ← PRIMARY METRIC")
 
-    # ── Per-class breakdown ──────────────────────────────────────────────────
     report_text = classification_report(
         y_test, y_pred, labels=CLASS_ORDER, zero_division=0
     )
@@ -576,19 +483,16 @@ def evaluate(
     )
     report_df = pd.DataFrame(report_dict).transpose().round(3)
 
-    # ── Highlight the two safety-critical recall numbers ────────────────────
     high_recall = report_df.loc["High", "recall"]     if "High"     in report_df.index else 0.0
     mod_recall  = report_df.loc["Moderate", "recall"] if "Moderate" in report_df.index else 0.0
     print(f"\n  ── Safety-critical recall scores ──────────────────────────")
     print(f"  High-risk recall     : {high_recall:.3f}  (target ≥ 0.80)")
     print(f"  Moderate-risk recall : {mod_recall:.3f}  (target ≥ 0.70)")
 
-    # ── Confusion matrix ─────────────────────────────────────────────────────
     cm = confusion_matrix(y_test, y_pred, labels=CLASS_ORDER)
     print("\n  Confusion matrix (rows=true label, cols=predicted label):")
     print(pd.DataFrame(cm, index=CLASS_ORDER, columns=CLASS_ORDER).to_string())
 
-    # ── OOB score (from the RF inside the pipeline) ──────────────────────────
     rf_step = pipeline.named_steps["classifier"]
     if hasattr(rf_step, "oob_score_"):
         print(f"\n  OOB accuracy (training data, internal estimate) : "
@@ -599,9 +503,6 @@ def evaluate(
     return report_df, cm
 
 
-# =============================================================================
-# STEP 7 – SAVE REPORTS AND CHARTS
-# =============================================================================
 
 def save_classification_report(report_df: pd.DataFrame, filepath: Path) -> None:
     """Save per-class precision / recall / F1 as a CSV."""
@@ -624,7 +525,7 @@ def save_confusion_matrix_image(cm: np.ndarray, filepath: Path) -> None:
       • Bottom-right cell  (High → High) : correct High detections
       • Bottom-left/middle (High → Low/Moderate) : MISSED floods ← danger
     """
-    # Also compute a row-normalised version so percentages are visible
+
     cm_norm = cm.astype(float) / cm.sum(axis=1, keepdims=True)
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
@@ -700,11 +601,9 @@ def save_feature_importance(
     fi_df["importance"] = fi_df["importance"].round(4)
     fi_df["std"]        = fi_df["std"].round(4)
 
-    # ── Save CSV ─────────────────────────────────────────────────────────────
     fi_df.to_csv(fi_csv, index=False)
     print(f"  Feature importances CSV → {fi_csv}")
 
-    # ── Plot top N ───────────────────────────────────────────────────────────
     top = fi_df.head(TOP_N_FEATURES)
 
     fig, ax = plt.subplots(figsize=(9, 6))
@@ -715,7 +614,7 @@ def save_feature_importance(
         for imp in top["importance"]
     ]
     bars = ax.barh(
-        top["feature"][::-1],       # reverse so highest importance is at top
+        top["feature"][::-1],      
         top["importance"][::-1],
         xerr=top["std"][::-1],
         color=colors[::-1],
@@ -775,10 +674,6 @@ def save_model(pipeline: ImbPipeline, filepath: Path) -> None:
     joblib.dump(pipeline, filepath)
     print(f"  Trained pipeline → {filepath}")
 
-
-# =============================================================================
-# STEP 8 – COMPARE AGAINST LOGISTIC REGRESSION BASELINE
-# =============================================================================
 
 def compare_with_baseline(
     rf_report_df: pd.DataFrame,
@@ -869,10 +764,6 @@ def compare_with_baseline(
     print(f"\n  Comparison table saved → {output_txt}")
 
 
-# =============================================================================
-# STEP 9 – PLAIN-LANGUAGE INTERPRETATION
-# =============================================================================
-
 def interpret_results(
     report_df: pd.DataFrame,
     fi_df: pd.DataFrame,
@@ -955,41 +846,29 @@ def interpret_results(
                                 initial_indent="  ",
                                 subsequent_indent="  "))
 
-
-# =============================================================================
-# MAIN
-# =============================================================================
-
 def main() -> None:
     print("\n" + "=" * 65)
     print("  AquaAlert – Random Forest (Main Model)")
     print("  Comparison target: Logistic Regression baseline")
     print("=" * 65)
 
-    # ── Load ──────────────────────────────────────────────────────────────────
     df = load_and_validate(DATA_FILE)
 
-    # ── Features / target ─────────────────────────────────────────────────────
     X, y = build_feature_matrix(df)
     feature_names = list(X.columns)
 
-    # ── Time-based split ──────────────────────────────────────────────────────
     X_train, X_test, y_train, y_test = time_split(df, X, y)
 
-    # ── Build pipeline ────────────────────────────────────────────────────────
     banner("STEP 4 – Build pipeline")
     pipeline = build_pipeline()
     print("  Pipeline steps:")
     for name, step in pipeline.steps:
         print(f"    [{name}]  {step.__class__.__name__}")
 
-    # ── Tune hyperparameters ──────────────────────────────────────────────────
     best_pipeline, cv_df = tune_hyperparameters(pipeline, X_train, y_train)
 
-    # ── Evaluate ──────────────────────────────────────────────────────────────
     report_df, cm = evaluate(best_pipeline, X_test, y_test)
 
-    # ── Save all artifacts ────────────────────────────────────────────────────
     banner("STEP 7 – Save reports and model")
     save_classification_report(report_df, CR_CSV)
     save_confusion_matrix_image(cm, CM_PNG)
@@ -997,13 +876,10 @@ def main() -> None:
     save_cv_results(cv_df, CV_CSV)
     save_model(best_pipeline, MODEL_FILE)
 
-    # ── Compare against baseline ──────────────────────────────────────────────
     compare_with_baseline(report_df, LR_CR_CSV, CMP_TXT)
 
-    # ── Plain-language interpretation ─────────────────────────────────────────
     interpret_results(report_df, fi_df, cm, y_test)
 
-    # ── Final checklist ───────────────────────────────────────────────────────
     banner("DONE – Output files")
     outputs = [MODEL_FILE, CR_CSV, CM_PNG, FI_PNG, FI_CSV, CV_CSV, CMP_TXT]
     for p in outputs:

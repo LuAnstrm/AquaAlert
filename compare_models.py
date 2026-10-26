@@ -37,10 +37,9 @@ CLASS_ORDER  = ["Low", "Moderate", "High"]
 TRAIN_RATIO  = 0.70
 RANDOM_STATE = 42
 
-# Colour palette – colour-blind safe (Paul Tol's muted set)
-C_LR   = "#4477AA"   # blue  – Logistic Regression
-C_RF   = "#CC6677"   # rose  – Random Forest
-C_SAFE = "#DDCC77"   # amber – safety-critical bar highlight
+C_LR   = "#4477AA"  
+C_RF   = "#CC6677"  
+C_SAFE = "#DDCC77" 
 
 def banner(title: str) -> None:
     w = 65
@@ -120,7 +119,7 @@ def load_and_predict(
 
     t0   = time.perf_counter()
     y_pred = pipeline.predict(X_test)
-    pred_ms = (time.perf_counter() - t0) * 1000   # milliseconds
+    pred_ms = (time.perf_counter() - t0) * 1000  
 
     acc   = accuracy_score(y_test, y_pred)
     mp    = precision_score(y_test, y_pred, average="macro",
@@ -719,13 +718,12 @@ def main() -> None:
 
     banner("STEP 4 – Bar chart")
     save_bar_chart(results, OUT_BAR)
-
+    
     banner("STEP 5 – Confusion matrices")
     save_confusion_matrices(results, y_test, OUT_CM)
 
     banner("STEP 6 – Auto-generated interpretation")
     generate_interpretation(results, y_test, OUT_TXT)
-
 
     banner("DONE – Output files")
     for p in [OUT_CSV, OUT_BAR, OUT_CM, OUT_TXT]:

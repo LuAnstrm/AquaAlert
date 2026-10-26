@@ -1,40 +1,4 @@
 """
-train_baseline_lr.py
-====================
-AquaAlert – Logistic Regression Baseline Classifier
-----------------------------------------------------
-
-PURPOSE OF THIS SCRIPT
------------------------
-This script trains a BASELINE Logistic Regression model to predict
-flood risk (Low / Moderate / High) for a barangay observation.
-
-A BASELINE MODEL is the simplest reasonable model we can build.
-Its job is NOT to be the best possible model.  Its job is to give
-us a reference score we can compare against later.  When we later
-train a Random Forest, we will ask: "Does it do better than this
-Logistic Regression?"  If it does not, the extra complexity is not
-worth it.
-
-                ┌───────────────────────────────────────┐
-                │  This is a COMPARISON BASELINE, not   │
-                │  a data-cleaning or filtering model.  │
-                │  Do NOT use its output to decide what │
-                │  rows to keep or remove from the CSV. │
-                └───────────────────────────────────────┘
-
-WHAT LOGISTIC REGRESSION IS (simple explanation)
--------------------------------------------------
-Logistic Regression is a mathematical formula that looks at every
-input feature (rainfall, river level, etc.) and assigns each one a
-weight (positive or negative).  It multiplies every feature value
-by its weight, adds them all up, and converts the total into a
-probability for each class.  The class with the highest probability
-becomes the predicted label.
-
-Because the formula uses multiplication and addition, it performs
-best when all input numbers are on a SIMILAR SCALE (e.g. 0–1 or
-−3 to +3).  That is why we apply StandardScaler before training.
 
 PROTOTYPE NOTICE
 ----------------
@@ -55,17 +19,13 @@ OUTPUTS
     reports/lr_feature_weights.csv        – model coefficients per feature
 """
 
-# =============================================================================
-# IMPORTS
-# =============================================================================
-
 import warnings
 import textwrap
 from pathlib import Path
 
-import joblib                          # for saving the trained pipeline
+import joblib                          
 import matplotlib
-matplotlib.use("Agg")                  # non-interactive backend (no display needed)
+matplotlib.use("Agg")                 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -83,11 +43,7 @@ from sklearn.metrics import (
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-warnings.filterwarnings("ignore")      # suppress sklearn convergence noise in output
-
-# =============================================================================
-# CONFIGURATION – change only these values if paths or settings need to change
-# =============================================================================
+warnings.filterwarnings("ignore")    
 
 DATA_FILE    = Path("data/processed/aquaalert_features.csv")
 MODEL_FILE   = Path("models/baseline_lr_pipeline.pkl")
@@ -95,69 +51,21 @@ REPORT_CSV   = Path("reports/lr_classification_report.csv")
 CM_IMAGE     = Path("reports/lr_confusion_matrix.png")
 WEIGHTS_CSV  = Path("reports/lr_feature_weights.csv")
 
-# Class labels in order LOW → MODERATE → HIGH (this order is used throughout
-# for consistent display in tables and plots).
 CLASS_ORDER = ["Low", "Moderate", "High"]
 
-# ── Time-based split ──────────────────────────────────────────────────────────
-# We sort by timestamp and use the earliest TRAIN_RATIO fraction for training,
-# the rest for testing.
-#
-# WHY TIME-BASED, NOT RANDOM SPLIT?
-# Flood risk data is time-ordered.  If we split randomly, some future
-# observations could end up in the training set and teach the model about
-# conditions it should not know yet.  This is called "temporal leakage".
-# A time-based split simulates the real deployment scenario:
-#   "Can the model predict flood risk for dates it has never seen?"
-#
-# PROTOTYPE ASSUMPTION: 70 / 30 split.  Adjust if you have more data.
 TRAIN_RATIO = 0.70
 
-# ── Logistic Regression hyperparameters ──────────────────────────────────────
-# max_iter: maximum number of optimisation steps.  We use 1000 because the
-# default (100) often causes a convergence warning on multi-class problems.
-# PROTOTYPE ASSUMPTION: tune this if you see convergence warnings.
 LR_MAX_ITER = 1000
 
-# solver: the optimisation algorithm.  'lbfgs' is the sklearn default and
-# works well for small-to-medium datasets with multi-class targets.
 LR_SOLVER = "lbfgs"
 
-# multi_class: removed in scikit-learn 1.5+.  The 'lbfgs' solver now always
-# uses a joint multinomial formula for multi-class targets automatically, so
-# we no longer need to pass this argument.  The comment is kept here so you
-# understand what the solver is doing under the hood.
-# (was: LR_MULTI_CLASS = "multinomial")
-
-# class_weight: 'balanced' tells sklearn to automatically give higher weight
-# to minority classes (e.g. High risk) during training.  This compensates for
-# the fact that High-risk events are rare in the dataset (~6 % of rows here).
-#
-# WHY DO WE NEED THIS?
-# Without balancing, the model is tempted to always predict "Moderate" because
-# that is the most common class.  It would look 51 % accurate but would miss
-# every real High-risk event – useless for a flood warning system.
-# Balancing forces the model to take rare classes seriously.
-# PROTOTYPE ASSUMPTION: compare with class_weight=None in your ablation study.
 LR_CLASS_WEIGHT = "balanced"
 
-# regularisation strength C: smaller C = more regularisation (simpler model,
-# less overfitting).  C=1.0 is the sklearn default; we keep it here so the
-# baseline is easy to reproduce and describe in the report.
-# PROTOTYPE ASSUMPTION: tune with cross-validated GridSearchCV later.
 LR_C = 1.0
-
-# =============================================================================
-# STEP 0 – Folder setup
-# =============================================================================
 
 for folder in [MODEL_FILE.parent, REPORT_CSV.parent, CM_IMAGE.parent]:
     folder.mkdir(parents=True, exist_ok=True)
 
-
-# =============================================================================
-# HELPER – pretty console banner
-# =============================================================================
 
 def banner(title: str) -> None:
     """Print a section divider to make console output easy to scan."""
@@ -166,10 +74,6 @@ def banner(title: str) -> None:
     print(f"  {title}")
     print(f"{'=' * width}")
 
-
-# =============================================================================
-# STEP 1 – LOAD THE DATASET
-# =============================================================================
 
 def load_data(filepath: Path) -> pd.DataFrame:
     """
@@ -193,10 +97,6 @@ def load_data(filepath: Path) -> pd.DataFrame:
           f"{df['timestamp'].max().date()}")
     return df
 
-
-# =============================================================================
-# STEP 2 – SEPARATE FEATURES AND TARGET
-# =============================================================================
 
 def build_feature_matrix(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     """
@@ -222,16 +122,15 @@ def build_feature_matrix(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     """
     banner("STEP 2 – Separate features and target")
 
-    # Columns to exclude from the feature matrix
     EXCLUDE = {
-        "flood_risk",           # TARGET (text)
-        "flood_risk_enc",       # TARGET (numeric) – do NOT use as a feature
+        "flood_risk",         
+        "flood_risk_enc",     
         "observation_id",
         "timestamp",
         "barangay",
         "municipality",
-        "flood_hazard_level",   # text version (use flood_hazard_level_enc)
-        "drainage_condition",   # text version (use drainage_condition_enc)
+        "flood_hazard_level",  
+        "drainage_condition",  
     }
 
     feature_cols = [c for c in df.columns if c not in EXCLUDE]
@@ -246,10 +145,6 @@ def build_feature_matrix(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     print(f"  Classes : {y.value_counts().to_dict()}")
     return X, y
 
-
-# =============================================================================
-# STEP 3 – TIME-BASED TRAIN / TEST SPLIT
-# =============================================================================
 
 def time_split(
     df: pd.DataFrame,
@@ -271,7 +166,7 @@ def time_split(
     """
     banner("STEP 3 – Time-based train / test split")
 
-    # Sort by timestamp (ascending = oldest first)
+
     sorted_idx = df["timestamp"].argsort().values
     X_sorted   = X.iloc[sorted_idx].reset_index(drop=True)
     y_sorted   = y.iloc[sorted_idx].reset_index(drop=True)
@@ -285,8 +180,7 @@ def time_split(
     print(f"  Test rows  : {len(X_test):,}  ({100*len(X_test)/len(X_sorted):.0f}%)")
     print()
 
-    # Show class distribution in each split so we can spot if one split is
-    # very different from the other (important with rare High-risk class)
+
     for name, y_part in [("Train", y_train), ("Test", y_test)]:
         counts = y_part.value_counts()
         dist   = ", ".join(f"{lbl}={counts.get(lbl,0)}" for lbl in CLASS_ORDER)
@@ -294,10 +188,6 @@ def time_split(
 
     return X_train, X_test, y_train, y_test
 
-
-# =============================================================================
-# STEP 4 – BUILD THE SKLEARN PIPELINE
-# =============================================================================
 
 def build_pipeline() -> Pipeline:
     """
@@ -328,12 +218,12 @@ def build_pipeline() -> Pipeline:
     scaler = StandardScaler()
 
     classifier = LogisticRegression(
-        # multi_class removed in sklearn 1.5; lbfgs uses multinomial by default
-        solver=LR_SOLVER,              # lbfgs – good default for small datasets
-        max_iter=LR_MAX_ITER,          # enough iterations to converge
-        class_weight=LR_CLASS_WEIGHT,  # penalise misclassifying rare High rows more
-        C=LR_C,                        # regularisation (default = 1.0)
-        random_state=42,               # makes results reproducible
+
+        solver=LR_SOLVER,           
+        max_iter=LR_MAX_ITER,         
+        class_weight=LR_CLASS_WEIGHT,  
+        C=LR_C,                       
+        random_state=42,               
     )
 
     pipeline = Pipeline(steps=[
@@ -342,10 +232,6 @@ def build_pipeline() -> Pipeline:
     ])
     return pipeline
 
-
-# =============================================================================
-# STEP 5 – TRAIN
-# =============================================================================
 
 def train(
     pipeline: Pipeline,
@@ -366,10 +252,6 @@ def train(
     print("done.")
     return pipeline
 
-
-# =============================================================================
-# STEP 6 – EVALUATE
-# =============================================================================
 
 def evaluate(
     pipeline: Pipeline,
@@ -417,7 +299,6 @@ def evaluate(
 
     y_pred = pipeline.predict(X_test)
 
-    # ── Scalar metrics ───────────────────────────────────────────────────────
     accuracy   = accuracy_score(y_test, y_pred)
     macro_f1   = f1_score(y_test, y_pred, average="macro",   labels=CLASS_ORDER, zero_division=0)
     macro_prec = precision_score(y_test, y_pred, average="macro", labels=CLASS_ORDER, zero_division=0)
@@ -429,7 +310,6 @@ def evaluate(
     print(f"  Macro F1-score    : {macro_f1:.3f}  ← PRIMARY METRIC")
     print()
 
-    # ── Per-class classification report ──────────────────────────────────────
     report_text = classification_report(
         y_test, y_pred, labels=CLASS_ORDER, zero_division=0
     )
@@ -437,25 +317,18 @@ def evaluate(
     for line in report_text.splitlines():
         print(f"    {line}")
 
-    # Build a DataFrame version of the report for saving to CSV
     report_dict = classification_report(
         y_test, y_pred, labels=CLASS_ORDER,
         output_dict=True, zero_division=0,
     )
     report_df = pd.DataFrame(report_dict).transpose().round(3)
 
-    # ── Confusion matrix ─────────────────────────────────────────────────────
     cm = confusion_matrix(y_test, y_pred, labels=CLASS_ORDER)
     print("\n  Confusion matrix (rows = true, cols = predicted):")
     cm_df = pd.DataFrame(cm, index=CLASS_ORDER, columns=CLASS_ORDER)
     print(cm_df.to_string())
 
     return report_df, cm
-
-
-# =============================================================================
-# STEP 7 – SAVE REPORTS
-# =============================================================================
 
 def save_classification_report(report_df: pd.DataFrame, filepath: Path) -> None:
     """Save the per-class precision/recall/F1 table to a CSV file."""
@@ -476,8 +349,8 @@ def save_confusion_matrix_image(cm: np.ndarray, filepath: Path) -> None:
 
     sns.heatmap(
         cm,
-        annot=True,            # write the count number in each cell
-        fmt="d",               # format as integer
+        annot=True,           
+        fmt="d",             
         cmap="Blues",
         xticklabels=CLASS_ORDER,
         yticklabels=CLASS_ORDER,
@@ -492,7 +365,6 @@ def save_confusion_matrix_image(cm: np.ndarray, filepath: Path) -> None:
         fontsize=13, pad=14,
     )
 
-    # Add prototype watermark in bottom-right corner
     fig.text(
         0.99, 0.01,
         "PROTOTYPE – NOT AN OFFICIAL FLOOD WARNING",
@@ -526,8 +398,8 @@ def save_feature_weights(
     - Comparing with the Random Forest's feature importances later.
     """
     clf    = pipeline.named_steps["classifier"]
-    coefs  = clf.coef_          # shape: (n_classes, n_features)
-    labels = clf.classes_       # the class labels in the order the model uses
+    coefs  = clf.coef_         
+    labels = clf.classes_      
 
     rows = []
     for i, cls in enumerate(labels):
@@ -546,9 +418,6 @@ def save_feature_weights(
     print(f"  Feature weights saved → {filepath}")
 
 
-# =============================================================================
-# STEP 8 – SAVE TRAINED PIPELINE
-# =============================================================================
 
 def save_pipeline(pipeline: Pipeline, filepath: Path) -> None:
     """
@@ -570,10 +439,6 @@ def save_pipeline(pipeline: Pipeline, filepath: Path) -> None:
     print(f"\n  Trained pipeline saved → {filepath}")
 
 
-# =============================================================================
-# STEP 9 – PLAIN-LANGUAGE RESULT INTERPRETER
-# =============================================================================
-
 def interpret_results(
     report_df: pd.DataFrame,
     cm: np.ndarray,
@@ -585,18 +450,17 @@ def interpret_results(
     """
     banner("STEP 9 – Plain-language interpretation")
 
-    # Pull key numbers from the report
     macro_f1 = float(report_df.loc["macro avg", "f1-score"])
 
-    # High-class recall is the most safety-critical metric
+
     high_recall   = float(report_df.loc["High", "recall"])   if "High"     in report_df.index else 0.0
     high_prec     = float(report_df.loc["High", "precision"]) if "High"    in report_df.index else 0.0
     low_recall    = float(report_df.loc["Low",  "recall"])    if "Low"     in report_df.index else 0.0
     mod_recall    = float(report_df.loc["Moderate","recall"]) if "Moderate" in report_df.index else 0.0
 
-    # How many true High-risk rows are in the test set?
+
     n_high_true = int((y_test == "High").sum())
-    # How many did the model correctly predict as High?
+
     n_high_correct = int(cm[CLASS_ORDER.index("High"), CLASS_ORDER.index("High")])
 
     paragraphs = [
@@ -659,16 +523,12 @@ def interpret_results(
         if para == "" or para.endswith(")"):
             print(f"\n  {para}")
         else:
-            # Wrap long lines to 63 characters for readability
+
             wrapped = textwrap.fill(para, width=63,
                                     initial_indent="  ",
                                     subsequent_indent="  ")
             print(wrapped)
 
-
-# =============================================================================
-# MAIN – runs all steps in order
-# =============================================================================
 
 def main() -> None:
     print("\n" + "=" * 65)
@@ -680,39 +540,31 @@ def main() -> None:
     print(f"  Report : {REPORT_CSV}")
     print(f"  Plot   : {CM_IMAGE}")
 
-    # ── Load ─────────────────────────────────────────────────────────────────
     df = load_data(DATA_FILE)
 
-    # ── Features / target ────────────────────────────────────────────────────
     X, y = build_feature_matrix(df)
 
-    # ── Time-based split ─────────────────────────────────────────────────────
     X_train, X_test, y_train, y_test = time_split(df, X, y, TRAIN_RATIO)
 
-    # ── Build pipeline ───────────────────────────────────────────────────────
+
     banner("STEP 4 – Build pipeline")
     pipeline = build_pipeline()
     print("  Pipeline steps:")
     for name, step in pipeline.steps:
         print(f"    [{name}]  {step}")
 
-    # ── Train ────────────────────────────────────────────────────────────────
     train(pipeline, X_train, y_train)
 
-    # ── Evaluate ─────────────────────────────────────────────────────────────
     report_df, cm = evaluate(pipeline, X_test, y_test)
 
-    # ── Save artifacts ───────────────────────────────────────────────────────
     banner("STEP 7 – Save reports and model")
     save_classification_report(report_df, REPORT_CSV)
     save_confusion_matrix_image(cm, CM_IMAGE)
     save_feature_weights(pipeline, list(X.columns), WEIGHTS_CSV)
     save_pipeline(pipeline, MODEL_FILE)
 
-    # ── Interpret ────────────────────────────────────────────────────────────
     interpret_results(report_df, cm, y_test)
 
-    # ── Final checklist ──────────────────────────────────────────────────────
     banner("DONE – Output files")
     outputs = [MODEL_FILE, REPORT_CSV, CM_IMAGE, WEIGHTS_CSV]
     for p in outputs:

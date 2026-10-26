@@ -1,13 +1,3 @@
-"""
-generate_sample_raw.py
-======================
-Creates a realistic synthetic aquaalert_raw.csv for testing.
-
-⚠️  SYNTHETIC DATA – NOT REAL OBSERVATIONS.
-    All rows are generated for prototype testing only.
-    Do not use for research conclusions.
-"""
-
 import numpy as np
 import pandas as pd
 
@@ -70,18 +60,15 @@ for i in range(N):
         "flood_risk":                   label,
     })
 
-# Inject a few issues for the pipeline to handle
 df = pd.DataFrame(records)
 
-# 5 duplicates
 df = pd.concat([df, df.iloc[:5]], ignore_index=True)
 
-# 8 missing required numeric values
 for col in ["rainfall_last_3h_mm", "citizen_report_count"]:
     idx = rng.choice(df.index, 4, replace=False)
     df.loc[idx, col] = None
 
-# 3 invalid category values
+
 df.loc[0, "flood_hazard_level"]  = "Very High"
 df.loc[1, "drainage_condition"]  = "Unknown"
 df.loc[2, "flood_risk"]          = "Extreme"
