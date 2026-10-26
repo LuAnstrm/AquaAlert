@@ -1,11 +1,9 @@
 # AquaAlert 
 
 > **Hyper-local flood-risk decision support for NCR barangays**
-> College capstone prototype · Not an official flood warning system
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Prototype](https://img.shields.io/badge/status-prototype-orange.svg)]()
 
 ---
 
@@ -22,18 +20,17 @@
 9. [Step 2 — Train the Logistic Regression Baseline](#9-step-2--train-the-logistic-regression-baseline)
 10. [Step 3 — Train the Random Forest Main Model](#10-step-3--train-the-random-forest-main-model)
 11. [Step 4 — Compare Both Models](#11-step-4--compare-both-models)
-12. [Step 5 — Run the App Prototype](#12-step-5--run-the-app-prototype)
-13. [Expected Output Files](#13-expected-output-files)
-14. [Reproducibility Notes](#14-reproducibility-notes)
-15. [Limitations](#15-limitations)
-16. [Responsible-Use Disclaimer](#16-responsible-use-disclaimer)
-17. [Contributors](#17-contributors)
+12. [Expected Output Files](#12-expected-output-files)
+13. [Reproducibility Notes](#13-reproducibility-notes)
+14. [Limitations](#14-limitations)
+15. [Responsible-Use Disclaimer](#15-responsible-use-disclaimer)
+16. [Contributors](#16-contributors)
 
 ---
 
 ## 1. Project Description
 
-**AquaAlert** is a machine-learning prototype that classifies flood risk at the barangay level into three categories: **Low**, **Moderate**, and **High**. It is designed to demonstrate how sensor data, hazard maps, and community reports could be combined into a single decision-support score for local governments and residents in Metro Manila (NCR), Philippines.
+**AquaAlert** is a machine-learning system that classifies flood risk at the barangay level into three categories: **Low**, **Moderate**, and **High**. It is designed to demonstrate how sensor data, hazard maps, and community reports could be combined into a single decision-support score for local governments and residents in Metro Manila (NCR), Philippines.
 
 Two classifiers are built and compared:
 
@@ -63,8 +60,7 @@ AquaAlert explores whether a lightweight machine-learning model, combining publi
 1. Build a reproducible ML pipeline that classifies barangay flood risk from five sensor and community features.
 2. Compare a Logistic Regression baseline against a Random Forest main model on the same held-out test set.
 3. Demonstrate that **High-risk recall** (catching real flood events) is the most safety-critical metric — more important than accuracy alone.
-4. Produce a mobile app prototype (8 screens) that visualises the risk classification in a citizen-friendly interface.
-5. Document all prototype assumptions, limitations, and responsible-use guidelines transparently.
+4. Document all assumptions, limitations, and responsible-use guidelines transparently.
 
 ---
 
@@ -102,14 +98,6 @@ AquaAlert explores whether a lightweight machine-learning model, combining publi
 │  compare_models.py                                          │
 │  → Same test set → CSV table, bar chart, confusion matrices │
 │  → Auto-generated interpretation report                     │
-└────────────────────┬────────────────────────────────────────┘
-                     │
-                     ▼
-┌─────────────────────────────────────────────────────────────┐
-│                  APP PROTOTYPE (UI)                         │
-│  app/  (8 HTML screens)                                     │
-│  Main · RiskCard · RiskFactors · NearbyAreas                │
-│  SubmitReport · AlertHistory · Preparedness · Disclaimer    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -123,7 +111,7 @@ AquaAlert explores whether a lightweight machine-learning model, combining publi
 | `drainage_condition_enc` | Observed drainage blockage (0 = Clean, 1 = Partly Blocked, 2 = Blocked) |
 | `citizen_report_count` | Number of community flood reports in the past 3 hours |
 
-All thresholds used to engineer categorical features are **prototype assumptions** and must be validated against local expert knowledge before any operational use.
+All thresholds used to engineer categorical features are assumptions and must be validated against local expert knowledge before any operational use.
 
 ---
 
@@ -139,16 +127,6 @@ aquaalert/
 ├── train_baseline_lr.py             ← Step 2: Logistic Regression baseline
 ├── train_random_forest.py           ← Step 3: Random Forest main model
 ├── compare_models.py                ← Step 4: head-to-head comparison
-│
-├── app/                             ← Mobile app prototype (HTML screens)
-│   ├── Main.html
-│   ├── RiskCard.html
-│   ├── RiskFactors.html
-│   ├── NearbyAreas.html
-│   ├── SubmitReport.html
-│   ├── AlertHistory.html
-│   ├── Preparedness.html
-│   └── Disclaimer.html
 │
 ├── data/
 │   ├── raw/
@@ -369,45 +347,9 @@ python compare_models.py
 
 ---
 
-## 12. Step 5 — Run the App Prototype
+## 12. Expected Output Files
 
-The app prototype is a set of **static HTML screens** that visualise how AquaAlert would look on a mobile device. No server is needed.
-
-**Open the app in your browser:**
-
-```bash
-# macOS
-open app/Main.html
-
-# Windows
-start app/Main.html
-
-# Linux
-xdg-open app/Main.html
-```
-
-Or simply double-click `app/Main.html` in your file explorer.
-
-**The 8 screens:**
-
-| Screen | File | Purpose |
-|---|---|---|
-| Home / Dashboard | `Main.html` | Current barangay risk level, sensor readings, quick actions |
-| Risk Card | `RiskCard.html` | Detailed breakdown for one barangay |
-| Risk Factors | `RiskFactors.html` | Feature contributions and driver explanation |
-| Nearby Areas | `NearbyAreas.html` | Schematic map + list of neighbouring barangays |
-| Submit Report | `SubmitReport.html` | Community flood report form (depth, road passability, photo) |
-| Alert History | `AlertHistory.html` | Timeline of past risk classifications |
-| Preparedness | `Preparedness.html` | Go-bag checklist and emergency contacts |
-| About / Disclaimer | `Disclaimer.html` | Full prototype disclaimer, model info, privacy notice |
-
-> **Note:** The HTML screens are static mockups. Navigation links between screens work locally. No backend, database, or real sensor feed is connected.
-
----
-
-## 13. Expected Output Files
-
-After running all five scripts in order, the following files should exist:
+After running all four scripts in order, the following files should exist:
 
 ```
 data/
@@ -437,7 +379,7 @@ reports/
 
 ---
 
-## 14. Reproducibility Notes
+## 13. Reproducibility Notes
 
 All scripts use `random_state=42` throughout. Given the same Python and library versions, every run should produce **identical** outputs.
 
@@ -470,7 +412,7 @@ pip freeze > requirements_lock.txt
 
 ---
 
-## 15. Limitations
+## 14. Limitations
 
 The following limitations must be understood before interpreting any results from this project.
 
@@ -495,21 +437,21 @@ Latitude, longitude, distance to river channels, and proximity to other flood-pr
 **7. No temporal autocorrelation.**
 Flood risk at time T is correlated with risk at T−1. Neither model accounts for this. A time-series approach (LSTM, LightGBM with lag features) may be more appropriate with real sequential data.
 
-**8. All thresholds are prototype assumptions.**
+**8. All thresholds are assumptions.**
 Every numeric threshold in the preprocessing and scoring code (e.g., 50 mm/3h = Moderate rainfall intensity, 100 mm/3h = High) was chosen for demonstration purposes and has not been validated against PAGASA warning criteria or expert domain knowledge.
 
 ---
 
-## 16. Responsible-Use Disclaimer
+## 15. Responsible-Use Disclaimer
 
 > **⚠ Please read this section before using, sharing, or citing this project.**
 
-AquaAlert is a **college capstone prototype** developed for academic evaluation. It is **not** an official flood warning system and has **not** been validated by PAGASA, NDRRMC, or any LGU DRRMO.
+AquaAlert is a **college capstone project** developed for academic evaluation. It is **not** an official flood warning system and has **not** been validated by PAGASA, NDRRMC, or any LGU DRRMO.
 
 **Do not:**
 - Use AquaAlert outputs as the sole basis for evacuation decisions.
 - Present AquaAlert risk classifications to the public as official flood alerts.
-- Deploy this prototype in a production environment without retraining on real, validated data and review by qualified disaster risk management professionals.
+- Deploy this system in a production environment without retraining on real, validated data and review by qualified disaster risk management professionals.
 
 **Always follow official guidance from:**
 - 🌦 **PAGASA** — [pagasa.dost.gov.ph](https://www.pagasa.dost.gov.ph/) — official weather and flood advisories
@@ -520,11 +462,11 @@ AquaAlert is a **college capstone prototype** developed for academic evaluation.
 The community report feature is designed around the Philippine Data Privacy Act. No name, phone number, or exact address is collected. Photos have EXIF location data removed client-side before any upload. Reporter tokens are anonymous UUIDs generated locally.
 
 **Citation for academic use:**
-If you reference this project in a paper or report, please state clearly that results are from a synthetic-data prototype and do not represent validated operational performance.
+If you reference this project in a paper or report, please state clearly that results are from a synthetic-data project and do not represent validated operational performance.
 
 ---
 
-## 17. Contributors
+## 16. Contributors
 
 **Tools and libraries used:**
 - [scikit-learn](https://scikit-learn.org/) — machine learning

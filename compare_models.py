@@ -1,51 +1,3 @@
-"""
-compare_models.py
-=================
-AquaAlert – Head-to-Head Model Comparison
-------------------------------------------
-Logistic Regression (baseline)  vs.  Random Forest (main model)
-
-PURPOSE
--------
-This script answers the single most important question in the project:
-  "Which classifier should AquaAlert use, and why?"
-
-It loads BOTH trained pipelines, evaluates them on the SAME held-out
-test set (time-based 70 / 30 split), and produces:
-
-  reports/comparison_metrics.csv          – full metrics table
-  reports/comparison_bar_chart.png        – side-by-side bar chart
-  reports/comparison_confusion_matrices.png – both confusion matrices
-  reports/comparison_interpretation.txt   – auto-generated write-up
-
-WHY THE SAME TEST SET MATTERS
-------------------------------
-Comparing two models on different data is meaningless — any difference
-could come from the data, not the model.  This script derives the
-identical time-sorted 70 / 30 split that both training scripts used,
-then evaluates both pipelines on that same 30 % test slice.
-
-PROTOTYPE NOTICE
-----------------
-All results are from a synthetic prototype dataset generated for a
-student capstone project.  Numbers must be re-validated on real,
-labelled NCR flood observations before drawing operational conclusions.
-The output of this script is NOT an official flood-risk assessment.
-
-HOW TO RUN
-----------
-    python compare_models.py
-
-Prerequisite: run the following scripts first
-    python preprocess.py
-    python train_baseline_lr.py
-    python train_random_forest.py
-"""
-
-# =============================================================================
-# IMPORTS
-# =============================================================================
-
 import textwrap
 import time
 import warnings
@@ -72,10 +24,6 @@ from sklearn.metrics import (
 
 warnings.filterwarnings("ignore")
 
-# =============================================================================
-# CONFIGURATION
-# =============================================================================
-
 DATA_FILE    = Path("data/processed/aquaalert_features.csv")
 LR_MODEL     = Path("models/baseline_lr_pipeline.pkl")
 RF_MODEL     = Path("models/rf_pipeline_final.pkl")
@@ -94,10 +42,6 @@ C_LR   = "#4477AA"   # blue  – Logistic Regression
 C_RF   = "#CC6677"   # rose  – Random Forest
 C_SAFE = "#DDCC77"   # amber – safety-critical bar highlight
 
-# =============================================================================
-# HELPERS
-# =============================================================================
-
 def banner(title: str) -> None:
     w = 65
     print(f"\n{'=' * w}\n  {title}\n{'=' * w}")
@@ -107,9 +51,6 @@ def hr() -> None:
     print("  " + "─" * 63)
 
 
-# =============================================================================
-# STEP 1 – LOAD DATA AND RECONSTRUCT THE TEST SET
-# =============================================================================
 
 def load_test_set(
     filepath: Path,
@@ -125,7 +66,7 @@ def load_test_set(
 
     df = pd.read_csv(filepath, parse_dates=["timestamp"])
 
-    # ── Feature / target split (must match both training scripts) ────────────
+
     EXCLUDE = {
         "flood_risk", "flood_risk_enc", "observation_id", "timestamp",
         "barangay", "municipality", "flood_hazard_level", "drainage_condition",
@@ -135,7 +76,6 @@ def load_test_set(
     X = df[feature_cols]
     y = df["flood_risk"]
 
-    # ── Time-based split ─────────────────────────────────────────────────────
     order    = df["timestamp"].argsort().values
     X_s      = X.iloc[order].reset_index(drop=True)
     y_s      = y.iloc[order].reset_index(drop=True)
@@ -156,10 +96,6 @@ def load_test_set(
 
     return X_test, y_test, feature_cols
 
-
-# =============================================================================
-# STEP 2 – LOAD BOTH PIPELINES AND TIME THEIR PREDICTIONS
-# =============================================================================
 
 def load_and_predict(
     model_path: Path,
@@ -182,12 +118,10 @@ def load_and_predict(
     """
     pipeline = joblib.load(model_path)
 
-    # ── Prediction time ───────────────────────────────────────────────────────
     t0   = time.perf_counter()
     y_pred = pipeline.predict(X_test)
     pred_ms = (time.perf_counter() - t0) * 1000   # milliseconds
 
-    # ── Metrics ───────────────────────────────────────────────────────────────
     acc   = accuracy_score(y_test, y_pred)
     mp    = precision_score(y_test, y_pred, average="macro",
                              labels=CLASS_ORDER, zero_division=0)
@@ -216,7 +150,6 @@ def load_and_predict(
     print(f"  {label:<30}  acc={acc:.3f}  macro-F1={mf1:.3f}  "
           f"High-recall={high_rec:.3f}  pred={pred_ms:.1f} ms")
 
-    # ── Interpretability note (hard-coded per model family) ──────────────────
     interp_map = {
         "Logistic Regression":
             "High — coefficients show direct feature contribution per class",
@@ -246,10 +179,6 @@ def load_and_predict(
         "cm":               cm,
     }
 
-
-# =============================================================================
-# STEP 3 – BUILD THE CSV COMPARISON TABLE
-# =============================================================================
 
 def build_and_save_csv(results: list[dict], filepath: Path) -> pd.DataFrame:
     """
@@ -300,10 +229,6 @@ def build_and_save_csv(results: list[dict], filepath: Path) -> pd.DataFrame:
     return df
 
 
-# =============================================================================
-# STEP 4 – BAR CHART OF MAJOR METRICS
-# =============================================================================
-
 def save_bar_chart(results: list[dict], filepath: Path) -> None:
     """
     Side-by-side bar chart comparing both models on six key metrics.
@@ -325,7 +250,7 @@ def save_bar_chart(results: list[dict], filepath: Path) -> None:
         ("high_recall",     "High Recall\n⚠⚠ safety metric"),
         ("high_precision",  "High Precision"),
     ]
-    safety_idx = {3, 4}   # bar group indices that are safety-critical
+    safety_idx = {3, 4}
 
     n_metrics = len(metrics_labels)
     x = np.arange(n_metrics)
@@ -344,7 +269,7 @@ def save_bar_chart(results: list[dict], filepath: Path) -> None:
             alpha=0.88,
             zorder=3,
         )
-        # Highlight safety-critical bars with a thick amber outline
+
         for j, bar in enumerate(bars):
             if j in safety_idx:
                 bar.set_edgecolor(C_SAFE)
@@ -352,7 +277,7 @@ def save_bar_chart(results: list[dict], filepath: Path) -> None:
             else:
                 bar.set_edgecolor("white")
                 bar.set_linewidth(0.5)
-            # Value label on each bar
+
             h = bar.get_height()
             ax.text(
                 bar.get_x() + bar.get_width() / 2,
@@ -363,13 +288,12 @@ def save_bar_chart(results: list[dict], filepath: Path) -> None:
                 color="#333333",
             )
 
-    # Safety target line at 0.80
+
     ax.axhline(
         0.80, color="#CC3311", linestyle="--", linewidth=1.2,
         zorder=2, label="Safety target (0.80)",
     )
 
-    # Axes formatting
     ax.set_xticks(x)
     ax.set_xticklabels(
         [lbl for _, lbl in metrics_labels],
@@ -387,7 +311,6 @@ def save_bar_chart(results: list[dict], filepath: Path) -> None:
     ax.grid(axis="y", linestyle="--", alpha=0.35, zorder=0)
     ax.spines[["top", "right"]].set_visible(False)
 
-    # Legend
     legend_handles = [
         mpatches.Patch(color=C_LR, label="Logistic Regression (baseline)"),
         mpatches.Patch(color=C_RF, label="Random Forest (main model)"),
@@ -414,10 +337,6 @@ def save_bar_chart(results: list[dict], filepath: Path) -> None:
     plt.close(fig)
     print(f"  Bar chart → {filepath}")
 
-
-# =============================================================================
-# STEP 5 – SIDE-BY-SIDE CONFUSION MATRICES
-# =============================================================================
 
 def save_confusion_matrices(
     results: list[dict],
@@ -469,7 +388,7 @@ def save_confusion_matrices(
                 ax=ax,
                 vmin=0,
                 vmax=(None if row == 0 else 1),
-                cbar=(col == n_models - 1),   # colour bar only on right panel
+                cbar=(col == n_models - 1),
             )
             ax.set_xlabel("Predicted label", fontsize=10)
             ax.set_ylabel("True label",      fontsize=10)
@@ -478,10 +397,9 @@ def save_confusion_matrices(
                 fontsize=10, pad=6,
             )
 
-            # Highlight the High-risk row with a thick orange border
             for spine in ax.spines.values():
                 spine.set_visible(False)
-            # Draw a box around bottom row (High = index 2)
+            
             ax.add_patch(plt.Rectangle(
                 (0, 2), len(CLASS_ORDER), 1,
                 fill=False, edgecolor="#CC3311",
@@ -505,11 +423,6 @@ def save_confusion_matrices(
     fig.savefig(filepath, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"  Confusion matrices → {filepath}")
-
-
-# =============================================================================
-# STEP 6 – AUTO-GENERATED INTERPRETATION
-# =============================================================================
 
 def generate_interpretation(
     results: list[dict],
@@ -541,20 +454,17 @@ def generate_interpretation(
         elif b - a >  tol: return "lower"
         else:              return "similar"
 
-    # ── Who wins each metric? ────────────────────────────────────────────────
     macro_f1_winner    = "RF"  if rf["macro_f1"]    > lr["macro_f1"]    else "LR"
     high_recall_winner = "RF"  if rf["high_recall"] > lr["high_recall"] else "LR"
     mod_recall_winner  = "RF"  if rf["mod_recall"]  > lr["mod_recall"]  else "LR"
     acc_winner         = "RF"  if rf["accuracy"]    > lr["accuracy"]    else "LR"
 
-    # ── Missed High events ───────────────────────────────────────────────────
     lr_cm = lr["cm"]
     rf_cm = rf["cm"]
     high_idx = CLASS_ORDER.index("High")
     lr_missed = int(n_high_test - lr_cm[high_idx, high_idx])
     rf_missed = int(n_high_test - rf_cm[high_idx, high_idx])
 
-    # ── Recommendation logic ─────────────────────────────────────────────────
     if lr["high_recall"] >= 0.80 and rf["high_recall"] >= 0.80:
         recommended   = "Random Forest"
         rec_reason    = (
@@ -778,18 +688,12 @@ def generate_interpretation(
     print(f"\n  Interpretation text → {filepath}")
     return text
 
-
-# =============================================================================
-# MAIN
-# =============================================================================
-
 def main() -> None:
     print("\n" + "=" * 65)
     print("  AquaAlert – Model Comparison")
     print("  Logistic Regression  vs.  Random Forest")
     print("=" * 65)
 
-    # Validate required files exist
     for p in [DATA_FILE, LR_MODEL, RF_MODEL]:
         if not p.exists():
             raise FileNotFoundError(
@@ -802,33 +706,27 @@ def main() -> None:
 
     OUT_CSV.parent.mkdir(parents=True, exist_ok=True)
 
-    # ── Test set ──────────────────────────────────────────────────────────────
     X_test, y_test, feature_cols = load_test_set(DATA_FILE)
 
-    # ── Evaluate both models ──────────────────────────────────────────────────
     banner("STEP 2 – Load models and evaluate")
     results = [
         load_and_predict(LR_MODEL, X_test, y_test, "Logistic Regression"),
         load_and_predict(RF_MODEL, X_test, y_test, "Random Forest"),
     ]
 
-    # ── CSV ───────────────────────────────────────────────────────────────────
     banner("STEP 3 – CSV comparison table")
     build_and_save_csv(results, OUT_CSV)
 
-    # ── Bar chart ─────────────────────────────────────────────────────────────
     banner("STEP 4 – Bar chart")
     save_bar_chart(results, OUT_BAR)
 
-    # ── Confusion matrices ────────────────────────────────────────────────────
     banner("STEP 5 – Confusion matrices")
     save_confusion_matrices(results, y_test, OUT_CM)
 
-    # ── Interpretation ────────────────────────────────────────────────────────
     banner("STEP 6 – Auto-generated interpretation")
     generate_interpretation(results, y_test, OUT_TXT)
 
-    # ── Summary ───────────────────────────────────────────────────────────────
+
     banner("DONE – Output files")
     for p in [OUT_CSV, OUT_BAR, OUT_CM, OUT_TXT]:
         status = "✓" if p.exists() else "✗ NOT CREATED"
