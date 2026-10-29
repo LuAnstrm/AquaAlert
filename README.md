@@ -475,6 +475,13 @@ If you reference this project in a paper or report, please state clearly that re
 - [matplotlib](https://matplotlib.org/) & [seaborn](https://seaborn.pydata.org/) — visualisation
 - [joblib](https://joblib.readthedocs.io/) — model serialisation
 
+**Team**
+-Francisco, Eliesha Mae L.
+-Gemina, Jamaica
+-Labaco, Charina Mae
+-Viray, Rodelyn U.
+-Viri, Aira Kristel
+
 ---
 
 *AquaAlert — College Capstone Project · NCR, Philippines · 2026*
