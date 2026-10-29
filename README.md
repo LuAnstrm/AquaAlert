@@ -383,6 +383,29 @@ python compare_models.py
 - Check **Moderate-risk recall** second.
 - Use macro F1 to compare overall balance across all three classes.
 
+### Step 5 (optional) — Check the models against real gauge data
+
+```bash
+python live_check.py                                   # three real event windows
+python live_check.py --start 2026-10-22 --end 2026-10-29   # any date range
+```
+
+`live_check.py` downloads observed rainfall and river levels from PAGASA's [Pasig-Marikina-Tullahan Flood Forecasting and Warning System](https://pasig-marikina-tullahanffws.pagasa.dost.gov.ph/), plus soil moisture from [Open-Meteo](https://open-meteo.com/). Neither needs an API key. It builds the same 19 features used in training and predicts each city-day. It then compares each prediction with what the city's river gauge actually did against PAGASA's official alert and alarm levels. Results go to `reports/live_check_results.csv`, and downloads are cached in `data/live_cache/`.
+
+**Results on 72 real city-days** (Typhoon Carina, July 2024; dry season, March 2025; habagat, July 2025):
+
+| | Agreement with gauges | High recall | Moderate recall |
+|---|---|---|---|
+| Random Forest | 0.58 | 0.50 (3 of 6) | 0.20 |
+| Logistic Regression | 0.53 | 0.67 (4 of 6) | 0.10 |
+
+- **What works:** every dry-season day is Low. The peak of Typhoon Carina (24 July 2024) is High in Manila, Quezon City and Marikina, with P(High) of 0.97 or more.
+- **False alarms:** the Random Forest called 22 days Moderate or Low "High" because 31–174 mm of rain fell, but the rivers stayed below alarm. The training label says "flood = 30 mm or more", while real NCR rivers absorb far more.
+- **Missed floods:** the Marikina River stayed above alarm for days when little rain fell in the city itself, for example 21–22 July 2025, when the water came from upstream. The model doesn't treat a high river as High because its High label was built from rainfall only.
+- **Assumption:** PAGASA reports river *elevation* (e.g. Sto. Niño is about 12 m normally), while the training data's water level has no stated datum. The check feeds the model "rise above the dry-season level + 0.5 m".
+
+**Conclusion:** the pipeline runs end to end on live data, but the current models are not reliable enough for real warnings. The fix is to retrain on PAGASA FFWS history, labelled with the official alert and alarm levels.
+
 ---
 
 ## 12. Expected Output Files
@@ -413,6 +436,7 @@ reports/
   comparison_bar_chart.png                 ✓ after compare_models.py
   comparison_confusion_matrices.png        ✓ after compare_models.py
   comparison_interpretation.txt            ✓ after compare_models.py
+  live_check_results.csv                   ✓ after live_check.py (optional)
 ```
 
 ---

@@ -1,0 +1,93 @@
+window,timestamp,municipality,rain_source,rainfall_last_24h_mm,rainfall_last_7d_mm,soil_moisture_pct,gauge_level_elm,gauge_alert_elm,gauge_alarm_elm,river_water_level_m,reference_risk,rf_pred,rf_p_high,lr_pred,lr_p_high
+Typhoon Carina + habagat,2024-07-20,Manila,pagasa-gauge,0.0,47.5,46.7875,11.75,12.0,12.5,1.4900000000000002,Low,Low,0.003,Low,0.0
+Typhoon Carina + habagat,2024-07-21,Manila,pagasa-gauge,4.0,51.5,46.95,11.84,12.0,12.5,1.58,Low,Low,0.007,Low,0.0
+Typhoon Carina + habagat,2024-07-22,Manila,pagasa-gauge,63.5,108.0,51.14583333333334,11.98,12.0,12.5,1.7200000000000006,Low,High,0.92,High,1.0
+Typhoon Carina + habagat,2024-07-23,Manila,pagasa-gauge,68.0,176.0,50.974999999999994,12.22,12.0,12.5,1.9600000000000009,Moderate,High,0.893,High,1.0
+Typhoon Carina + habagat,2024-07-24,Manila,pagasa-gauge,296.0,465.5,50.912499999999994,12.99,12.0,12.5,2.7300000000000004,High,High,0.967,High,1.0
+Typhoon Carina + habagat,2024-07-25,Manila,pagasa-gauge,8.0,473.0,50.520833333333336,12.13,12.0,12.5,1.870000000000001,Moderate,Low,0.013,High,1.0
+Typhoon Carina + habagat,2024-07-26,Manila,pagasa-gauge,2.5,442.0,49.89999999999999,11.76,12.0,12.5,1.5,Low,Low,0.01,High,1.0
+Typhoon Carina + habagat,2024-07-27,Manila,pagasa-gauge,0.0,442.0,47.61666666666669,11.48,12.0,12.5,1.2200000000000006,Low,Low,0.003,Low,0.0
+Typhoon Carina + habagat,2024-07-20,Quezon City,open-meteo,11.2,43.5,48.17083333333333,31.91,33.0,34.0,0.5,Low,Low,0.0,Low,0.0
+Typhoon Carina + habagat,2024-07-21,Quezon City,pagasa-gauge,14.0,47.2,49.17916666666667,31.9,33.0,34.0,0.5,Low,Low,0.003,Low,0.0
+Typhoon Carina + habagat,2024-07-22,Quezon City,pagasa-gauge,56.0,90.2,51.40416666666668,32.43,33.0,34.0,0.9400000000000013,Low,High,0.907,High,1.0
+Typhoon Carina + habagat,2024-07-23,Quezon City,pagasa-gauge,75.0,165.2,51.07083333333333,33.78,33.0,34.0,2.2900000000000027,Moderate,High,0.993,High,1.0
+Typhoon Carina + habagat,2024-07-24,Quezon City,pagasa-gauge,471.0,631.2,50.74999999999999,36.49,33.0,34.0,5.0000000000000036,High,High,0.993,High,1.0
+Typhoon Carina + habagat,2024-07-25,Quezon City,pagasa-gauge,9.0,639.2,50.4875,32.52,33.0,34.0,1.0300000000000047,Low,Low,0.007,High,1.0
+Typhoon Carina + habagat,2024-07-26,Quezon City,pagasa-gauge,2.0,638.2,50.14583333333334,31.94,33.0,34.0,0.5,Low,Low,0.013,High,1.0
+Typhoon Carina + habagat,2024-07-27,Quezon City,pagasa-gauge,1.0,628.0,47.55000000000001,31.8,33.0,34.0,0.5,Low,Low,0.0,High,1.0
+Typhoon Carina + habagat,2024-07-20,Marikina,open-meteo,15.0,102.6,39.96666666666667,11.46,15.0,16.0,0.5,Low,Low,0.003,Low,0.0
+Typhoon Carina + habagat,2024-07-21,Marikina,pagasa-gauge,13.0,115.6,40.400000000000006,11.45,15.0,16.0,0.5,Low,Low,0.01,Low,0.0
+Typhoon Carina + habagat,2024-07-22,Marikina,pagasa-gauge,59.5,163.5,42.79583333333333,13.08,15.0,16.0,1.8399999999999999,Low,High,0.997,High,1.0
+Typhoon Carina + habagat,2024-07-23,Marikina,pagasa-gauge,75.0,238.5,42.97083333333332,13.94,15.0,16.0,2.6999999999999993,Low,High,0.957,High,1.0
+Typhoon Carina + habagat,2024-07-24,Marikina,pagasa-gauge,400.5,607.7,42.90416666666667,20.17,15.0,16.0,8.930000000000001,High,High,0.993,High,1.0
+Typhoon Carina + habagat,2024-07-25,Marikina,pagasa-gauge,10.0,593.6,42.70416666666666,17.21,15.0,16.0,5.970000000000001,High,Moderate,0.027,High,1.0
+Typhoon Carina + habagat,2024-07-26,Marikina,pagasa-gauge,4.0,577.0,41.94583333333333,14.19,15.0,16.0,2.9499999999999993,Low,Moderate,0.027,High,1.0
+Typhoon Carina + habagat,2024-07-27,Marikina,pagasa-gauge,1.0,563.0,39.94583333333333,13.73,15.0,16.0,2.49,Low,Moderate,0.013,High,0.969
+Typhoon Carina + habagat,2024-07-20,Pasig,open-meteo,15.5,33.5,38.59583333333333,,14.0,14.5,,,,,,
+Typhoon Carina + habagat,2024-07-21,Pasig,pagasa-gauge,6.0,28.5,38.920833333333334,,14.0,14.5,,,,,,
+Typhoon Carina + habagat,2024-07-22,Pasig,pagasa-gauge,78.0,102.5,42.52916666666667,,14.0,14.5,,,,,,
+Typhoon Carina + habagat,2024-07-23,Pasig,pagasa-gauge,92.0,194.5,42.979166666666664,,14.0,14.5,,,,,,
+Typhoon Carina + habagat,2024-07-24,Pasig,pagasa-gauge,97.0,291.5,42.875,,14.0,14.5,,,,,,
+Typhoon Carina + habagat,2024-07-25,Pasig,pagasa-gauge,5.0,294.5,42.45833333333333,,14.0,14.5,,,,,,
+Typhoon Carina + habagat,2024-07-26,Pasig,pagasa-gauge,1.0,294.5,40.912499999999994,,14.0,14.5,,,,,,
+Typhoon Carina + habagat,2024-07-27,Pasig,pagasa-gauge,0.0,279.0,38.954166666666666,,14.0,14.5,,,,,,
+Dry season,2025-03-01,Manila,pagasa-gauge,0.0,0.0,16.38333333333333,,12.0,12.5,,,,,,
+Dry season,2025-03-02,Manila,pagasa-gauge,0.0,0.0,16.454166666666666,11.33,12.0,12.5,1.0700000000000003,Low,,,,
+Dry season,2025-03-03,Manila,pagasa-gauge,0.0,0.0,16.041666666666664,11.43,12.0,12.5,1.17,Low,Low,0.0,Low,0.0
+Dry season,2025-03-04,Manila,pagasa-gauge,0.0,0.0,16.3,11.4,12.0,12.5,1.1400000000000006,Low,Low,0.0,Low,0.0
+Dry season,2025-03-05,Manila,pagasa-gauge,0.0,0.0,14.137500000000003,11.52,12.0,12.5,1.2599999999999998,Low,Low,0.0,Low,0.0
+Dry season,2025-03-06,Manila,pagasa-gauge,0.0,0.0,12.350000000000001,11.57,12.0,12.5,1.3100000000000005,Low,Low,0.0,Low,0.0
+Dry season,2025-03-07,Manila,pagasa-gauge,0.0,0.0,12.383333333333336,11.6,12.0,12.5,1.3399999999999999,Low,Low,0.0,Low,0.0
+Dry season,2025-03-01,Quezon City,pagasa-gauge,0.0,0.0,16.525000000000002,31.95,33.0,34.0,0.5,Low,Low,0.0,Low,0.0
+Dry season,2025-03-02,Quezon City,pagasa-gauge,0.0,0.0,17.491666666666664,31.96,33.0,34.0,0.5,Low,Low,0.0,Low,0.0
+Dry season,2025-03-03,Quezon City,pagasa-gauge,0.0,0.0,16.44166666666667,31.96,33.0,34.0,0.5,Low,Low,0.0,Low,0.0
+Dry season,2025-03-04,Quezon City,pagasa-gauge,0.0,0.0,18.0125,31.96,33.0,34.0,0.5,Low,Low,0.0,Low,0.0
+Dry season,2025-03-05,Quezon City,pagasa-gauge,0.0,0.0,18.429166666666667,31.96,33.0,34.0,0.5,Low,Low,0.0,Low,0.0
+Dry season,2025-03-06,Quezon City,pagasa-gauge,0.0,0.0,16.237499999999997,31.95,33.0,34.0,0.5,Low,Low,0.0,Low,0.0
+Dry season,2025-03-07,Quezon City,pagasa-gauge,0.0,0.0,17.133333333333336,31.96,33.0,34.0,0.5,Low,Low,0.0,Low,0.0
+Dry season,2025-03-01,Marikina,pagasa-gauge,0.0,0.0,7.450000000000003,,15.0,16.0,,,,,,
+Dry season,2025-03-02,Marikina,pagasa-gauge,0.0,0.0,8.316666666666666,11.81,15.0,16.0,0.5700000000000003,Low,,,,
+Dry season,2025-03-03,Marikina,pagasa-gauge,0.0,0.0,6.841666666666667,11.81,15.0,16.0,0.5700000000000003,Low,Low,0.0,Low,0.0
+Dry season,2025-03-04,Marikina,pagasa-gauge,0.0,0.0,9.929166666666665,11.81,15.0,16.0,0.5700000000000003,Low,Low,0.0,Low,0.0
+Dry season,2025-03-05,Marikina,pagasa-gauge,0.0,0.0,10.862499999999999,11.81,15.0,16.0,0.5700000000000003,Low,Low,0.0,Low,0.0
+Dry season,2025-03-06,Marikina,pagasa-gauge,0.0,0.0,7.400000000000002,11.81,15.0,16.0,0.5700000000000003,Low,Low,0.0,Low,0.0
+Dry season,2025-03-07,Marikina,pagasa-gauge,0.0,0.0,7.412500000000002,11.8,15.0,16.0,0.5600000000000005,Low,Low,0.0,Low,0.0
+Dry season,2025-03-01,Pasig,pagasa-gauge,0.0,0.0,7.2541666666666655,12.89,14.0,14.5,0.9500000000000011,Low,Low,0.0,Low,0.0
+Dry season,2025-03-02,Pasig,pagasa-gauge,0.0,0.0,6.733333333333334,12.89,14.0,14.5,0.9500000000000011,Low,Low,0.0,Low,0.0
+Dry season,2025-03-03,Pasig,pagasa-gauge,0.0,0.0,6.504166666666665,12.89,14.0,14.5,0.9500000000000011,Low,Low,0.0,Low,0.0
+Dry season,2025-03-04,Pasig,pagasa-gauge,0.0,0.0,11.616666666666669,12.92,14.0,14.5,0.9800000000000004,Low,Low,0.0,Low,0.0
+Dry season,2025-03-05,Pasig,pagasa-gauge,0.0,0.0,15.47916666666667,12.94,14.0,14.5,1.0,Low,Low,0.0,Low,0.0
+Dry season,2025-03-06,Pasig,pagasa-gauge,0.0,0.0,9.779166666666669,12.93,14.0,14.5,0.9900000000000002,Low,Low,0.0,Low,0.0
+Dry season,2025-03-07,Pasig,pagasa-gauge,0.0,0.0,7.720833333333334,12.95,14.0,14.5,1.0099999999999998,Low,Low,0.0,Low,0.0
+"Habagat, July 2025",2025-07-18,Manila,open-meteo,27.6,47.3,42.14166666666667,11.34,12.0,12.5,1.08,Low,Moderate,0.01,High,0.827
+"Habagat, July 2025",2025-07-19,Manila,open-meteo,35.1,82.4,41.020833333333336,11.87,12.0,12.5,1.6099999999999994,Low,High,0.897,High,1.0
+"Habagat, July 2025",2025-07-20,Manila,open-meteo,30.7,113.10000000000001,39.94166666666667,11.94,12.0,12.5,1.6799999999999997,Low,High,0.727,High,0.992
+"Habagat, July 2025",2025-07-21,Manila,open-meteo,60.3,173.4,39.75416666666667,12.28,12.0,12.5,2.0199999999999996,Moderate,High,0.92,High,1.0
+"Habagat, July 2025",2025-07-22,Manila,open-meteo,34.4,188.1,39.391666666666666,12.47,12.0,12.5,2.210000000000001,Moderate,High,0.727,High,1.0
+"Habagat, July 2025",2025-07-23,Manila,open-meteo,51.4,239.5,39.17500000000001,12.14,12.0,12.5,1.8800000000000008,Moderate,High,0.693,High,1.0
+"Habagat, July 2025",2025-07-24,Manila,open-meteo,60.7,300.2,38.8875,12.28,12.0,12.5,2.0199999999999996,Moderate,High,0.763,High,1.0
+"Habagat, July 2025",2025-07-25,Manila,open-meteo,25.4,298.0,37.829166666666666,12.43,12.0,12.5,2.17,Moderate,Moderate,0.05,High,1.0
+"Habagat, July 2025",2025-07-18,Quezon City,pagasa-gauge,14.0,65.0,47.42083333333334,,33.0,34.0,,,,,,
+"Habagat, July 2025",2025-07-19,Quezon City,pagasa-gauge,190.0,255.0,44.18333333333333,,33.0,34.0,,,,,,
+"Habagat, July 2025",2025-07-20,Quezon City,pagasa-gauge,62.0,317.0,42.00416666666666,,33.0,34.0,,,,,,
+"Habagat, July 2025",2025-07-21,Quezon City,pagasa-gauge,237.0,548.0,41.662499999999994,,33.0,34.0,,,,,,
+"Habagat, July 2025",2025-07-22,Quezon City,pagasa-gauge,84.0,623.0,41.02916666666667,,33.0,34.0,,,,,,
+"Habagat, July 2025",2025-07-23,Quezon City,pagasa-gauge,52.0,655.0,40.64999999999999,,33.0,34.0,,,,,,
+"Habagat, July 2025",2025-07-24,Quezon City,pagasa-gauge,58.0,697.0,40.287499999999994,,33.0,34.0,,,,,,
+"Habagat, July 2025",2025-07-25,Quezon City,pagasa-gauge,43.0,726.0,39.1875,,33.0,34.0,,,,,,
+"Habagat, July 2025",2025-07-18,Marikina,pagasa-gauge,13.0,67.5,39.83333333333333,12.28,15.0,16.0,1.0399999999999991,Low,Low,0.003,Low,0.0
+"Habagat, July 2025",2025-07-19,Marikina,pagasa-gauge,80.0,143.0,42.358333333333334,15.13,15.0,16.0,3.8900000000000006,Moderate,High,0.997,High,1.0
+"Habagat, July 2025",2025-07-20,Marikina,pagasa-gauge,7.0,149.5,41.895833333333336,15.21,15.0,16.0,3.9700000000000006,Moderate,Moderate,0.033,Moderate,0.0
+"Habagat, July 2025",2025-07-21,Marikina,pagasa-gauge,4.0,138.0,42.49166666666666,18.43,15.0,16.0,7.1899999999999995,High,Moderate,0.047,Moderate,0.0
+"Habagat, July 2025",2025-07-22,Marikina,pagasa-gauge,4.0,134.0,42.54583333333333,18.6,15.0,16.0,7.360000000000001,High,Moderate,0.013,Moderate,0.0
+"Habagat, July 2025",2025-07-23,Marikina,open-meteo,59.6,173.1,42.437499999999986,14.86,15.0,16.0,3.619999999999999,Low,High,0.893,High,1.0
+"Habagat, July 2025",2025-07-24,Marikina,open-meteo,62.8,230.39999999999998,41.57916666666667,14.61,15.0,16.0,3.369999999999999,Low,High,0.783,High,1.0
+"Habagat, July 2025",2025-07-25,Marikina,pagasa-gauge,21.5,238.89999999999998,40.7125,14.85,15.0,16.0,3.6099999999999994,Low,Moderate,0.033,High,0.999
+"Habagat, July 2025",2025-07-18,Pasig,pagasa-gauge,13.0,33.0,38.37916666666668,12.83,14.0,14.5,0.8900000000000006,Low,Low,0.0,Low,0.0
+"Habagat, July 2025",2025-07-19,Pasig,pagasa-gauge,129.0,159.0,41.11666666666667,13.09,14.0,14.5,1.1500000000000004,Low,High,0.86,High,1.0
+"Habagat, July 2025",2025-07-20,Pasig,pagasa-gauge,31.0,190.0,41.80416666666666,13.25,14.0,14.5,1.3100000000000005,Low,High,0.66,High,1.0
+"Habagat, July 2025",2025-07-21,Pasig,pagasa-gauge,142.0,332.0,41.54166666666667,13.83,14.0,14.5,1.8900000000000006,Low,High,0.97,High,1.0
+"Habagat, July 2025",2025-07-22,Pasig,pagasa-gauge,174.0,504.0,40.920833333333334,13.78,14.0,14.5,1.8399999999999999,Low,High,0.827,High,1.0
+"Habagat, July 2025",2025-07-23,Pasig,pagasa-gauge,81.0,585.0,40.24166666666667,13.55,14.0,14.5,1.6100000000000012,Low,High,0.617,High,1.0
+"Habagat, July 2025",2025-07-24,Pasig,pagasa-gauge,67.0,637.0,39.68333333333332,13.55,14.0,14.5,1.6100000000000012,Low,High,0.617,High,1.0
+"Habagat, July 2025",2025-07-25,Pasig,pagasa-gauge,44.0,668.0,38.395833333333336,13.75,14.0,14.5,1.8100000000000005,Low,High,0.717,High,1.0
