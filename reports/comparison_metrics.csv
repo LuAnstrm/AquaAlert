@@ -1,3 +1,3 @@
 model,accuracy,macro_precision,macro_recall,macro_f1,low_precision,low_recall,low_f1,moderate_precision,moderate_recall,moderate_f1,high_precision,high_recall,high_f1,pred_time_ms,interpretability
-Logistic Regression,0.926,0.861,0.929,0.888,0.988,0.927,0.956,0.673,0.919,0.777,0.922,0.94,0.931,111.92,High — coefficients show direct feature contribution per class
-Random Forest,0.994,0.986,0.991,0.989,1.0,0.993,0.997,0.959,1.0,0.979,1.0,0.98,0.99,57.4,Moderate — feature importances available; individual paths opaque
+Logistic Regression,0.926,0.861,0.929,0.888,0.988,0.927,0.956,0.673,0.919,0.777,0.922,0.94,0.931,68.18,High — coefficients show direct feature contribution per class
+Random Forest,0.994,0.986,0.991,0.989,1.0,0.993,0.997,0.959,1.0,0.979,1.0,0.98,0.99,64.35,Moderate — feature importances available; individual paths opaque

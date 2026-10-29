@@ -46,7 +46,7 @@ SECTION 4 – METRIC-BY-METRIC COMPARISON
   Moderate Recall  ⚠ safety               0.919           1.000       RF
   High Recall  ⚠⚠ key metric              0.940           0.980       RF
   High Precision                          0.922           1.000       RF
-  Pred. time (ms, 2193 rows)              111.9            57.4       RF
+  Pred. time (ms, 2193 rows)               68.2            64.3       RF
   ────────────────────────────────────────────────────────────────────
 
 SECTION 5 – SAFETY TARGET ASSESSMENT
@@ -81,13 +81,6 @@ SECTION 7 – RECOMMENDATION
 Both models meet the ≥ 0.80 High-recall safety target. Random Forest is
 preferred because it achieves a higher macro F1, meaning it is more
 balanced across all three risk levels.
-
-REGARDLESS OF WHICH MODEL IS CHOSEN: The hard-override rules in
-aquaalert_scorer.py remain active. If a river reaches DANGER level or
-the daily rainfall threshold is exceeded, the alert is forced to High
-regardless of the ML model's output. This rule-based safety net is the
-primary protection against false negatives in extreme events. [PROTOTYPE
-ASSUMPTION — verify thresholds against EFCOS and PAGASA]
 
 SECTION 8 – LIMITATIONS
 ────────────────────────────────────────────────────────────────────────

@@ -612,18 +612,6 @@ def generate_interpretation(
         "",
         textwrap.fill(rec_reason, width=72),
         "",
-        textwrap.fill(
-            "REGARDLESS OF WHICH MODEL IS CHOSEN: "
-            "The hard-override rules in aquaalert_scorer.py remain active. "
-            "If a river reaches DANGER level or the daily rainfall threshold is "
-            "exceeded, the alert is forced to High "
-            "regardless of the ML model's output. "
-            "This rule-based safety net is the primary protection against "
-            "false negatives in extreme events. "
-            "[PROTOTYPE ASSUMPTION — verify thresholds against EFCOS and PAGASA]",
-            width=72,
-        ),
-        "",
         "SECTION 8 – LIMITATIONS",
         "─" * 72,
         textwrap.fill(

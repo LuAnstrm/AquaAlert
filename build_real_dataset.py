@@ -3,7 +3,6 @@ build_real_dataset.py
 =====================
 AquaAlert – Build the raw training CSV from REAL source datasets
 -----------------------------------------------------------------
-Replaces the old generate_sample_raw.py (synthetic data).
 
 SOURCES (all stored in data/raw/sources/)
 -----------------------------------------

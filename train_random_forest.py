@@ -202,7 +202,7 @@ def load_and_validate(filepath: Path) -> pd.DataFrame:
     if n_high < 20:
         print(
             f"\n  ⚠  WARNING: Only {n_high} High-risk rows in the full dataset.\n"
-            "     SMOTE will generate synthetic rows to compensate, but the\n"
+            "     SMOTE will oversample this class to compensate, but the\n"
             "     model's High-class metrics will be unreliable until you\n"
             "     collect more real High-risk observations.\n"
             "     PROTOTYPE ASSUMPTION – document this limitation in your report."
@@ -277,7 +277,7 @@ def time_split(
     Using the same test set is required for a fair model comparison.
 
     SMOTE IS NOT APPLIED HERE.
-    It is applied inside the cross-validation pipeline so synthetic rows
+    It is applied inside the cross-validation pipeline so oversampled rows
     are never created from test-fold data (that would be data leakage).
     """
     banner("STEP 3 – Time-based train / test split")
@@ -308,7 +308,7 @@ def build_pipeline() -> ImbPipeline:
 
     ┌─────────────────────────────────────────────────────────────────┐
     │  Step 1 – SMOTE (inside training folds only)                   │
-    │    Creates synthetic High-risk rows so the classifier sees     │
+    │    Interpolates extra High-risk rows so the classifier sees    │
     │    enough examples to learn what High risk looks like.         │
     │                                                                 │
     │  Step 2 – StandardScaler                                       │

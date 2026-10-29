@@ -260,13 +260,13 @@ pip install -r requirements.txt
 ### `requirements.txt`
 
 ```
-numpy>=1.24
-pandas>=2.0
-scikit-learn>=1.3
-imbalanced-learn>=0.11
-matplotlib>=3.7
-seaborn>=0.12
-joblib>=1.3
+numpy==2.5.4
+pandas==3.1.0
+scikit-learn==1.9.1
+imbalanced-learn==0.14.2
+matplotlib==3.11.2
+seaborn==0.13.2
+joblib==1.6.0
 ```
 
 > **Tip:** If you see an error about `imbalanced-learn`, run:
@@ -333,7 +333,7 @@ python train_random_forest.py
 
 - Uses the **same 70/30 time-based split** as the baseline for a fair comparison.
 - Fits an imbalanced-learn pipeline: `SMOTE → StandardScaler → RandomForestClassifier`.
-  - SMOTE creates synthetic minority-class rows **inside** each cross-validation fold only — no data leakage.
+  - SMOTE oversamples the minority class by interpolating between real High-risk rows, **inside** each cross-validation fold only — no data leakage.
 - Runs a `GridSearchCV` over 27 hyperparameter combinations (3 × 3 × 3) with 5-fold stratified cross-validation, optimising for `f1_macro`.
 - Evaluates on the held-out test set, prints feature importances, and generates a side-by-side comparison against the LR baseline.
 
@@ -420,17 +420,7 @@ All scripts use `random_state=42` throughout. Given the same Python and library 
 | LR solver | `lbfgs`, `max_iter=1000`, `C=1.0` |
 | RF scoring | `f1_macro` |
 
-**Recommended library versions** (from `requirements.txt`):
-
-```
-numpy==1.26.4
-pandas==2.2.2
-scikit-learn==1.4.2
-imbalanced-learn==0.12.3
-matplotlib==3.8.4
-seaborn==0.13.2
-joblib==1.4.2
-```
+The current results were produced with Python 3.14 and the exact library versions pinned in `requirements.txt`.
 
 To save your exact installed versions for future reproduction:
 
@@ -486,8 +476,6 @@ AquaAlert is a **college capstone project** developed for academic evaluation. I
 - 🏛 **LGU DRRMO** — your local barangay or city disaster risk reduction and management office
 - 🇵🇭 **NDRRMC** — [ndrrmc.gov.ph](https://www.ndrrmc.gov.ph/) — national disaster response hotline: **911**
 
-**Privacy (RA 10173):**
-The community report feature is designed around the Philippine Data Privacy Act. No name, phone number, or exact address is collected. Photos have EXIF location data removed client-side before any upload. Reporter tokens are anonymous UUIDs generated locally.
 
 **Citation for academic use:**
 If you reference this project in a paper or report, cite the three data sources in Section 6. State clearly that the 3-class label comes from rainfall and river-level thresholds, so the results do not represent validated operational performance.
