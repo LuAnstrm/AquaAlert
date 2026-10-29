@@ -23,9 +23,9 @@ EXPECTED COLUMNS IN THE RAW FILE
   timestamp                    – observation date (daily data)
   municipality                 – city (Manila / Quezon City / Marikina / Pasig)
   rainfall_last_24h_mm         – rainfall on the observation day (mm)
-  rainfall_prev_day_mm         – rainfall on the previous day (blank on day 1)
-  rainfall_last_3d_mm          – 3-day rolling rainfall total (blank on days 1–2)
-  rainfall_last_7d_mm          – 7-day rolling rainfall total (blank on days 1–6)
+  rainfall_prev_day_mm         – rainfall on the previous day
+  rainfall_last_3d_mm          – 3-day rolling rainfall total
+  rainfall_last_7d_mm          – 7-day rolling rainfall total
   river_water_level_m          – river water level (m)
   water_level_change_1d_m      – change in river level since the previous day
   soil_moisture_pct            – soil moisture (%)
@@ -69,8 +69,10 @@ OUTPUT_FILE = Path("data/processed/aquaalert_features.csv")
 REPORT_FILE = Path("reports/data_quality_report.txt")
 
 # Numeric columns that MUST have a value (no NaN allowed after imputation).
-# The lag/rolling rainfall columns are blank for the first days of each city
-# (no history yet) and are median-filled here.
+# build_real_dataset.py already drops rows without full history, so the real
+# data has no gaps; median fill is only a fallback for future data.
+# NOTE: the median is computed over ALL rows (train + test).  If you ever
+# feed data with gaps, move imputation into the model pipeline instead.
 REQUIRED_NUMERIC_COLS = [
     "rainfall_last_24h_mm",
     "rainfall_prev_day_mm",
@@ -281,8 +283,8 @@ def handle_missing_values(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     Categorical columns       → fill with the column MODE (most common value)
     Target label (flood_risk) → rows with missing target are DROPPED
     ─────────────────────────────────────────────────────────────────────────
-    In the real data the only gaps are the lag/rolling columns on the first
-    day(s) of each city, where no earlier observation exists.
+    The real data has no gaps (rows without full history are dropped in
+    build_real_dataset.py); this step is a safeguard for future data.
     """
     banner("STEP 4b – Handle missing values")
 
@@ -301,6 +303,10 @@ def handle_missing_values(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
         if col not in df.columns:
             continue
         n_missing = df[col].isna().sum()
+        if n_missing == 0:
+            # No gaps → no flag column (an all-zero column carries no signal).
+            imputation_log[col] = {"n_missing": 0}
+            continue
         flag_col  = f"{col}_missing"
 
         df[flag_col] = df[col].isna().astype(int)       # 1 = was NaN, 0 = had data
@@ -617,7 +623,7 @@ def save_quality_report(
         textwrap.fill(
             "flood_risk is derived from the source binary FloodOccurrence: "
             "High = recorded flood; Moderate = no flood but daily rain >= 20 mm "
-            "or river level >= 2.5 m; Low = otherwise. In the source data "
+            "or river level >= its training-period 90th percentile (2.4 m); Low = otherwise. In the source data "
             "FloodOccurrence equals (rainfall >= 30 mm) on every row, so the "
             "target is a deterministic function of rainfall and water level.",
             width=68, initial_indent="  ", subsequent_indent="  "

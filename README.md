@@ -70,7 +70,7 @@ AquaAlert explores whether a lightweight machine-learning model, combining publi
 │                     DATA LAYER                              │
 │  build_real_dataset.py                                      │
 │  → NCR daily series + AEGIS hazard + JICA context           │
-│  → aquaalert_raw.csv (7,308 rows, 4 NCR cities, 2016–2020)  │
+│  → aquaalert_raw.csv (7,284 rows, 4 NCR cities, 2016–2020)  │
 └────────────────────┬────────────────────────────────────────┘
                      │
                      ▼
@@ -204,8 +204,8 @@ The source data only records whether a flood happened. `build_real_dataset.py` t
 | Class | Rule | Rows |
 |---|---|---|
 | **High** | A flood was recorded (`FloodOccurrence = 1`) | 132 (1.8 %) |
-| **Moderate** | No flood, but daily rain ≥ 20 mm **or** river level ≥ 2.5 m (the 90th percentile of non-flood days) | 1,022 (14.0 %) |
-| **Low** | Everything else | 6,154 (84.2 %) |
+| **Moderate** | No flood, but daily rain ≥ 20 mm **or** river level ≥ 2.4 m (the 90th percentile of non-flood days in the training period only) | 1,116 (15.3 %) |
+| **Low** | Everything else | 6,036 (82.9 %) |
 
 > **⚠ Important:** In the source data, `FloodOccurrence` is exactly `Rainfall_mm ≥ 30` on every row. The target is therefore a fixed rule on rainfall and water level, and both models score close to perfect. This shows the models can recover those thresholds. It is **not** evidence that they can forecast real floods.
 
@@ -281,7 +281,18 @@ joblib==1.6.0
 python build_real_dataset.py
 ```
 
-This creates `data/raw/aquaalert_raw.csv` (7,308 rows: 4 cities × 1,827 days). It adds past-only rainfall lags and rolling totals, the AEGIS hazard level for each city and the 3-class label. It also prints a check against the JICA major-flood table. The lag columns are blank on each city's first days, and `preprocess.py` fills them.
+This creates `data/raw/aquaalert_raw.csv` (7,284 rows: 4 cities × 1,821 days). It adds past-only rainfall lags and rolling totals, the AEGIS hazard level for each city and the 3-class label. It also prints a check against the JICA major-flood table. Each city's first 6 days are dropped because they don't have 7 days of rainfall history yet. Dropping them avoids filling the gaps with averages that would include test-period data.
+
+### Leakage safeguards
+
+| Safeguard | Where |
+|---|---|
+| The train/test cut is made on **dates**, so the four city rows for one day are never split between training and test | all three model scripts |
+| The Moderate river-level threshold is fitted on the **training period only** | `build_real_dataset.py` |
+| Lag and rolling features use only past and same-day values. Rows without full history are dropped, not imputed | `build_real_dataset.py` |
+| `flood_occurrence`, `flood_risk` and `flood_risk_enc` are never model inputs | `preprocess.py` and the model scripts |
+| Scaling and SMOTE are fitted inside each training fold only | `train_random_forest.py` |
+| Hyperparameter tuning uses forward-chaining folds, so validation days always come after training days | `train_random_forest.py` |
 
 ### 8b. Run preprocessing
 
@@ -414,7 +425,7 @@ All scripts use `random_state=42` throughout. Given the same Python and library 
 |---|---|
 | Random seed | `42` (all scripts) |
 | Train/test split | 70% / 30%, time-sorted (no shuffle) |
-| CV strategy | `StratifiedKFold(n_splits=5, shuffle=True, random_state=42)` |
+| CV strategy | `TimeSeriesSplit(n_splits=5)` over training dates (forward-chaining; whole dates kept together) |
 | SMOTE k-neighbours | `3` (small minority class) |
 | LR solver | `lbfgs`, `max_iter=1000`, `C=1.0` |
 | RF scoring | `f1_macro` |
@@ -434,7 +445,7 @@ pip freeze > requirements_lock.txt
 The following limitations must be understood before interpreting any results from this project.
 
 **1. The label follows fixed thresholds.**
-The data is real, but its flood flag is exactly `rainfall ≥ 30 mm`, and the Moderate class is defined by rainfall and river-level thresholds. Test scores (RF macro F1 ≈ 0.99, LR ≈ 0.89) show how well each model recovers those rules. They are not validated flood-forecasting performance.
+The data is real, but its flood flag is exactly `rainfall ≥ 30 mm`, and the Moderate class is defined by rainfall and river-level thresholds. Test scores (RF macro F1 ≈ 1.00, LR ≈ 0.88) show how well each model recovers those rules. They are not validated flood-forecasting performance.
 
 **2. No typhoon-scale events.**
 The wettest day in 2016–2020 is 52.7 mm. The major Metro Manila floods documented by JICA/DPWH (2014) (Seniang 2000, Chedeng 2003, Winnie 2004, Ondoy 2009, Kirogi 2012) had 149–291 mm of basin rainfall in one day. The models have never seen an event like these.
@@ -455,7 +466,7 @@ The pipeline reads static CSVs. There is no live connection to PAGASA AWS statio
 Flood risk at time T is correlated with risk at T−1. Neither model accounts for this. A time-series approach (LSTM, LightGBM with lag features) may be more appropriate with real sequential data.
 
 **8. All thresholds are assumptions.**
-Every numeric threshold in the dataset builder and preprocessing code (e.g., 20 mm/day or 2.5 m river level = Moderate, 1.0 m/day = rapid rise) was chosen for demonstration purposes and has not been validated against PAGASA warning criteria or expert domain knowledge.
+Every numeric threshold in the dataset builder and preprocessing code (e.g., 20 mm/day or 2.4 m river level = Moderate, 1.0 m/day = rapid rise) was chosen for demonstration purposes and has not been validated against PAGASA warning criteria or expert domain knowledge.
 
 ---
 

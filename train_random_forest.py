@@ -29,7 +29,7 @@ is justified.
 WHAT IS A RANDOM FOREST? (plain language)
 ------------------------------------------
 A single Decision Tree asks a series of yes/no questions
-("Is daily rainfall > 30 mm?  Is river level above 2.5 m?")
+("Is daily rainfall > 30 mm?  Is river level above 2.4 m?")
 and follows a path to a prediction.  It is easy to understand but
 tends to memorise the training data (overfitting).
 
@@ -92,7 +92,7 @@ from sklearn.metrics import (
     precision_score,
     recall_score,
 )
-from sklearn.model_selection import StratifiedKFold, GridSearchCV
+from sklearn.model_selection import GridSearchCV, TimeSeriesSplit
 from sklearn.preprocessing import StandardScaler       
 
 warnings.filterwarnings("ignore")
@@ -268,12 +268,12 @@ def time_split(
     df: pd.DataFrame,
     X: pd.DataFrame,
     y: pd.Series,
-) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series]:
     """
     Sort by timestamp and split at the TRAIN_RATIO point.
 
     IMPORTANT: this produces the SAME test set as the Logistic Regression
-    baseline (same ratio, same random_state = not used = deterministic sort).
+    baseline (same ratio, same date-based cut – no randomness involved).
     Using the same test set is required for a fair model comparison.
 
     SMOTE IS NOT APPLIED HERE.
@@ -282,24 +282,25 @@ def time_split(
     """
     banner("STEP 3 – Time-based train / test split")
 
-    order       = df["timestamp"].argsort().values
-    X_s, y_s    = X.iloc[order].reset_index(drop=True), y.iloc[order].reset_index(drop=True)
-    cut         = int(len(X_s) * TRAIN_RATIO)
+    # Cut on DATES so the four city rows of one day (same weather) never
+    # straddle the train / test boundary.
+    dates    = np.sort(df["timestamp"].unique())
+    cut_date = dates[int(len(dates) * TRAIN_RATIO)]
+    is_train = (df["timestamp"] < cut_date).values
 
-    X_train, X_test = X_s.iloc[:cut], X_s.iloc[cut:]
-    y_train, y_test = y_s.iloc[:cut], y_s.iloc[cut:]
+    X_train, X_test = X[is_train].reset_index(drop=True), X[~is_train].reset_index(drop=True)
+    y_train, y_test = y[is_train].reset_index(drop=True), y[~is_train].reset_index(drop=True)
+    train_dates = df.loc[is_train, "timestamp"].reset_index(drop=True)
 
-    print(f"  Train : {len(X_train):,} rows  "
-          f"(ends at row {cut - 1})")
-    print(f"  Test  : {len(X_test):,} rows  "
-          f"(rows {cut} → {len(X_s) - 1})")
+    print(f"  Train : {len(X_train):,} rows  (before {pd.Timestamp(cut_date).date()})")
+    print(f"  Test  : {len(X_test):,} rows  (from {pd.Timestamp(cut_date).date()})")
     print()
     for name, yp in [("Train", y_train), ("Test", y_test)]:
         dist = {lbl: int((yp == lbl).sum()) for lbl in CLASS_ORDER}
         print(f"  {name} distribution: "
               + "  ".join(f"{k}={v}" for k, v in dist.items()))
 
-    return X_train, X_test, y_train, y_test
+    return X_train, X_test, y_train, y_test, train_dates
 
 
 def build_pipeline() -> ImbPipeline:
@@ -307,14 +308,14 @@ def build_pipeline() -> ImbPipeline:
     Assemble a three-step pipeline:
 
     ┌─────────────────────────────────────────────────────────────────┐
-    │  Step 1 – SMOTE (inside training folds only)                   │
+    │  Step 1 – StandardScaler                                       │
+    │    Random Forests do NOT require scaling, but SMOTE does: it   │
+    │    finds nearest neighbours by distance, so unscaled columns   │
+    │    (e.g. 7-day rainfall in mm vs a 0–1 ratio) would dominate.  │
+    │                                                                 │
+    │  Step 2 – SMOTE (inside training folds only)                   │
     │    Interpolates extra High-risk rows so the classifier sees    │
     │    enough examples to learn what High risk looks like.         │
-    │                                                                 │
-    │  Step 2 – StandardScaler                                       │
-    │    Random Forests do NOT require scaling, but we include it    │
-    │    to keep this pipeline consistent with the baseline and to   │
-    │    make the pipeline reusable if we swap in other classifiers. │
     │                                                                 │
     │  Step 3 – RandomForestClassifier                               │
     │    The main model.  Hyperparameters are tuned by GridSearchCV  │
@@ -347,8 +348,8 @@ def build_pipeline() -> ImbPipeline:
     )
 
     pipeline = ImbPipeline(steps=[
-        ("smote",      smote),
         ("scaler",     scaler),
+        ("smote",      smote),
         ("classifier", rf),
     ])
     return pipeline
@@ -357,19 +358,23 @@ def tune_hyperparameters(
     pipeline: ImbPipeline,
     X_train: pd.DataFrame,
     y_train: pd.Series,
+    train_dates: pd.Series,
 ) -> tuple[ImbPipeline, pd.DataFrame]:
     """
     Search the PARAM_GRID for the combination of hyperparameters that gives
-    the highest macro F1 on a 5-fold stratified cross-validation of the
-    TRAINING data only.
+    the highest macro F1 on a 5-fold FORWARD-CHAINING (time-series)
+    cross-validation of the TRAINING data only.
 
-    HOW GridSearchCV WORKS (step by step)
-    ──────────────────────────────────────
+    HOW GridSearchCV WORKS HERE (step by step)
+    ──────────────────────────────────────────
     1. It takes every combination of values in PARAM_GRID.
        (3 × 3 × 3 = 27 combinations here.)
-    2. For each combination, it splits the training data into 5 folds.
-    3. For each fold: train on 4 folds, validate on 1 fold, record macro F1.
-       SMOTE runs only on the 4 training folds – never on the validation fold.
+    2. The training DATES are cut into 6 consecutive blocks.  Fold k trains
+       on blocks 1..k and validates on block k+1, so the model is always
+       validated on days that come AFTER the days it trained on (a shuffled
+       split would let it train on the future).  Whole dates stay together.
+    3. For each fold, record macro F1 on the validation block.
+       SMOTE runs only on the training part – never on the validation block.
     4. Average the 5 fold scores.  The combination with the highest average
        macro F1 is chosen.
     5. The best pipeline is then re-trained on the FULL training set.
@@ -390,11 +395,13 @@ def tune_hyperparameters(
     print(f"  Searching {total_combos} hyperparameter combinations × {CV_FOLDS} folds "
           f"= {total_combos * CV_FOLDS} model fits …")
 
-    cv = StratifiedKFold(
-        n_splits=CV_FOLDS,
-        shuffle=True,
-        random_state=RANDOM_STATE,
-    )
+    # Split unique dates in time order, then map each fold back to row indices.
+    unique_dates = np.sort(train_dates.unique())
+    date_pos     = np.searchsorted(unique_dates, train_dates.values)
+    cv = [
+        (np.flatnonzero(np.isin(date_pos, tr)), np.flatnonzero(np.isin(date_pos, va)))
+        for tr, va in TimeSeriesSplit(n_splits=CV_FOLDS).split(unique_dates)
+    ]
 
     grid_search = GridSearchCV(
         estimator=pipeline,
@@ -861,7 +868,7 @@ def main() -> None:
     X, y = build_feature_matrix(df)
     feature_names = list(X.columns)
 
-    X_train, X_test, y_train, y_test = time_split(df, X, y)
+    X_train, X_test, y_train, y_test, train_dates = time_split(df, X, y)
 
     banner("STEP 4 – Build pipeline")
     pipeline = build_pipeline()
@@ -869,7 +876,7 @@ def main() -> None:
     for name, step in pipeline.steps:
         print(f"    [{name}]  {step.__class__.__name__}")
 
-    best_pipeline, cv_df = tune_hyperparameters(pipeline, X_train, y_train)
+    best_pipeline, cv_df = tune_hyperparameters(pipeline, X_train, y_train, train_dates)
 
     report_df, cm = evaluate(best_pipeline, X_test, y_test)
 

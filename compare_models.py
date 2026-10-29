@@ -57,9 +57,9 @@ def load_test_set(
     """
     Reproduce the exact same held-out test set that both training scripts used.
 
-    Both train_baseline_lr.py and train_random_forest.py sort by timestamp,
-    take the first TRAIN_RATIO of rows as training data, and hold out the rest.
-    We replicate those two lines here so comparisons are fair.
+    Both train_baseline_lr.py and train_random_forest.py take the earliest
+    TRAIN_RATIO of DATES as training data and hold out the rest.
+    We replicate that cut here so comparisons are fair.
     """
     banner("STEP 1 – Reconstruct shared test set")
 
@@ -75,17 +75,17 @@ def load_test_set(
     X = df[feature_cols]
     y = df["flood_risk"]
 
-    order    = df["timestamp"].argsort().values
-    X_s      = X.iloc[order].reset_index(drop=True)
-    y_s      = y.iloc[order].reset_index(drop=True)
-    cut      = int(len(X_s) * TRAIN_RATIO)
+    # Same date-based cut as the training scripts.
+    dates    = np.sort(df["timestamp"].unique())
+    cut_date = dates[int(len(dates) * TRAIN_RATIO)]
+    is_test  = (df["timestamp"] >= cut_date).values
 
-    X_test = X_s.iloc[cut:]
-    y_test = y_s.iloc[cut:]
+    X_test = X[is_test].reset_index(drop=True)
+    y_test = y[is_test].reset_index(drop=True)
 
     print(f"  Total rows  : {len(df):,}")
-    print(f"  Train rows  : {cut:,}  (70 %)")
-    print(f"  Test rows   : {len(X_test):,}  (30 %)")
+    print(f"  Train rows  : {int((~is_test).sum()):,}  (dates before {pd.Timestamp(cut_date).date()})")
+    print(f"  Test rows   : {len(X_test):,}  (dates from {pd.Timestamp(cut_date).date()})")
     print(f"  Features    : {len(feature_cols)}")
     print()
     dist = {lbl: int((y_test == lbl).sum()) for lbl in CLASS_ORDER}

@@ -1,6 +1,6 @@
 ======================================================================
   AquaAlert – Data Quality Report
-  Generated : 2026-10-29 21:54:26
+  Generated : 2026-10-29 22:29:22
   Input     : data\raw\aquaalert_raw.csv
   Output    : data\processed\aquaalert_features.csv
 ======================================================================
@@ -19,21 +19,21 @@ DATA SOURCES (see build_real_dataset.py)
 ──────────────────────────────────────────────────────────────────────
 1. ROW COUNTS
 ──────────────────────────────────────────────────────────────────────
-  Rows in raw file                 : 7,308
-  Rows after removing duplicates   : 7,308
+  Rows in raw file                 : 7,284
+  Rows after removing duplicates   : 7,284
   Rows removed (duplicates)        : 0
-  Rows in final processed file     : 7,308
+  Rows in final processed file     : 7,284
   Total rows removed overall       : 0
 
 ──────────────────────────────────────────────────────────────────────
 2. MISSING-VALUE HANDLING
 ──────────────────────────────────────────────────────────────────────
   flood_risk                               no missing values
-  water_level_change_1d_m                  4 missing → strategy=sentinel=-999.0, flag_col=water_level_change_1d_m_missing
+  water_level_change_1d_m                  no missing values
   rainfall_last_24h_mm                     no missing values
-  rainfall_prev_day_mm                     4 missing → strategy=median, fill=8.4
-  rainfall_last_3d_mm                      8 missing → strategy=median, fill=28.499999999999957
-  rainfall_last_7d_mm                      24 missing → strategy=median, fill=68.75
+  rainfall_prev_day_mm                     no missing values
+  rainfall_last_3d_mm                      no missing values
+  rainfall_last_7d_mm                      no missing values
   river_water_level_m                      no missing values
   soil_moisture_pct                        no missing values
   elevation_m                              no missing values
@@ -64,12 +64,11 @@ DATA SOURCES (see build_real_dataset.py)
    12. obs_month
    13. obs_dayofweek
    14. is_flood_season
-   15. water_level_change_1d_m_missing
-   16. flood_hazard_level_enc
-   17. rainfall_ratio_1d_7d
-   18. water_level_rise_cat
-   19. combined_rain_hazard_risk
-   20. wet_antecedent_index
+   15. flood_hazard_level_enc
+   16. rainfall_ratio_1d_7d
+   17. water_level_rise_cat
+   18. combined_rain_hazard_risk
+   19. wet_antecedent_index
 
 ──────────────────────────────────────────────────────────────────────
 5. TARGET COLUMN
@@ -80,8 +79,8 @@ DATA SOURCES (see build_real_dataset.py)
 ──────────────────────────────────────────────────────────────────────
 6. CLASS DISTRIBUTION (flood_risk)
 ──────────────────────────────────────────────────────────────────────
-  Low           6,154 rows  (84.2%)
-  Moderate      1,022 rows  (14.0%)
+  Low           6,036 rows  (82.9%)
+  Moderate      1,116 rows  (15.3%)
   High            132 rows  (1.8%)
 
 ──────────────────────────────────────────────────────────────────────
@@ -92,9 +91,10 @@ DATA SOURCES (see build_real_dataset.py)
   before using this dataset in a production system.
   flood_risk is derived from the source binary FloodOccurrence: High
   = recorded flood; Moderate = no flood but daily rain >= 20 mm or
-  river level >= 2.5 m; Low = otherwise. In the source data
-  FloodOccurrence equals (rainfall >= 30 mm) on every row, so the
-  target is a deterministic function of rainfall and water level.
+  river level >= its training-period 90th percentile (2.4 m); Low =
+  otherwise. In the source data FloodOccurrence equals (rainfall >=
+  30 mm) on every row, so the target is a deterministic function of
+  rainfall and water level.
   The wettest day in the data is 52.7 mm. Documented major Metro
   Manila floods (JICA 2014, Table 2.6) had 149-291 mm of basin
   rainfall in one day, so typhoon-scale events are absent from

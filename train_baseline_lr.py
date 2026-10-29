@@ -164,21 +164,23 @@ def time_split(
 
     A RANDOM split would be wrong here because it could mix future data into
     the training set and make accuracy look better than it really is.
+
+    The cut is made on DATES, not rows: every date has one row per city and
+    those rows share the same weather, so a date must never be split between
+    training and test.
     """
     banner("STEP 3 – Time-based train / test split")
 
+    dates    = np.sort(df["timestamp"].unique())
+    cut_date = dates[int(len(dates) * train_ratio)]
+    is_train = (df["timestamp"] < cut_date).values
 
-    sorted_idx = df["timestamp"].argsort().values
-    X_sorted   = X.iloc[sorted_idx].reset_index(drop=True)
-    y_sorted   = y.iloc[sorted_idx].reset_index(drop=True)
+    X_train, X_test = X[is_train].reset_index(drop=True), X[~is_train].reset_index(drop=True)
+    y_train, y_test = y[is_train].reset_index(drop=True), y[~is_train].reset_index(drop=True)
+    print(f"  Test period starts : {pd.Timestamp(cut_date).date()}")
 
-    split_point = int(len(X_sorted) * train_ratio)
-
-    X_train, X_test = X_sorted.iloc[:split_point], X_sorted.iloc[split_point:]
-    y_train, y_test = y_sorted.iloc[:split_point], y_sorted.iloc[split_point:]
-
-    print(f"  Train rows : {len(X_train):,}  ({100*len(X_train)/len(X_sorted):.0f}%)")
-    print(f"  Test rows  : {len(X_test):,}  ({100*len(X_test)/len(X_sorted):.0f}%)")
+    print(f"  Train rows : {len(X_train):,}  ({100*len(X_train)/len(X):.0f}%)")
+    print(f"  Test rows  : {len(X_test):,}  ({100*len(X_test)/len(X):.0f}%)")
     print()
 
 

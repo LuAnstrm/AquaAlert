@@ -5,8 +5,8 @@
 
 SECTION 1 – OVERVIEW
 ────────────────────────────────────────────────────────────────────────
-Two classifiers were evaluated on the same held-out test set (2193 rows;
-50 High-risk, 307 Moderate-risk, 1836 Low-risk observations). Both were
+Two classifiers were evaluated on the same held-out test set (2188 rows;
+50 High-risk, 339 Moderate-risk, 1799 Low-risk observations). Both were
 trained on the earliest 70% of sorted timestamps and tested on the most
 recent 30%.
 
@@ -31,22 +31,22 @@ event. The direct consequence could be loss of life, injuries, or
 preventable damage to property.
 
 In the current test set, Logistic Regression missed 3 of 50 truly High-
-risk events (High-recall = 0.94). Random Forest missed 1 of 50 (High-
-recall = 0.98). Each missed event represents a potential failure to warn
+risk events (High-recall = 0.94). Random Forest missed 0 of 50 (High-
+recall = 1.00). Each missed event represents a potential failure to warn
 a community.
 
 SECTION 4 – METRIC-BY-METRIC COMPARISON
 ────────────────────────────────────────────────────────────────────────
   Metric                           Logistic Reg   Random Forest   Winner
   ────────────────────────────────────────────────────────────────────
-  Accuracy                                0.926           0.994       RF
-  Macro Precision                         0.861           0.986       RF
-  Macro Recall                            0.929           0.991       RF
-  Macro F1  ← primary metric              0.888           0.989       RF
-  Moderate Recall  ⚠ safety               0.919           1.000       RF
-  High Recall  ⚠⚠ key metric              0.940           0.980       RF
-  High Precision                          0.922           1.000       RF
-  Pred. time (ms, 2193 rows)               68.2            64.3       RF
+  Accuracy                                0.924           0.997       RF
+  Macro Precision                         0.850           0.993       RF
+  Macro Recall                            0.926           0.999       RF
+  Macro F1  ← primary metric              0.882           0.996       RF
+  Moderate Recall  ⚠ safety               0.912           1.000       RF
+  High Recall  ⚠⚠ key metric              0.940           1.000       RF
+  High Precision                          0.870           1.000       RF
+  Pred. time (ms, 2188 rows)              286.1           305.2       LR
   ────────────────────────────────────────────────────────────────────
 
 SECTION 5 – SAFETY TARGET ASSESSMENT
@@ -54,9 +54,9 @@ SECTION 5 – SAFETY TARGET ASSESSMENT
   Target: High-recall ≥ 0.80  |  Moderate-recall ≥ 0.70
 
   Logistic Regression  – High-recall   0.94  PASS ✓
-                         Mod-recall    0.92  PASS ✓
+                         Mod-recall    0.91  PASS ✓
 
-  Random Forest        – High-recall   0.98  PASS ✓
+  Random Forest        – High-recall   1.00  PASS ✓
                          Mod-recall    1.00  PASS ✓
 
 PROTOTYPE ASSUMPTION: The 0.80 and 0.70 recall targets are working

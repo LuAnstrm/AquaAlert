@@ -35,7 +35,9 @@ The source dataset only says flood / no flood.  AquaAlert needs
 Low / Moderate / High, so:
     High     = FloodOccurrence == 1 (a recorded flood)
     Moderate = no flood, but a near-miss: daily rain ≥ 20 mm OR river
-               level ≥ 2.5 m (2.5 m = 90th percentile of non-flood days)
+               level ≥ the 90th percentile of non-flood days, computed on the
+               TRAINING period only (earliest 70 % of dates) so the test
+               period never influences how labels are defined
     Low      = everything else
 NOTE: in the source data FloodOccurrence is exactly Rainfall_mm ≥ 30, so the
 label is a deterministic function of rainfall and water level.  Expect very
@@ -61,8 +63,15 @@ JICA_FILE  = SRC_DIR / "jica_2014_major_floods.csv"
 OUT_FILE   = Path("data/raw/aquaalert_raw.csv")
 
 # Label thresholds (PROTOTYPE ASSUMPTIONS)
-MODERATE_RAIN_MM   = 20.0
-MODERATE_LEVEL_M   = 2.5
+MODERATE_RAIN_MM          = 20.0
+MODERATE_LEVEL_PERCENTILE = 0.90
+
+# Must match TRAIN_RATIO in the training scripts: the Moderate river-level
+# threshold is fitted on the same earliest-70 %-of-dates training period.
+TRAIN_RATIO = 0.70
+
+# Rows before this many days of history exist have incomplete rolling sums.
+HISTORY_DAYS = 7
 
 # AEGIS flood-height code at or above which a point counts as "deep" flooding.
 # Commonly read as waist-high; the code book is not shipped with the dataset.
@@ -112,6 +121,8 @@ def load_ncr_timeseries(filepath: Path) -> pd.DataFrame:
 
     df = pd.read_csv(filepath, parse_dates=["Date"])
     print(f"  Rows: {len(df):,}   Cities: {sorted(df['Location'].unique())}")
+    if df.duplicated(subset=["Date", "Location"]).any():
+        raise ValueError("Source has more than one row for the same city and date.")
     print(f"  Dates: {df['Date'].min().date()} → {df['Date'].max().date()}")
     print(f"  Recorded floods: {int(df['FloodOccurrence'].sum())}")
 
@@ -119,15 +130,37 @@ def load_ncr_timeseries(filepath: Path) -> pd.DataFrame:
     g  = df.groupby("Location")
 
     # Only PAST and SAME-DAY values are used, so nothing leaks from the future.
-    # The first day(s) of each city have no history → left as NaN on purpose;
-    # preprocess.py fills them (median) and logs it in the quality report.
     df["rainfall_prev_day_mm"]    = g["Rainfall_mm"].shift(1)
     df["rainfall_last_3d_mm"]     = g["Rainfall_mm"].transform(
         lambda s: s.rolling(3, min_periods=3).sum())
     df["rainfall_last_7d_mm"]     = g["Rainfall_mm"].transform(
-        lambda s: s.rolling(7, min_periods=7).sum())
+        lambda s: s.rolling(HISTORY_DAYS, min_periods=HISTORY_DAYS).sum())
     df["water_level_change_1d_m"] = g["WaterLevel_m"].diff()
-    return df
+
+    # The first days of each city have no full history.  Dropping them (rather
+    # than filling with a dataset-wide median, which would include test-period
+    # values) keeps the test period from influencing the training rows.
+    first_day = g["Date"].transform("min")
+    keep = df["Date"] >= first_day + pd.Timedelta(days=HISTORY_DAYS - 1)
+    print(f"  Dropped {int((~keep).sum())} rows without {HISTORY_DAYS} days of history")
+    return df[keep].reset_index(drop=True)
+
+
+def fit_moderate_level_threshold(df: pd.DataFrame) -> float:
+    """
+    90th percentile of river level on non-flood days in the TRAINING period.
+
+    Uses the same date-based 70 / 30 cut as the training scripts, so the
+    held-out test period plays no part in defining the labels.
+    """
+    dates    = np.sort(df["Date"].unique())
+    cut_date = dates[int(len(dates) * TRAIN_RATIO)]
+    train    = df[(df["Date"] < cut_date) & (df["FloodOccurrence"] == 0)]
+    level    = round(float(train["WaterLevel_m"].quantile(MODERATE_LEVEL_PERCENTILE)), 1)
+    print(f"  Moderate river-level threshold = {level} m  "
+          f"(p{int(MODERATE_LEVEL_PERCENTILE * 100)} of non-flood days "
+          f"before {pd.Timestamp(cut_date).date()})")
+    return level
 
 
 def build_aegis_hazard(filepath: Path, cities: list[str]) -> pd.DataFrame:
@@ -163,10 +196,10 @@ def build_aegis_hazard(filepath: Path, cities: list[str]) -> pd.DataFrame:
     return summary.reset_index().rename(columns={"city": "municipality"})
 
 
-def assign_risk_label(df: pd.DataFrame) -> pd.Series:
+def assign_risk_label(df: pd.DataFrame, level_m: float) -> pd.Series:
     """Map the binary flood label onto Low / Moderate / High."""
     near_miss = ((df["Rainfall_mm"] >= MODERATE_RAIN_MM)
-                 | (df["WaterLevel_m"] >= MODERATE_LEVEL_M))
+                 | (df["WaterLevel_m"] >= level_m))
     return pd.Series(
         np.select([df["FloodOccurrence"] == 1, near_miss],
                   ["High", "Moderate"], default="Low"),
@@ -208,7 +241,7 @@ def main() -> None:
         "Elevation_m":      "elevation_m",
         "FloodOccurrence":  "flood_occurrence",
     })
-    df["flood_risk"] = assign_risk_label(ncr)
+    df["flood_risk"] = assign_risk_label(ncr, fit_moderate_level_threshold(ncr))
     df = df.merge(hazard, on="municipality", how="left")
 
     df = df.sort_values(["timestamp", "municipality"]).reset_index(drop=True)
