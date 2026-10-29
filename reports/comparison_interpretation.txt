@@ -5,8 +5,8 @@
 
 SECTION 1 – OVERVIEW
 ────────────────────────────────────────────────────────────────────────
-Two classifiers were evaluated on the same held-out test set (90 rows; 6
-High-risk, 45 Moderate-risk, 39 Low-risk observations). Both were
+Two classifiers were evaluated on the same held-out test set (2193 rows;
+50 High-risk, 307 Moderate-risk, 1836 Low-risk observations). Both were
 trained on the earliest 70% of sorted timestamps and tested on the most
 recent 30%.
 
@@ -14,7 +14,7 @@ SECTION 2 – WHY ACCURACY IS NOT THE RIGHT PRIMARY METRIC
 ────────────────────────────────────────────────────────────────────────
 Accuracy measures the fraction of all predictions that are correct. In a
 balanced dataset this is a useful summary, but the AquaAlert dataset is
-imbalanced: High-risk events make up only approximately 6 % of
+imbalanced: High-risk events make up only approximately 2 % of
 observations. A model that labels every observation as 'Low' would
 achieve very high accuracy while detecting zero floods. For a flood
 warning system, the cost of a missed flood (a false negative) is
@@ -30,34 +30,34 @@ triggered, and people remain in flood-prone areas during a dangerous
 event. The direct consequence could be loss of life, injuries, or
 preventable damage to property.
 
-In the current test set, Logistic Regression missed 0 of 6 truly High-
-risk events (High-recall = 1.00). Random Forest missed 2 of 6 (High-
-recall = 0.67). Each missed event represents a potential failure to warn
+In the current test set, Logistic Regression missed 3 of 50 truly High-
+risk events (High-recall = 0.94). Random Forest missed 1 of 50 (High-
+recall = 0.98). Each missed event represents a potential failure to warn
 a community.
 
 SECTION 4 – METRIC-BY-METRIC COMPARISON
 ────────────────────────────────────────────────────────────────────────
   Metric                           Logistic Reg   Random Forest   Winner
   ────────────────────────────────────────────────────────────────────
-  Accuracy                                0.800           0.856       RF
-  Macro Precision                         0.742           0.899       RF
-  Macro Recall                            0.862           0.802       LR
-  Macro F1  ← primary metric              0.775           0.839       RF
-  Moderate Recall  ⚠ safety               0.689           0.867       RF
-  High Recall  ⚠⚠ key metric              1.000           0.667       LR
-  High Precision                          0.545           1.000       RF
-  Pred. time (ms, 90 rows)                 63.3            19.3       RF
+  Accuracy                                0.926           0.994       RF
+  Macro Precision                         0.861           0.986       RF
+  Macro Recall                            0.929           0.991       RF
+  Macro F1  ← primary metric              0.888           0.989       RF
+  Moderate Recall  ⚠ safety               0.919           1.000       RF
+  High Recall  ⚠⚠ key metric              0.940           0.980       RF
+  High Precision                          0.922           1.000       RF
+  Pred. time (ms, 2193 rows)              111.9            57.4       RF
   ────────────────────────────────────────────────────────────────────
 
 SECTION 5 – SAFETY TARGET ASSESSMENT
 ────────────────────────────────────────────────────────────────────────
   Target: High-recall ≥ 0.80  |  Moderate-recall ≥ 0.70
 
-  Logistic Regression  – High-recall   1.00  PASS ✓
-                         Mod-recall    0.69  FAIL ✗
+  Logistic Regression  – High-recall   0.94  PASS ✓
+                         Mod-recall    0.92  PASS ✓
 
-  Random Forest        – High-recall   0.67  FAIL ✗  ← investigate
-                         Mod-recall    0.87  PASS ✓
+  Random Forest        – High-recall   0.98  PASS ✓
+                         Mod-recall    1.00  PASS ✓
 
 PROTOTYPE ASSUMPTION: The 0.80 and 0.70 recall targets are working
 thresholds chosen for this capstone. They have not been validated
@@ -68,43 +68,47 @@ SECTION 6 – INTERPRETABILITY
 ────────────────────────────────────────────────────────────────────────
 Logistic Regression is the more interpretable model: each feature has a
 single coefficient per class that shows its direction and magnitude of
-influence. A barangay official can be shown 'rainfall in the last 3
-hours has the strongest positive effect on High-risk probability.'
-Random Forest offers feature importances (how often each feature reduced
-prediction error) but individual predictions are harder to explain
-because they aggregate 100–300 decision trees.
+influence. A barangay official can be shown 'daily rainfall has the
+strongest positive effect on High-risk probability.' Random Forest
+offers feature importances (how often each feature reduced prediction
+error) but individual predictions are harder to explain because they
+aggregate 100–300 decision trees.
 
 SECTION 7 – RECOMMENDATION
 ────────────────────────────────────────────────────────────────────────
-  Recommended model for AquaAlert prototype: Logistic Regression
+  Recommended model for AquaAlert prototype: Random Forest
 
-Logistic Regression achieves substantially higher High-risk recall. For
-a flood warning system, missing fewer real flood events is more
-important than any other metric improvement. Random Forest may be
-preferred after collecting more training data for the High-risk class.
+Both models meet the ≥ 0.80 High-recall safety target. Random Forest is
+preferred because it achieves a higher macro F1, meaning it is more
+balanced across all three risk levels.
 
 REGARDLESS OF WHICH MODEL IS CHOSEN: The hard-override rules in
 aquaalert_scorer.py remain active. If a river reaches DANGER level or
-both the 3h and 24h rainfall thresholds are exceeded simultaneously, the
-alert is forced to High regardless of the ML model's output. This rule-
-based safety net is the primary protection against false negatives in
-extreme events. [PROTOTYPE ASSUMPTION — verify thresholds against EFCOS
-and PAGASA]
+the daily rainfall threshold is exceeded, the alert is forced to High
+regardless of the ML model's output. This rule-based safety net is the
+primary protection against false negatives in extreme events. [PROTOTYPE
+ASSUMPTION — verify thresholds against EFCOS and PAGASA]
 
 SECTION 8 – LIMITATIONS
 ────────────────────────────────────────────────────────────────────────
-1. SYNTHETIC DATA: All training and test rows were generated by
-generate_sample_raw.py, not from real sensor readings. Metrics reflect
-learned patterns in artificial data and will not generalise to real NCR
-flood conditions without retraining.
+1. THRESHOLD-DERIVED LABEL: The data is real (daily NCR observations
+2016-2020), but its FloodOccurrence label equals rainfall >= 30 mm on
+every row, and Moderate is defined by rainfall/river-level thresholds.
+High scores show the models recover those thresholds, not validated
+forecasting skill.
 
-2. SMALL HIGH-RISK SAMPLE: Only 6 High-risk rows in the test set. A
-single correct or incorrect prediction changes recall by 0.17.
+1b. NO TYPHOON-SCALE EVENTS: The wettest training day is about 53 mm.
+Documented major Metro Manila floods (JICA/DPWH 2014, Table 2.6: Seniang
+2000, Chedeng 2003, Winnie 2004, Ondoy 2009, Kirogi 2012) had 149-291 mm
+of basin rainfall in one day. The models have never seen such an event.
+
+2. SMALL HIGH-RISK SAMPLE: Only 50 High-risk rows in the test set. A
+single correct or incorrect prediction changes recall by 0.02.
 Confidence intervals are wide; treat all High-class metrics as
 approximate.
 
-3. NO TEMPORAL AUTOCORRELATION HANDLING: Flood risk in a barangay at
-time T is correlated with risk at T−1. Neither model accounts for this
+3. NO TEMPORAL AUTOCORRELATION HANDLING: Flood risk in a city at time T
+is correlated with risk at T−1. Neither model accounts for this
 explicitly. A time-series model (LSTM, LightGBM with lag features) may
 be more appropriate once enough real data is available.
 
@@ -114,7 +118,8 @@ PAGASA, LGU DRRMO, or NDRRMC advisories with its output.
 
 SECTION 9 – SUGGESTED NEXT STEPS
 ────────────────────────────────────────────────────────────────────────
-  1. Collect ≥ 100 real labelled High-risk observations for NCR.
+  1. Add independently recorded flood events (NDRRMC sitreps) so
+     the label is not a rainfall threshold.
   2. Re-run the full pipeline (preprocess → train_baseline_lr →
      train_random_forest → compare_models) on real data.
   3. Run permutation importance to cross-check RF feature rankings.
@@ -125,8 +130,9 @@ SECTION 9 – SUGGESTED NEXT STEPS
 
 ========================================================================
   PROTOTYPE NOTICE
-This interpretation was auto-generated from metric values computed on a
-synthetic prototype dataset. It is a DRAFT for review and must be
-revised before submission. All numbers are prototype results only.
-AquaAlert does not constitute an official flood warning system.
+This interpretation was auto-generated from metric values computed on
+real 2016-2020 NCR data with a threshold-derived 3-class label. It is a
+DRAFT for review and must be revised before submission. All numbers are
+prototype results only. AquaAlert does not constitute an official flood
+warning system.
 ========================================================================

@@ -1,6 +1,6 @@
 ======================================================================
   AquaAlert – Data Quality Report
-  Generated : 2026-10-26 13:36:40
+  Generated : 2026-10-29 21:54:26
   Input     : data\raw\aquaalert_raw.csv
   Output    : data\processed\aquaalert_features.csv
 ======================================================================
@@ -9,63 +9,67 @@ PROTOTYPE NOTICE
   This report documents a student capstone prototype pipeline.
   It does not constitute an official flood data product.
 
+DATA SOURCES (see build_real_dataset.py)
+  1. Flood Prediction NCR Philippines – daily, 2016–2020,
+     Manila / Quezon City / Marikina / Pasig (time series + label)
+  2. AEGIS flood points – static per-city flood-hazard summary
+  3. JICA/DPWH (2014) Data Collection Survey on Flood Management
+     in Metro Manila – flood season (May–Nov), major-flood table
+
 ──────────────────────────────────────────────────────────────────────
 1. ROW COUNTS
 ──────────────────────────────────────────────────────────────────────
-  Rows in raw file                 : 305
-  Rows after removing duplicates   : 303
-  Rows removed (duplicates)        : 2
-  Rows in final processed file     : 300
-  Total rows removed overall       : 5
+  Rows in raw file                 : 7,308
+  Rows after removing duplicates   : 7,308
+  Rows removed (duplicates)        : 0
+  Rows in final processed file     : 7,308
+  Total rows removed overall       : 0
 
 ──────────────────────────────────────────────────────────────────────
 2. MISSING-VALUE HANDLING
 ──────────────────────────────────────────────────────────────────────
   flood_risk                               no missing values
-  river_water_level_m                      61 missing → strategy=sentinel=-999.0, flag_col=river_water_level_m_missing, fill=sentinel=-999.0, flag_col=river_water_level_m_missing
-  water_level_change_1h_m                  61 missing → strategy=sentinel=-999.0, flag_col=water_level_change_1h_m_missing, fill=sentinel=-999.0, flag_col=water_level_change_1h_m_missing
-  rainfall_last_3h_mm                      4 missing → strategy=median, fill=12.95
+  water_level_change_1d_m                  4 missing → strategy=sentinel=-999.0, flag_col=water_level_change_1d_m_missing
   rainfall_last_24h_mm                     no missing values
-  forecast_rainfall_next_3h_mm             no missing values
+  rainfall_prev_day_mm                     4 missing → strategy=median, fill=8.4
+  rainfall_last_3d_mm                      8 missing → strategy=median, fill=28.499999999999957
+  rainfall_last_7d_mm                      24 missing → strategy=median, fill=68.75
+  river_water_level_m                      no missing values
+  soil_moisture_pct                        no missing values
   elevation_m                              no missing values
-  citizen_report_count                     4 missing → strategy=median, fill=18.0
-  average_reported_flood_depth_cm          no missing values
   flood_hazard_level                       no missing values
-  drainage_condition                       no missing values
-  barangay                                 no missing values
   municipality                             no missing values
 
 ──────────────────────────────────────────────────────────────────────
 3. CATEGORICAL VALIDATION
 ──────────────────────────────────────────────────────────────────────
-  flood_hazard_level             invalid rows dropped: 1
-  drainage_condition             invalid rows dropped: 1
-  flood_risk                     invalid rows dropped: 1
+  flood_hazard_level             invalid rows dropped: 0
+  flood_risk                     invalid rows dropped: 0
+  flood_occurrence               invalid rows dropped: 0
 
 ──────────────────────────────────────────────────────────────────────
 4. FINAL FEATURE COLUMNS  (use these as X in model training)
 ──────────────────────────────────────────────────────────────────────
-    1. rainfall_last_3h_mm
-    2. rainfall_last_24h_mm
-    3. forecast_rainfall_next_3h_mm
-    4. river_water_level_m
-    5. water_level_change_1h_m
-    6. elevation_m
-    7. citizen_report_count
-    8. average_reported_flood_depth_cm
-    9. obs_hour
-   10. obs_month
-   11. obs_dayofweek
-   12. is_typhoon_season
-   13. river_water_level_m_missing
-   14. water_level_change_1h_m_missing
-   15. flood_hazard_level_enc
-   16. drainage_condition_enc
-   17. rainfall_intensity_3h_cat
-   18. rainfall_ratio_3h_24h
-   19. water_level_rise_cat
-   20. report_density_per_km2
-   21. combined_rain_drainage_risk
+    1. rainfall_last_24h_mm
+    2. rainfall_prev_day_mm
+    3. rainfall_last_3d_mm
+    4. rainfall_last_7d_mm
+    5. river_water_level_m
+    6. water_level_change_1d_m
+    7. soil_moisture_pct
+    8. elevation_m
+    9. aegis_mean_flood_height_code
+   10. aegis_share_deep_flood
+   11. aegis_mean_elevation_m
+   12. obs_month
+   13. obs_dayofweek
+   14. is_flood_season
+   15. water_level_change_1d_m_missing
+   16. flood_hazard_level_enc
+   17. rainfall_ratio_1d_7d
+   18. water_level_rise_cat
+   19. combined_rain_hazard_risk
+   20. wet_antecedent_index
 
 ──────────────────────────────────────────────────────────────────────
 5. TARGET COLUMN
@@ -76,9 +80,9 @@ PROTOTYPE NOTICE
 ──────────────────────────────────────────────────────────────────────
 6. CLASS DISTRIBUTION (flood_risk)
 ──────────────────────────────────────────────────────────────────────
-  Low             129 rows  (43.0%)
-  Moderate        153 rows  (51.0%)
-  High             18 rows  (6.0%)
+  Low           6,154 rows  (84.2%)
+  Moderate      1,022 rows  (14.0%)
+  High            132 rows  (1.8%)
 
 ──────────────────────────────────────────────────────────────────────
 7. NOTES FOR THE TEAM
@@ -86,9 +90,14 @@ PROTOTYPE NOTICE
   All numeric thresholds used in feature engineering are PROTOTYPE
   ASSUMPTIONS. Validate them against local NCR historical data
   before using this dataset in a production system.
-  The flood_risk target was labeled using proxy sources (NDRRMC
-  sitreps, news archives, LGU bulletins). Treat label accuracy as
-  approximate and document your annotation log alongside this
-  report.
+  flood_risk is derived from the source binary FloodOccurrence: High
+  = recorded flood; Moderate = no flood but daily rain >= 20 mm or
+  river level >= 2.5 m; Low = otherwise. In the source data
+  FloodOccurrence equals (rainfall >= 30 mm) on every row, so the
+  target is a deterministic function of rainfall and water level.
+  The wettest day in the data is 52.7 mm. Documented major Metro
+  Manila floods (JICA 2014, Table 2.6) had 149-291 mm of basin
+  rainfall in one day, so typhoon-scale events are absent from
+  training.
 
 ======================================================================

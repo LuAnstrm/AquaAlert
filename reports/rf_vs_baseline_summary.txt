@@ -5,28 +5,29 @@
 
   Metric                                LR Baseline  Random Forest   Δ (RF−LR)
   ──────────────────────────────────────────────────────────────────
-  Low / precision                             0.795          0.850  ▲ +0.055
-  Low / recall                                0.897          0.872  ▼ -0.025
-  Low / f1-score                              0.843          0.861  ▲ +0.018
+  Low / precision                             0.988          1.000  ▲ +0.012
+  Low / recall                                0.927          0.993  ▲ +0.066
+  Low / f1-score                              0.956          0.997  ▲ +0.041
 
-  Moderate / precision                        0.886          0.848  ▼ -0.038
-  Moderate / recall                           0.689          0.867  ▲ +0.178
-  Moderate / f1-score                         0.775          0.857  ▲ +0.082
+  Moderate / precision                        0.673          0.959  ▲ +0.286
+  Moderate / recall                           0.919          1.000  ▲ +0.081
+  Moderate / f1-score                         0.777          0.979  ▲ +0.202
 
-  High / precision                            0.545          1.000  ▲ +0.455
-  High / recall                               1.000          0.667  ▼ -0.333
-  High / f1-score                             0.706          0.800  ▲ +0.094
+  High / precision                            0.922          1.000  ▲ +0.078
+  High / recall                               0.940          0.980  ▲ +0.040
+  High / f1-score                             0.931          0.990  ▲ +0.059
 
-  macro avg / precision                       0.742          0.899  ▲ +0.157
-  macro avg / recall                          0.862          0.802  ▼ -0.060
-  macro avg / f1-score                        0.775          0.839  ▲ +0.064
+  macro avg / precision                       0.861          0.986  ▲ +0.125
+  macro avg / recall                          0.929          0.991  ▲ +0.062
+  macro avg / f1-score                        0.888          0.989  ▲ +0.101
 
 ──────────────────────────────────────────────────────────────────────
-  Mean metric improvement (RF − LR) : +0.054
+  Mean metric improvement (RF − LR) : +0.096
   Verdict : RF outperforms the baseline overall (mean Δ > 0).
 
   PROTOTYPE NOTICE
-  Results are from a synthetic prototype dataset.  Do not
-  generalise these numbers to real NCR flood patterns without
-  validating on real labelled observations.
+  Results are from real 2016–2020 daily NCR data with a 3-class
+  label derived from rainfall and river-level thresholds.  They
+  show how well each model recovers those thresholds, not
+  validated flood-forecasting skill.
 ======================================================================

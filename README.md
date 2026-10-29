@@ -30,7 +30,7 @@
 
 ## 1. Project Description
 
-**AquaAlert** is a machine-learning system that classifies flood risk at the barangay level into three categories: **Low**, **Moderate**, and **High**. It is designed to demonstrate how sensor data, hazard maps, and community reports could be combined into a single decision-support score for local governments and residents in Metro Manila (NCR), Philippines.
+**AquaAlert** is a machine-learning system that classifies flood risk (currently at the city level, with barangay level as the goal) into three categories: **Low**, **Moderate**, and **High**. It is designed to demonstrate how sensor data, hazard maps, and community reports could be combined into a single decision-support score for local governments and residents in Metro Manila (NCR), Philippines.
 
 Two classifiers are built and compared:
 
@@ -39,7 +39,7 @@ Two classifiers are built and compared:
 | Logistic Regression | Baseline | Highly interpretable; coefficients explain each feature's contribution |
 | Random Forest | Main model | Handles non-linear interactions; includes hyperparameter tuning via GridSearchCV |
 
-The system was built as an undergraduate capstone project and is trained on **synthetic (computer-generated) data**. It does **not** issue official flood warnings and does **not** replace PAGASA, LGU DRRMOs, or the NDRRMC.
+The system was built as an undergraduate capstone project and is trained on **real public data**: daily 2016–2020 flood observations for Manila, Quezon City, Marikina and Pasig, a per-city hazard map built from the AEGIS flood-height dataset, and context from the JICA/DPWH (2014) Metro Manila flood survey (see [Section 6](#6-dataset-schema-and-data-sources)). It does **not** issue official flood warnings and does **not** replace PAGASA, LGU DRRMOs, or the NDRRMC.
 
 ---
 
@@ -57,7 +57,7 @@ AquaAlert explores whether a lightweight machine-learning model, combining publi
 
 ## 3. Project Objectives
 
-1. Build a reproducible ML pipeline that classifies barangay flood risk from five sensor and community features.
+1. Build a reproducible ML pipeline that classifies daily city-level flood risk from rainfall, river-level, soil-moisture and hazard-map features.
 2. Compare a Logistic Regression baseline against a Random Forest main model on the same held-out test set.
 3. Demonstrate that **High-risk recall** (catching real flood events) is the most safety-critical metric — more important than accuracy alone.
 4. Document all assumptions, limitations, and responsible-use guidelines transparently.
@@ -69,15 +69,16 @@ AquaAlert explores whether a lightweight machine-learning model, combining publi
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                     DATA LAYER                              │
-│  generate_sample_raw.py                                     │
-│  → Synthetic raw CSV (300 rows, 8 NCR barangays)            │
+│  build_real_dataset.py                                      │
+│  → NCR daily series + AEGIS hazard + JICA context           │
+│  → aquaalert_raw.csv (7,308 rows, 4 NCR cities, 2016–2020)  │
 └────────────────────┬────────────────────────────────────────┘
                      │
                      ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                  PREPROCESSING LAYER                        │
 │  preprocess.py                                              │
-│  → Clean + validate → Engineer 5 features                   │
+│  → Clean + validate → Engineer 4 features                   │
 │  → aquaalert_features.csv + data_quality_report.txt         │
 └────────────────────┬────────────────────────────────────────┘
                      │
@@ -101,15 +102,18 @@ AquaAlert explores whether a lightweight machine-learning model, combining publi
 └─────────────────────────────────────────────────────────────┘
 ```
 
-**Features used by both models:**
+**Main features used by both models** (20 in total; the full list is in `reports/data_quality_report.txt`):
 
 | Feature | Description |
 |---|---|
-| `rainfall_last_3h_mm` | Cumulative rainfall in the past 3 hours (mm) |
-| `river_water_level_m` | Current river water level at the nearest gauge (m) |
-| `flood_hazard_level_enc` | NAMRIA/LGU static flood-hazard zone (0 = Low, 1 = Medium, 2 = High) |
-| `drainage_condition_enc` | Observed drainage blockage (0 = Clean, 1 = Partly Blocked, 2 = Blocked) |
-| `citizen_report_count` | Number of community flood reports in the past 3 hours |
+| `rainfall_last_24h_mm` | Rainfall on the observation day (mm) |
+| `rainfall_prev_day_mm`, `rainfall_last_3d_mm`, `rainfall_last_7d_mm` | Previous-day and rolling 3-/7-day rainfall (past values only) |
+| `river_water_level_m`, `water_level_change_1d_m` | River water level (m) and its change since the previous day |
+| `soil_moisture_pct` | Soil moisture (%) |
+| `flood_hazard_level_enc` | Static hazard zone built from AEGIS flood heights (0 = Low, 1 = Medium, 2 = High) |
+| `aegis_mean_flood_height_code`, `aegis_share_deep_flood` | Per-city AEGIS flood-height summaries |
+| `is_flood_season` | 1 in May–November, the Metro Manila flood season per JICA/DPWH (2014) |
+| `rainfall_ratio_1d_7d`, `water_level_rise_cat`, `combined_rain_hazard_risk`, `wet_antecedent_index` | Engineered features (see `preprocess.py`) |
 
 All thresholds used to engineer categorical features are assumptions and must be validated against local expert knowledge before any operational use.
 
@@ -122,7 +126,7 @@ aquaalert/
 │
 ├── README.md                        ← you are here
 │
-├── generate_sample_raw.py           ← Step 0: create synthetic raw data
+├── build_real_dataset.py            ← Step 0: build raw CSV from real sources
 ├── preprocess.py                    ← Step 1: clean + feature engineering
 ├── train_baseline_lr.py             ← Step 2: Logistic Regression baseline
 ├── train_random_forest.py           ← Step 3: Random Forest main model
@@ -130,7 +134,11 @@ aquaalert/
 │
 ├── data/
 │   ├── raw/
-│   │   └── aquaalert_raw.csv        ← generated by generate_sample_raw.py
+│   │   ├── sources/                 ← original real datasets (see Section 6)
+│   │   │   ├── flood_prediction_ncr_2016_2020.csv
+│   │   │   ├── aegis_flood_points.csv
+│   │   │   └── jica_2014_major_floods.csv
+│   │   └── aquaalert_raw.csv        ← generated by build_real_dataset.py
 │   └── processed/
 │       └── aquaalert_features.csv   ← generated by preprocess.py
 │
@@ -166,23 +174,43 @@ aquaalert/
 | Column | Type | Description |
 |---|---|---|
 | `observation_id` | string | Unique row identifier |
-| `timestamp` | datetime | ISO 8601 observation time |
-| `barangay` | string | Barangay name |
-| `municipality` | string | Municipality / city |
-| `rainfall_last_3h_mm` | float | 3-hour cumulative rainfall (mm) |
-| `rainfall_last_24h_mm` | float | 24-hour cumulative rainfall (mm) |
-| `river_water_level_m` | float | River water level (m); `-999.0` = sensor offline |
-| `elevation_m` | float | Barangay mean elevation (m) |
-| `flood_hazard_level` | string | Static hazard zone: Low / Medium / High |
-| `drainage_condition` | string | Observed drainage: Clean / Partly Blocked / Blocked |
-| `citizen_report_count` | int | Community reports in past 3 hours |
+| `timestamp` | date | Observation date (one row per city per day) |
+| `municipality` | string | Manila / Quezon City / Marikina / Pasig |
+| `rainfall_last_24h_mm` | float | Rainfall on the day (mm) |
+| `rainfall_prev_day_mm` | float | Rainfall on the previous day (blank on each city's first day) |
+| `rainfall_last_3d_mm`, `rainfall_last_7d_mm` | float | Rolling 3-/7-day rainfall totals (blank until enough history) |
+| `river_water_level_m` | float | River water level (m) |
+| `water_level_change_1d_m` | float | Change in river level since the previous day |
+| `soil_moisture_pct` | float | Soil moisture (%) |
+| `elevation_m` | float | City elevation (m) |
+| `aegis_*` | float | Per-city summaries of the AEGIS flood points |
+| `flood_hazard_level` | string | AEGIS-derived hazard zone: Low / Medium / High |
+| `flood_occurrence` | int | Source flood label (0/1). **Not a feature.** |
 | `flood_risk` | string | Target label: Low / Moderate / High |
 
-### Data source attribution
+### Data sources
 
-> **⚠ Important:** The current dataset is entirely **synthetic** — generated by `generate_sample_raw.py` to simulate realistic NCR flood patterns for academic purposes. It is **not** derived from real sensor readings.
+All three sources are stored unchanged (or, for the PDF, transcribed) in `data/raw/sources/`, and `build_real_dataset.py` combines them.
 
-For a production system, the following real data sources would replace the synthetic data:
+| File | Source | How it is used |
+|---|---|---|
+| `flood_prediction_ncr_2016_2020.csv` | *Flood Prediction NCR Philippines* dataset: 7,308 daily rows, 2016–2020, 4 cities, with rainfall, water level, soil moisture, elevation and a 0/1 flood flag | The time series and the flood label |
+| `aegis_flood_points.csv` | *AEGIS* flood dataset: 3,510 Metro Manila points with an ordinal flood-height code (0–8), elevation and precipitation | Each point is assigned to its nearest city centre. The share of points with code ≥ 3 gives the hazard level: Marikina = High (0.59), Quezon City = Medium (0.36), Pasig = Low (0.25), Manila = Low (0.20) |
+| `jica_2014_major_floods.csv` | JICA / DPWH (May 2014), *Data Collection Survey on Flood Management Plan in Metro Manila – Final Report*, Tables 2.6–2.7 | Flood season (May–Nov, Section 2.3) and a check of training rainfall against documented major floods (149–291 mm/day) |
+
+### How the Low / Moderate / High label is built
+
+The source data only records whether a flood happened. `build_real_dataset.py` turns that into three classes:
+
+| Class | Rule | Rows |
+|---|---|---|
+| **High** | A flood was recorded (`FloodOccurrence = 1`) | 132 (1.8 %) |
+| **Moderate** | No flood, but daily rain ≥ 20 mm **or** river level ≥ 2.5 m (the 90th percentile of non-flood days) | 1,022 (14.0 %) |
+| **Low** | Everything else | 6,154 (84.2 %) |
+
+> **⚠ Important:** In the source data, `FloodOccurrence` is exactly `Rainfall_mm ≥ 30` on every row. The target is therefore a fixed rule on rainfall and water level, and both models score close to perfect. This shows the models can recover those thresholds. It is **not** evidence that they can forecast real floods.
+
+For a production system, the following data sources should be added:
 
 | Data type | Source | Notes |
 |---|---|---|
@@ -248,13 +276,13 @@ joblib>=1.3
 
 ## 8. Step 1 — Prepare the Data
 
-### 8a. Generate synthetic raw data
+### 8a. Build the raw dataset from the real sources
 
 ```bash
-python generate_sample_raw.py
+python build_real_dataset.py
 ```
 
-This creates `data/raw/aquaalert_raw.csv` — a 300-row synthetic dataset with 8 NCR barangays. The script intentionally introduces 5 duplicate rows, 8 missing values, and 3 invalid category labels to simulate real-world data quality issues.
+This creates `data/raw/aquaalert_raw.csv` (7,308 rows: 4 cities × 1,827 days). It adds past-only rainfall lags and rolling totals, the AEGIS hazard level for each city and the 3-class label. It also prints a check against the JICA major-flood table. The lag columns are blank on each city's first days, and `preprocess.py` fills them.
 
 ### 8b. Run preprocessing
 
@@ -264,9 +292,9 @@ python preprocess.py
 
 This script:
 - Removes duplicates and fills or flags missing sensor values
-- Validates categorical columns (`flood_hazard_level`, `drainage_condition`, `flood_risk`)
+- Validates categorical columns (`flood_hazard_level`, `flood_risk`, `flood_occurrence`)
 - Encodes categories as integers for the model
-- Engineers 5 additional features (rainfall intensity category, rainfall ratio, water-level rise rate, report density, combined rain-drainage risk)
+- Engineers 4 additional features (1-day/7-day rainfall ratio, water-level rise rate, combined rain-hazard risk, wet-antecedent index)
 - Outputs `data/processed/aquaalert_features.csv`
 - Saves a data quality summary to `reports/data_quality_report.txt`
 
@@ -340,7 +368,7 @@ python compare_models.py
 
 **How to read the comparison:**
 
-- **Do not choose a model based on accuracy alone.** The dataset is class-imbalanced (~6% High-risk rows), so accuracy can be high even when the model misses every flood event.
+- **Do not choose a model based on accuracy alone.** The dataset is class-imbalanced (~1.8% High-risk rows), so accuracy can be high even when the model misses every flood event.
 - Prioritise **High-risk recall** first. A false negative (missed High event) could leave a community without warning.
 - Check **Moderate-risk recall** second.
 - Use macro F1 to compare overall balance across all three classes.
@@ -353,7 +381,7 @@ After running all four scripts in order, the following files should exist:
 
 ```
 data/
-  raw/aquaalert_raw.csv                    ✓ after generate_sample_raw.py
+  raw/aquaalert_raw.csv                    ✓ after build_real_dataset.py
   processed/aquaalert_features.csv         ✓ after preprocess.py
 
 models/
@@ -416,29 +444,29 @@ pip freeze > requirements_lock.txt
 
 The following limitations must be understood before interpreting any results from this project.
 
-**1. Synthetic training data.**
-All 300 rows were generated by a script using probability weights — not collected from real sensors or real flood events. The model learned patterns in artificial data. Its performance on real NCR observations is unknown and may be substantially different.
+**1. The label follows fixed thresholds.**
+The data is real, but its flood flag is exactly `rainfall ≥ 30 mm`, and the Moderate class is defined by rainfall and river-level thresholds. Test scores (RF macro F1 ≈ 0.99, LR ≈ 0.89) show how well each model recovers those rules. They are not validated flood-forecasting performance.
 
-**2. Very small High-risk sample.**
-Approximately 18 rows in the full dataset are labelled High risk. With so few examples, a single misclassification shifts High-recall by ~0.06. All High-class metrics carry wide uncertainty intervals and should not be treated as reliable estimates.
+**2. No typhoon-scale events.**
+The wettest day in 2016–2020 is 52.7 mm. The major Metro Manila floods documented by JICA/DPWH (2014) (Seniang 2000, Chedeng 2003, Winnie 2004, Ondoy 2009, Kirogi 2012) had 149–291 mm of basin rainfall in one day. The models have never seen an event like these.
 
-**3. No real-time sensor integration.**
-The pipeline reads a static CSV. There is no live connection to PAGASA AWS stations, EFCOS river gauges, or any other data feed.
+**3. Small High-risk sample.**
+There are 132 High-risk rows, and 50 of them are in the test set, so one misclassification moves High-recall by 0.02.
 
-**4. Manually assessed drainage condition.**
-The `drainage_condition` feature assumes a human observer reports blockage. No automated drain sensor is modelled.
+**4. City-level, daily resolution.**
+There are four cities and one reading per city per day. The data has no barangay detail, no hourly rainfall bursts, no drainage condition and no citizen reports.
 
-**5. Static hazard zones.**
-`flood_hazard_level_enc` uses a fixed hazard map. It does not update with changing land use, new infrastructure, or updated LiDAR surveys.
+**5. Approximate hazard map.**
+AEGIS points are assigned to cities by nearest city centre, not official boundaries. The hazard levels are fixed and relative to the four cities. The meaning of the AEGIS flood-height codes (commonly read as 0 = none, 3 = waist-high) is not documented in the file.
 
-**6. No spatial context.**
-Latitude, longitude, distance to river channels, and proximity to other flood-prone areas are not features in the current model.
+**6. No real-time sensor integration.**
+The pipeline reads static CSVs. There is no live connection to PAGASA AWS stations, EFCOS river gauges, or any other data feed.
 
 **7. No temporal autocorrelation.**
 Flood risk at time T is correlated with risk at T−1. Neither model accounts for this. A time-series approach (LSTM, LightGBM with lag features) may be more appropriate with real sequential data.
 
 **8. All thresholds are assumptions.**
-Every numeric threshold in the preprocessing and scoring code (e.g., 50 mm/3h = Moderate rainfall intensity, 100 mm/3h = High) was chosen for demonstration purposes and has not been validated against PAGASA warning criteria or expert domain knowledge.
+Every numeric threshold in the dataset builder and preprocessing code (e.g., 20 mm/day or 2.5 m river level = Moderate, 1.0 m/day = rapid rise) was chosen for demonstration purposes and has not been validated against PAGASA warning criteria or expert domain knowledge.
 
 ---
 
@@ -462,7 +490,7 @@ AquaAlert is a **college capstone project** developed for academic evaluation. I
 The community report feature is designed around the Philippine Data Privacy Act. No name, phone number, or exact address is collected. Photos have EXIF location data removed client-side before any upload. Reporter tokens are anonymous UUIDs generated locally.
 
 **Citation for academic use:**
-If you reference this project in a paper or report, please state clearly that results are from a synthetic-data project and do not represent validated operational performance.
+If you reference this project in a paper or report, cite the three data sources in Section 6. State clearly that the 3-class label comes from rainfall and river-level thresholds, so the results do not represent validated operational performance.
 
 ---
 

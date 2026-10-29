@@ -7,7 +7,7 @@ AquaAlert – Random Forest Flood-Risk Classifier  (Main Model)
 PURPOSE OF THIS SCRIPT
 -----------------------
 This script trains the MAIN AquaAlert model: a Random Forest classifier
-that predicts flood risk (Low / Moderate / High) for a barangay observation.
+that predicts flood risk (Low / Moderate / High) for a daily city observation.
 
 HOW IT FITS INTO THE PROJECT
 -----------------------------
@@ -29,7 +29,7 @@ is justified.
 WHAT IS A RANDOM FOREST? (plain language)
 ------------------------------------------
 A single Decision Tree asks a series of yes/no questions
-("Is 3h rainfall > 100 mm?  Is river level above danger?")
+("Is daily rainfall > 30 mm?  Is river level above 2.5 m?")
 and follows a path to a prediction.  It is easy to understand but
 tends to memorise the training data (overfitting).
 
@@ -40,7 +40,7 @@ is slightly different, their errors cancel out and the forest is
 much harder to overfit than a single tree.
 
 Random Forests handle:
-  • non-linear feature interactions (e.g. high rainfall AND blocked drain)
+  • non-linear feature interactions (e.g. high rainfall AND saturated soil)
   • different feature scales without needing StandardScaler
   • missing-value indicators (the _missing flag columns)
   • imbalanced classes (via class_weight or SMOTE)
@@ -170,7 +170,7 @@ def load_and_validate(filepath: Path) -> pd.DataFrame:
 
     required = [
         "timestamp", "flood_risk",
-        "rainfall_last_3h_mm", "rainfall_last_24h_mm",
+        "rainfall_last_24h_mm", "rainfall_last_3d_mm",
         "river_water_level_m", "flood_hazard_level_enc",
     ]
     missing_cols = [c for c in required if c not in df.columns]
@@ -209,8 +209,8 @@ def load_and_validate(filepath: Path) -> pd.DataFrame:
         )
 
     numeric_check_cols = [
-        "rainfall_last_3h_mm", "rainfall_last_24h_mm",
-        "elevation_m", "citizen_report_count",
+        "rainfall_last_24h_mm", "rainfall_last_7d_mm",
+        "elevation_m", "soil_moisture_pct",
     ]
     nan_counts = {c: int(df[c].isna().sum())
                   for c in numeric_check_cols if c in df.columns}
@@ -235,21 +235,23 @@ def build_feature_matrix(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     Including it in X would let the model cheat – it would "predict" flood
     risk by reading the answer directly.  Same principle applies to flood_risk.
 
-    We also exclude raw text location columns (barangay, municipality) because
-    they need special treatment before use as model inputs.  They are kept in
-    the CSV for human readability but excluded here.
+    flood_occurrence is the source binary label the 3-class target is built
+    from, so it is excluded for the same reason.
+
+    The municipality text column is excluded too; the per-city aegis_* and
+    elevation columns already carry its information as numbers.
     """
     banner("STEP 2 – Build feature matrix")
 
     EXCLUDE = {
-        "flood_risk",           
-        "flood_risk_enc",      
-        "observation_id",     
-        "timestamp",           
-        "barangay",            
-        "municipality",        
-        "flood_hazard_level",  
-        "drainage_condition",   
+        "flood_risk",
+        "flood_risk_enc",
+        "flood_occurrence",
+        "observation_id",
+        "timestamp",
+        "municipality",
+        "flood_hazard_level",
+        "aegis_points",
     }
 
     feature_cols = [c for c in df.columns if c not in EXCLUDE]
@@ -660,7 +662,7 @@ def save_model(pipeline: ImbPipeline, filepath: Path) -> None:
         import joblib, pandas as pd
         pipeline = joblib.load("models/rf_pipeline_final.pkl")
 
-        # new_data must be a DataFrame with the same 21 feature columns
+        # new_data must be a DataFrame with the same feature columns
         # used during training (NOT the raw CSV columns).
         prediction = pipeline.predict(new_data)
         # returns e.g. ["Low", "Moderate", "High"]
@@ -749,9 +751,10 @@ def compare_with_baseline(
         "",
         "  PROTOTYPE NOTICE",
         textwrap.fill(
-            "Results are from a synthetic prototype dataset.  "
-            "Do not generalise these numbers to real NCR flood patterns "
-            "without validating on real labelled observations.",
+            "Results are from real 2016–2020 daily NCR data with a 3-class "
+            "label derived from rainfall and river-level thresholds.  "
+            "They show how well each model recovers those thresholds, "
+            "not validated flood-forecasting skill.",
             width=66, initial_indent="  ", subsequent_indent="  ",
         ),
         "=" * 70,
@@ -813,19 +816,20 @@ def interpret_results(
             f"Check the feature importance chart and confirm that these features "
             f"make physical sense for NCR flood risk.  If a feature you expect to "
             f"be important (e.g. flood_hazard_level_enc) is ranked low, it may "
-            f"be because the synthetic training data does not reflect real patterns."
+            f"be because the label is built from rainfall and river level only."
         ),
         "",
         "What are this model's limitations?",
         (
-            "1. Small dataset: with only ~18 real High-risk rows, even a perfect "
-            "model cannot be trusted until more real observations are collected. "
-            "2. Synthetic training data: all rows were generated by a script, so "
-            "the model learned from artificial patterns, not real NCR flood events. "
-            "3. Temporal gap: the model was tested on roughly 2 months of data. "
-            "Its performance may change significantly under different typhoon seasons. "
-            "4. No spatial context: latitude/longitude and actual distances to "
-            "river channels are not in the current feature set. "
+            "1. Threshold-derived label: the source flood label is exactly "
+            "rainfall >= 30 mm, and Moderate is defined by rain/river thresholds, "
+            "so near-perfect scores are expected and do not prove forecasting skill. "
+            "2. No typhoon-scale events: the wettest day is ~53 mm, while major "
+            "NCR floods (JICA 2014) had 149–291 mm/day. "
+            "3. City-level, daily data: only four cities, one reading per day; "
+            "no barangay detail or hourly bursts. "
+            "4. Static hazard map: AEGIS points are assigned to cities by nearest "
+            "city centre, not official boundaries. "
             "Document all four limitations in your capstone report."
         ),
         "",
@@ -890,10 +894,10 @@ def main() -> None:
     print("  They do NOT constitute official flood risk assessments.")
     print()
     print("  Next steps:")
-    print("  1. Replace synthetic data with real labelled NCR observations.")
-    print("  2. Re-run preprocess.py → train_baseline_lr.py → train_random_forest.py.")
-    print("  3. Check High-recall ≥ 0.80 on the real test set.")
-    print("  4. Document all prototype limitations in your capstone report.")
+    print("  1. Add independently recorded flood events (e.g. NDRRMC sitreps)")
+    print("     so the label is not a rainfall threshold.")
+    print("  2. Add typhoon-season data with > 100 mm/day rainfall.")
+    print("  3. Document all prototype limitations in your capstone report.")
 
 
 if __name__ == "__main__":

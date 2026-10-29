@@ -109,12 +109,13 @@ def build_feature_matrix(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     We explicitly list every column that must NOT be in X:
       • flood_risk      – the target label itself (text version)
       • flood_risk_enc  – numeric version of the target
+      • flood_occurrence – the source binary label the target is built from
       • observation_id  – just a row ID, carries no predictive meaning
-      • timestamp       – raw datetime; we already extracted hour/month/dayofweek
-      • barangay        – location text; needs special encoding (future work)
-      • municipality    – same reason
-      • flood_hazard_level / drainage_condition – text versions; the _enc
-        columns already carry the same information as numbers
+      • timestamp       – raw date; we already extracted month/dayofweek
+      • municipality    – location text; the aegis_* columns carry it as numbers
+      • flood_hazard_level – text version; the _enc column carries the same
+        information as a number
+      • aegis_points    – sample size of the AEGIS summary, not a measurement
 
     Including any of these as model inputs would be target leakage or would
     cause errors.  If you are ever unsure whether a column is safe to include,
@@ -124,13 +125,13 @@ def build_feature_matrix(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
 
     EXCLUDE = {
         "flood_risk",         
-        "flood_risk_enc",     
+        "flood_risk_enc",
+        "flood_occurrence",
         "observation_id",
         "timestamp",
-        "barangay",
         "municipality",
-        "flood_hazard_level",  
-        "drainage_condition",  
+        "flood_hazard_level",
+        "aegis_points",
     }
 
     feature_cols = [c for c in df.columns if c not in EXCLUDE]
@@ -196,8 +197,8 @@ def build_pipeline() -> Pipeline:
     STEP A  StandardScaler
     ──────────────────────
     Rescales every numeric feature to have mean = 0 and standard deviation = 1.
-    Example:  rainfall_last_3h_mm might range 0–150 mm.
-              elevation_m might range 3–50 m.
+    Example:  rainfall_last_7d_mm might range 0–200 mm.
+              elevation_m might range 5–43 m.
               Without scaling, the model treats large numbers as more important
               just because they are bigger — not because they are more informative.
     After scaling, every feature contributes on equal footing.
@@ -266,7 +267,7 @@ def evaluate(
     Accuracy
         Of all predictions, what fraction were correct?
         Problem: with imbalanced classes, a model that always predicts
-        "Moderate" gets 51 % accuracy without ever catching a flood.
+        "Low" gets about 84 % accuracy without ever catching a flood.
 
     Precision (per class)
         Of all rows the model labelled "High", what fraction actually were High?
@@ -388,8 +389,8 @@ def save_feature_weights(
     WHY ARE COEFFICIENTS USEFUL?
     Each coefficient tells us: "When this feature goes up by 1 standard
     deviation, how much does the log-probability of a given class go up or down?"
-    A large positive coefficient for 'rainfall_last_3h_mm → High' means the
-    model learned that heavy short-burst rainfall strongly predicts High risk.
+    A large positive coefficient for 'rainfall_last_24h_mm → High' means the
+    model learned that heavy daily rainfall strongly predicts High risk.
     Negative coefficients push the model away from a class.
 
     This table is useful for:
@@ -492,10 +493,11 @@ def interpret_results(
         "",
         "Why does Logistic Regression sometimes struggle with rare classes?",
         (
-            "The High-risk class makes up only about 6% of the dataset.  Even "
+            f"The High-risk class makes up only about "
+            f"{100 * n_high_true / len(y_test):.1f}% of the test set.  Even "
             "with class_weight='balanced', a linear model like Logistic Regression "
             "can find it hard to capture the non-linear combinations of signals "
-            "(e.g. high rainfall AND blocked drain AND rising river) that together "
+            "(e.g. high rainfall AND wet soil AND rising river) that together "
             "indicate High risk.  This is one reason we will train a Random Forest "
             "next: it can learn those interactions naturally."
         ),
@@ -511,10 +513,11 @@ def interpret_results(
         "",
         "PROTOTYPE NOTICE",
         (
-            "All results above come from a synthetic dataset generated for "
-            "prototype testing.  They do NOT reflect real flood patterns in NCR.  "
-            "Collect real labelled observations before drawing conclusions about "
-            "the AquaAlert system's actual performance."
+            "Results come from real 2016–2020 daily NCR data, but the "
+            "Low/Moderate/High label is derived from rainfall and river-level "
+            "thresholds (the source flood label is exactly rainfall >= 30 mm).  "
+            "High scores show the model recovers those thresholds; they are not "
+            "proof of real-world forecasting skill."
         ),
     ]
 
