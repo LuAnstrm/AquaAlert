@@ -1,0 +1,573 @@
+adm4_pcode,adm4_name,adm3_name,elev_mean_m,elev_p10_m,share_below_2m,share_water,share_built,share_wetland_mangrove,waterway_km_per_km2
+PH0301401001,Banaban,Angat,50.59,34.71,0.0,0.001,0.024,0.0,1.51
+PH0301401002,Baybay,Angat,40.43,26.6,0.0,0.0,0.018,0.0,1.26
+PH0301401003,Binagbag,Angat,33.73,26.26,0.0,0.017,0.085,0.0,0.28
+PH0301401005,Donacion,Angat,21.84,19.49,0.0,0.008,0.141,0.0,0.94
+PH0301401006,Encanto,Angat,57.6,39.15,0.0,0.001,0.017,0.0,0.37
+PH0301401007,Laog,Angat,38.65,29.84,0.0,0.018,0.014,0.0,0.04
+PH0301401008,Marungko,Angat,28.58,21.73,0.0,0.074,0.103,0.0,0.41
+PH0301401009,Niugan,Angat,28.25,20.6,0.0,0.035,0.058,0.0,1.78
+PH0301401010,Paltok,Angat,45.25,36.1,0.0,0.0,0.013,0.0,0.45
+PH0301401013,Pulong Yantok,Angat,66.19,51.69,0.0,0.0,0.054,0.0,0.64
+PH0301401014,San Roque (Pob.),Angat,32.04,27.33,0.0,0.002,0.219,0.0,1.24
+PH0301401015,Santa Cruz (Pob.),Angat,40.59,35.66,0.0,0.007,0.232,0.0,1.12
+PH0301401016,Santa Lucia,Angat,47.66,27.98,0.0,0.009,0.102,0.0,0.1
+PH0301401017,Santo Cristo (Pob.),Angat,30.96,21.96,0.0,0.022,0.688,0.0,0.94
+PH0301401018,Sulucan,Angat,31.99,21.96,0.0,0.005,0.067,0.0,0.33
+PH0301401019,Taboc,Angat,29.09,21.39,0.0,0.005,0.047,0.0,1.83
+PH0301402002,Borol 2nd,Balagtas (Bigaa),4.25,2.66,0.002,0.0,0.175,0.0,0.54
+PH0301402003,Borol 1st,Balagtas (Bigaa),4.23,2.22,0.006,0.0,0.491,0.0,0.88
+PH0301402004,Dalig,Balagtas (Bigaa),3.19,2.37,0.014,0.0,0.055,0.0,1.54
+PH0301402005,Longos,Balagtas (Bigaa),3.03,1.82,0.244,0.0,0.289,0.0,1.38
+PH0301402007,Panginay,Balagtas (Bigaa),2.46,0.0,0.436,0.374,0.286,0.005,2.62
+PH0301402008,Pulong Gubat,Balagtas (Bigaa),7.3,6.01,0.0,0.0,0.153,0.0,1.25
+PH0301402009,San Juan,Balagtas (Bigaa),1.71,0.0,0.595,0.411,0.114,0.013,1.44
+PH0301402010,Santol,Balagtas (Bigaa),5.76,3.95,0.0,0.0,0.215,0.0,0.96
+PH0301402011,Wawa (Pob.),Balagtas (Bigaa),3.52,1.28,0.263,0.01,0.478,0.0,2.52
+PH0301403001,Bagong Nayon,City of Baliwag,16.43,14.35,0.0,0.0,0.725,0.0,1.52
+PH0301403002,Barangca,City of Baliwag,11.72,10.26,0.0,0.0,0.088,0.0,1.18
+PH0301403003,Calantipay,City of Baliwag,9.73,8.29,0.0,0.0,0.036,0.0,0.85
+PH0301403004,Catulinan,City of Baliwag,12.15,10.96,0.0,0.0,0.052,0.0,1.45
+PH0301403005,Concepcion,City of Baliwag,16.05,14.56,0.0,0.0,0.756,0.0,2.08
+PH0301403006,Hinukay,City of Baliwag,9.23,8.04,0.0,0.0,0.044,0.0,3.11
+PH0301403007,Makinabang,City of Baliwag,11.59,8.5,0.021,0.014,0.225,0.0,0.4
+PH0301403008,Matangtubig,City of Baliwag,9.39,7.51,0.0,0.0,0.04,0.0,1.07
+PH0301403010,Pagala,City of Baliwag,13.73,12.07,0.0,0.0,0.463,0.0,1.69
+PH0301403011,Paitan,City of Baliwag,9.46,8.2,0.0,0.0,0.03,0.0,3.79
+PH0301403012,Piel,City of Baliwag,11.53,9.92,0.0,0.0,0.044,0.0,3.15
+PH0301403013,Pinagbarilan,City of Baliwag,12.46,10.55,0.0,0.0,0.133,0.0,0.7
+PH0301403014,Poblacion,City of Baliwag,13.49,4.68,0.0,0.023,0.698,0.006,0.71
+PH0301403016,Sabang,City of Baliwag,14.08,6.69,0.0,0.023,0.383,0.015,1.61
+PH0301403017,San Jose,City of Baliwag,13.77,6.39,0.0,0.007,0.415,0.0,0.62
+PH0301403018,San Roque,City of Baliwag,10.17,8.77,0.0,0.0,0.098,0.0,2.68
+PH0301403019,Santa Barbara,City of Baliwag,14.26,5.71,0.0,0.015,0.278,0.0,0.94
+PH0301403020,Santo Cristo,City of Baliwag,16.25,14.71,0.0,0.0,0.903,0.0,1.38
+PH0301403021,Santo Niño,City of Baliwag,11.55,10.0,0.0,0.0,0.31,0.0,1.48
+PH0301403022,Subic,City of Baliwag,16.7,14.36,0.0,0.0,0.715,0.0,0.92
+PH0301403023,Sulivan,City of Baliwag,13.39,11.55,0.0,0.0,0.256,0.0,1.77
+PH0301403024,Tangos,City of Baliwag,12.8,11.34,0.0,0.0,0.251,0.0,1.78
+PH0301403025,Tarcan,City of Baliwag,10.59,7.91,0.0,0.001,0.053,0.0,1.35
+PH0301403026,Tiaong,City of Baliwag,16.17,7.97,0.0,0.05,0.392,0.0,1.18
+PH0301403027,Tibag,City of Baliwag,12.87,4.35,0.0,0.062,0.594,0.01,0.76
+PH0301403028,Tilapayong,City of Baliwag,11.09,9.57,0.0,0.0,0.104,0.0,1.66
+PH0301403030,Virgen delas Flores,City of Baliwag,16.03,14.66,0.0,0.0,0.797,0.0,0.81
+PH0301404001,Antipona,Bocaue,4.74,4.32,0.056,0.056,0.889,0.0,0.22
+PH0301404002,Bagumbayan,Bocaue,2.5,0.0,0.483,0.416,0.348,0.0,0.1
+PH0301404003,Bambang,Bocaue,0.24,-1.0,0.903,0.873,0.062,0.0,1.86
+PH0301404004,Batia,Bocaue,11.11,2.58,0.048,0.0,0.293,0.0,0.91
+PH0301404005,Biñang 1st,Bocaue,3.91,2.24,0.04,0.056,0.397,0.0,2.76
+PH0301404006,Biñang 2nd,Bocaue,4.53,2.71,0.031,0.044,0.419,0.0,1.71
+PH0301404007,Bolacan,Bocaue,4.9,3.45,0.004,0.0,0.381,0.0,0.75
+PH0301404008,Bundukan,Bocaue,5.3,1.81,0.157,0.002,0.203,0.002,1.36
+PH0301404009,Bunlo,Bocaue,4.55,2.96,0.054,0.085,0.628,0.0,2.39
+PH0301404010,Caingin,Bocaue,4.78,1.8,0.106,0.088,0.54,0.0,1.47
+PH0301404011,Duhat,Bocaue,9.74,5.48,0.0,0.0,0.389,0.0,0.42
+PH0301404012,Igulot,Bocaue,3.43,2.49,0.014,0.003,0.214,0.0,2.64
+PH0301404013,Lolomboy,Bocaue,3.21,1.25,0.254,0.104,0.464,0.0,2.07
+PH0301404014,Poblacion,Bocaue,6.04,4.37,0.05,0.05,0.8,0.0,0.0
+PH0301404015,Sulucan,Bocaue,1.63,0.0,0.683,0.587,0.179,0.0,0.85
+PH0301404016,Taal,Bocaue,4.32,2.57,0.025,0.019,0.197,0.0,0.59
+PH0301404017,Tambobong,Bocaue,5.64,3.34,0.014,0.037,0.44,0.0,0.53
+PH0301404018,Turo,Bocaue,6.04,2.38,0.014,0.008,0.266,0.0,1.52
+PH0301404019,Wakas,Bocaue,3.14,0.0,0.405,0.285,0.372,0.003,0.31
+PH0301405001,Bagumbayan,Bulacan,3.57,1.13,0.344,0.048,0.184,0.0,1.24
+PH0301405002,Balubad,Bulacan,4.06,1.51,0.339,0.111,0.087,0.003,1.52
+PH0301405003,Bambang,Bulacan,0.6,0.0,0.922,0.697,0.038,0.029,0.6
+PH0301405004,Matungao,Bulacan,2.17,0.0,0.548,0.273,0.198,0.028,1.58
+PH0301405005,Maysantol,Bulacan,5.53,2.29,0.071,0.008,0.252,0.0,2.83
+PH0301405006,Perez,Bulacan,0.38,0.0,0.95,0.857,0.044,0.008,1.03
+PH0301405007,Pitpitan,Bulacan,2.89,0.35,0.618,0.208,0.078,0.067,0.86
+PH0301405009,San Francisco,Bulacan,4.07,1.62,0.234,0.007,0.116,0.005,1.41
+PH0301405010,San Jose (Pob.),Bulacan,4.99,2.47,0.077,0.066,0.383,0.0,3.2
+PH0301405012,San Nicolas,Bulacan,0.46,0.0,0.954,0.757,0.019,0.075,1.14
+PH0301405013,Santa Ana,Bulacan,0.59,0.0,0.883,0.804,0.061,0.017,1.43
+PH0301405014,Santa Ines,Bulacan,3.06,1.0,0.226,0.302,0.509,0.0,3.9
+PH0301405015,Taliptip,Bulacan,0.15,0.0,0.981,0.969,0.009,0.0,0.37
+PH0301405016,Tibig,Bulacan,7.51,4.75,0.0,0.0,0.295,0.0,4.64
+PH0301406001,Bonga Mayor,Bustos,21.26,16.61,0.0,0.029,0.149,0.0,0.65
+PH0301406002,Bonga Menor,Bustos,16.97,13.68,0.0,0.035,0.076,0.005,0.99
+PH0301406003,Buisan,Bustos,18.61,16.08,0.0,0.0,0.138,0.0,0.0
+PH0301406004,Camachilihan,Bustos,11.77,9.5,0.0,0.0,0.079,0.008,2.24
+PH0301406005,Cambaog,Bustos,13.39,9.04,0.0,0.023,0.128,0.0,0.88
+PH0301406006,Catacte,Bustos,27.19,18.48,0.0,0.0,0.047,0.0,2.16
+PH0301406007,Liciada,Bustos,18.55,11.73,0.0,0.002,0.081,0.005,0.85
+PH0301406008,Malamig,Bustos,17.05,13.8,0.0,0.0,0.077,0.002,1.72
+PH0301406009,Malawak,Bustos,28.62,18.41,0.0,0.0,0.034,0.0,2.03
+PH0301406010,Poblacion,Bustos,14.38,6.46,0.0,0.047,0.33,0.015,0.96
+PH0301406011,San Pedro,Bustos,13.49,7.41,0.0,0.014,0.158,0.001,0.94
+PH0301406012,Talampas,Bustos,12.91,11.39,0.0,0.0,0.073,0.003,2.34
+PH0301406013,Tanawan,Bustos,14.12,5.71,0.0,0.094,0.133,0.016,0.43
+PH0301406014,Tibagan,Bustos,26.21,17.5,0.0,0.032,0.103,0.002,0.52
+PH0301407001,Balite,Calumpit,4.43,2.92,0.063,0.049,0.422,0.0,1.43
+PH0301407002,Balungao,Calumpit,3.72,1.74,0.151,0.036,0.338,0.0,0.12
+PH0301407004,Buguion,Calumpit,4.53,2.39,0.04,0.04,0.114,0.0,1.04
+PH0301407005,Bulusan,Calumpit,2.04,0.96,0.733,0.209,0.072,0.1,0.02
+PH0301407006,Calizon,Calumpit,2.57,1.47,0.423,0.123,0.098,0.028,0.33
+PH0301407007,Calumpang,Calumpit,2.65,1.36,0.649,0.005,0.078,0.019,0.15
+PH0301407008,Caniogan,Calumpit,3.95,1.67,0.145,0.105,0.322,0.0,1.12
+PH0301407009,Corazon,Calumpit,3.74,2.43,0.015,0.0,0.544,0.0,0.0
+PH0301407010,Frances,Calumpit,2.52,1.19,0.493,0.121,0.086,0.005,1.02
+PH0301407011,Gatbuca,Calumpit,4.38,1.96,0.108,0.145,0.602,0.0,1.93
+PH0301407012,Gugo,Calumpit,1.66,1.07,0.764,0.195,0.019,0.159,0.15
+PH0301407013,Iba Este,Calumpit,3.21,1.38,0.4,0.083,0.209,0.011,0.95
+PH0301407014,Iba O'Este,Calumpit,2.38,1.26,0.527,0.091,0.125,0.1,0.23
+PH0301407015,Longos,Calumpit,3.26,1.47,0.303,0.011,0.136,0.021,1.1
+PH0301407016,Meysulao,Calumpit,1.59,0.5,0.733,0.325,0.036,0.161,1.63
+PH0301407017,Meyto,Calumpit,2.54,1.0,0.538,0.356,0.076,0.072,1.14
+PH0301407018,Palimbang,Calumpit,4.56,0.5,0.223,0.194,0.301,0.0,0.62
+PH0301407019,Panducot,Calumpit,2.32,0.5,0.659,0.433,0.062,0.145,1.88
+PH0301407020,Pio Cruzcosa,Calumpit,4.26,2.6,0.01,0.0,0.352,0.0,0.95
+PH0301407021,Poblacion,Calumpit,4.64,2.3,0.083,0.067,0.85,0.0,0.0
+PH0301407022,Pungo,Calumpit,2.57,1.18,0.607,0.068,0.057,0.029,1.73
+PH0301407023,San Jose,Calumpit,2.0,1.0,0.707,0.277,0.052,0.151,1.71
+PH0301407024,San Marcos,Calumpit,4.8,1.13,0.116,0.058,0.38,0.0,1.44
+PH0301407025,San Miguel,Calumpit,1.83,0.66,0.715,0.253,0.063,0.108,2.16
+PH0301407026,Santa Lucia,Calumpit,2.16,0.5,0.624,0.552,0.072,0.042,1.27
+PH0301407027,Santo Niño,Calumpit,2.97,1.13,0.362,0.182,0.197,0.002,1.16
+PH0301407028,Sapang Bayan,Calumpit,2.0,1.0,0.618,0.132,0.027,0.024,1.88
+PH0301407029,Sergio Bayan,Calumpit,4.53,2.82,0.05,0.059,0.074,0.0,0.63
+PH0301407030,Sucol,Calumpit,4.57,2.33,0.118,0.235,0.706,0.0,0.0
+PH0301408001,Cutcut,Guiguinto,7.38,3.86,0.0,0.0,0.103,0.0,1.31
+PH0301408002,Daungan,Guiguinto,3.51,2.75,0.0,0.0,0.045,0.0,1.88
+PH0301408003,Ilang-Ilang,Guiguinto,4.32,2.79,0.005,0.0,0.462,0.0,1.68
+PH0301408004,Malis,Guiguinto,4.56,2.59,0.001,0.0,0.336,0.0,1.73
+PH0301408005,Panginay,Guiguinto,3.65,2.54,0.0,0.0,0.383,0.0,1.03
+PH0301408006,Poblacion,Guiguinto,4.04,1.95,0.116,0.004,0.565,0.004,0.47
+PH0301408007,Pritil,Guiguinto,4.66,3.26,0.0,0.0,0.106,0.0,2.61
+PH0301408008,Pulong Gubat,Guiguinto,6.45,3.29,0.0,0.0,0.121,0.0,1.31
+PH0301408009,Santa Cruz,Guiguinto,5.96,3.64,0.0,0.001,0.45,0.0,1.04
+PH0301408010,Santa Rita,Guiguinto,7.72,4.66,0.0,0.001,0.494,0.0,0.73
+PH0301408011,Tabang,Guiguinto,6.59,3.65,0.0,0.0,0.458,0.0,1.0
+PH0301408012,Tabe,Guiguinto,6.28,4.02,0.0,0.0,0.486,0.0,0.3
+PH0301408013,Tiaong,Guiguinto,5.77,3.32,0.0,0.0,0.274,0.0,0.91
+PH0301408015,Tuktukan,Guiguinto,4.52,2.9,0.0,0.002,0.461,0.0,1.14
+PH0301409001,Abulalas,Hagonoy,2.67,0.5,0.388,0.453,0.094,0.008,3.0
+PH0301409002,Carillo,Hagonoy,2.49,0.5,0.449,0.399,0.041,0.055,2.42
+PH0301409003,Iba,Hagonoy,2.47,1.0,0.501,0.285,0.103,0.127,1.34
+PH0301409004,Mercado,Hagonoy,0.37,0.0,0.932,0.927,0.07,0.0,2.95
+PH0301409005,Palapat,Hagonoy,2.03,0.5,0.572,0.529,0.073,0.08,1.94
+PH0301409006,Pugad,Hagonoy,0.12,0.0,0.989,0.991,0.001,0.006,1.73
+PH0301409007,Sagrada Familia,Hagonoy,0.21,0.0,0.962,0.968,0.025,0.002,2.78
+PH0301409008,San Agustin,Hagonoy,1.23,0.46,0.8,0.82,0.116,0.0,3.45
+PH0301409009,San Isidro,Hagonoy,1.72,0.0,0.587,0.585,0.147,0.009,3.52
+PH0301409011,San Jose,Hagonoy,0.38,0.0,0.914,0.918,0.078,0.0,3.0
+PH0301409012,San Juan,Hagonoy,2.75,0.5,0.39,0.428,0.135,0.019,2.21
+PH0301409013,San Miguel,Hagonoy,1.37,0.5,0.767,0.791,0.112,0.003,2.72
+PH0301409014,San Nicolas,Hagonoy,1.71,0.0,0.575,0.598,0.345,0.0,4.17
+PH0301409015,San Pablo,Hagonoy,1.15,0.0,0.808,0.838,0.054,0.062,2.48
+PH0301409016,San Pascual,Hagonoy,0.11,0.0,0.984,0.986,0.012,0.0,2.23
+PH0301409017,San Pedro,Hagonoy,1.77,0.5,0.643,0.62,0.203,0.0,2.11
+PH0301409018,San Roque,Hagonoy,0.07,0.0,0.996,0.995,0.005,0.0,2.16
+PH0301409019,San Sebastian,Hagonoy,0.89,0.0,0.819,0.813,0.166,0.0,2.7
+PH0301409020,Santa Cruz,Hagonoy,1.36,0.0,0.652,0.638,0.275,0.0,4.52
+PH0301409021,Santa Elena,Hagonoy,0.67,0.0,0.859,0.885,0.046,0.05,3.53
+PH0301409022,Santa Monica,Hagonoy,0.5,0.0,0.913,0.913,0.069,0.0,2.75
+PH0301409023,Santo Niño (Pob.),Hagonoy,1.73,0.0,0.58,0.5,0.387,0.0,2.17
+PH0301409024,Santo Rosario,Hagonoy,1.11,0.0,0.743,0.708,0.271,0.0,2.94
+PH0301409025,Tampok,Hagonoy,0.36,0.0,0.925,0.946,0.029,0.0,2.49
+PH0301409026,Tibaguin,Hagonoy,0.2,0.0,0.978,0.971,0.018,0.008,1.59
+PH0301409027,Iba-Ibayo,Hagonoy,2.55,1.4,0.409,0.082,0.057,0.019,1.26
+PH0301410001,Anilao,City of Malolos (Capital),1.47,0.0,0.668,0.537,0.077,0.031,2.4
+PH0301410002,Atlag,City of Malolos (Capital),3.25,0.52,0.195,0.09,0.511,0.0,1.14
+PH0301410003,Babatnin,City of Malolos (Capital),0.16,0.0,0.986,0.797,0.004,0.185,2.17
+PH0301410004,Bagna,City of Malolos (Capital),1.04,0.0,0.78,0.743,0.176,0.003,3.15
+PH0301410005,Bagong Bayan,City of Malolos (Capital),6.23,3.73,0.0,0.0,0.49,0.0,0.77
+PH0301410006,Balayong,City of Malolos (Capital),2.36,0.6,0.446,0.19,0.109,0.031,1.0
+PH0301410007,Balite,City of Malolos (Capital),3.07,1.43,0.325,0.032,0.068,0.019,1.8
+PH0301410008,Bangkal,City of Malolos (Capital),2.66,0.56,0.488,0.158,0.093,0.003,0.32
+PH0301410010,Barihan,City of Malolos (Capital),5.71,4.11,0.0,0.0,0.117,0.0,0.59
+PH0301410012,Bulihan,City of Malolos (Capital),2.87,1.4,0.282,0.069,0.328,0.015,0.94
+PH0301410013,Bungahan,City of Malolos (Capital),7.29,4.53,0.0,0.0,0.113,0.0,0.74
+PH0301410014,Dakila,City of Malolos (Capital),5.48,2.48,0.044,0.001,0.16,0.0,0.07
+PH0301410015,Guinhawa,City of Malolos (Capital),6.18,4.78,0.008,0.0,0.877,0.0,1.21
+PH0301410016,Caingin,City of Malolos (Capital),3.23,2.03,0.101,0.09,0.553,0.0,2.65
+PH0301410017,Calero,City of Malolos (Capital),0.3,0.0,0.978,0.927,0.011,0.031,2.77
+PH0301410018,Caliligawan,City of Malolos (Capital),-0.4,-1.0,0.958,0.807,0.0,0.181,1.47
+PH0301410019,Canalate,City of Malolos (Capital),1.25,0.0,0.72,0.644,0.216,0.047,2.81
+PH0301410020,Caniogan,City of Malolos (Capital),5.04,2.72,0.02,0.007,0.48,0.007,4.13
+PH0301410021,Catmon,City of Malolos (Capital),4.61,3.53,0.009,0.0,0.861,0.0,2.9
+PH0301410022,Ligas,City of Malolos (Capital),7.9,5.34,0.0,0.0,0.211,0.0,0.98
+PH0301410023,Liang,City of Malolos (Capital),4.68,4.12,0.0,0.0,0.854,0.0,4.38
+PH0301410025,Longos,City of Malolos (Capital),3.59,2.17,0.066,0.001,0.372,0.0,1.55
+PH0301410026,Look 1st,City of Malolos (Capital),3.46,2.14,0.059,0.002,0.381,0.0,1.57
+PH0301410027,Look 2nd,City of Malolos (Capital),8.05,3.3,0.0,0.0,0.116,0.0,1.79
+PH0301410028,Lugam,City of Malolos (Capital),6.17,3.92,0.0,0.0,0.324,0.0,1.3
+PH0301410029,Mabolo,City of Malolos (Capital),3.58,1.39,0.383,0.079,0.325,0.038,1.52
+PH0301410031,Mambog,City of Malolos (Capital),1.19,0.0,0.789,0.5,0.059,0.039,1.24
+PH0301410032,Masile,City of Malolos (Capital),0.16,0.0,0.969,0.686,0.028,0.261,1.42
+PH0301410033,Matimbo,City of Malolos (Capital),1.11,0.0,0.811,0.522,0.072,0.035,1.57
+PH0301410034,Mojon,City of Malolos (Capital),5.53,3.83,0.0,0.0,0.574,0.0,1.29
+PH0301410035,Namayan,City of Malolos (Capital),-0.1,-1.0,0.974,0.848,0.003,0.138,1.6
+PH0301410036,Niugan,City of Malolos (Capital),5.61,2.18,0.076,0.0,0.007,0.0,0.0
+PH0301410037,Pamarawan,City of Malolos (Capital),0.2,0.0,0.963,0.951,0.028,0.019,0.63
+PH0301410038,Panasahan,City of Malolos (Capital),0.43,0.0,0.92,0.753,0.051,0.1,1.77
+PH0301410039,Pinagbakahan,City of Malolos (Capital),5.08,3.99,0.0,0.0,0.528,0.0,0.98
+PH0301410041,San Agustin,City of Malolos (Capital),3.64,2.51,0.0,0.0,0.769,0.0,2.07
+PH0301410042,San Gabriel,City of Malolos (Capital),4.67,3.21,0.0,0.0,0.771,0.0,0.0
+PH0301410043,San Juan,City of Malolos (Capital),1.99,0.0,0.523,0.415,0.307,0.018,2.44
+PH0301410044,San Pablo,City of Malolos (Capital),6.39,4.36,0.0,0.0,0.272,0.0,0.0
+PH0301410045,San Vicente (Pob.),City of Malolos (Capital),4.16,2.48,0.031,0.0,0.846,0.0,4.28
+PH0301410046,Santiago,City of Malolos (Capital),1.14,0.0,0.778,0.772,0.15,0.011,4.51
+PH0301410047,Santisima Trinidad,City of Malolos (Capital),6.03,4.69,0.0,0.0,0.283,0.0,1.85
+PH0301410048,Santo Cristo,City of Malolos (Capital),3.21,1.86,0.168,0.03,0.455,0.0,1.17
+PH0301410049,Santo Niño (Pob.),City of Malolos (Capital),5.31,4.15,0.0,0.0,1.0,0.0,3.73
+PH0301410050,Santo Rosario (Pob.),City of Malolos (Capital),3.59,1.56,0.177,0.078,0.773,0.0,2.32
+PH0301410051,Santor,City of Malolos (Capital),6.31,3.54,0.0,0.0,0.176,0.0,1.42
+PH0301410052,Sumapang Bata,City of Malolos (Capital),5.38,3.54,0.0,0.0,0.086,0.0,1.31
+PH0301410053,Sumapang Matanda,City of Malolos (Capital),4.78,2.67,0.011,0.0,0.268,0.0,1.52
+PH0301410054,Taal,City of Malolos (Capital),2.93,1.34,0.432,0.018,0.05,0.015,0.0
+PH0301410055,Tikay,City of Malolos (Capital),7.98,5.23,0.0,0.0,0.439,0.0,1.99
+PH0301410056,Cofradia,City of Malolos (Capital),5.3,2.85,0.0,0.0,0.302,0.0,1.01
+PH0301411001,Abangan Norte,Marilao,3.12,0.0,0.275,0.245,0.271,0.001,0.62
+PH0301411002,Abangan Sur,Marilao,2.37,0.0,0.437,0.398,0.427,0.0,2.22
+PH0301411003,Ibayo,Marilao,6.22,3.26,0.009,0.013,0.819,0.0,1.02
+PH0301411004,Lambakin,Marilao,13.9,6.82,0.0,0.003,0.577,0.0,1.11
+PH0301411005,Lias,Marilao,10.37,6.41,0.0,0.0,0.735,0.0,0.0
+PH0301411006,Loma de Gato,Marilao,37.44,25.74,0.0,0.0,0.484,0.0,1.58
+PH0301411007,Nagbalon,Marilao,0.77,0.0,0.859,0.784,0.068,0.0,1.47
+PH0301411008,Patubig,Marilao,7.21,3.92,0.0,0.002,0.485,0.0,1.58
+PH0301411009,Poblacion I,Marilao,1.26,0.0,0.752,0.729,0.186,0.008,1.22
+PH0301411010,Poblacion II,Marilao,3.05,0.0,0.292,0.261,0.527,0.0,0.86
+PH0301411011,Prenza I,Marilao,23.39,17.53,0.0,0.0,0.26,0.0,1.48
+PH0301411012,Prenza II,Marilao,19.34,11.97,0.0,0.0,0.394,0.0,3.24
+PH0301411013,Santa Rosa I,Marilao,11.89,7.29,0.0,0.0,0.76,0.0,2.31
+PH0301411014,Santa Rosa II,Marilao,17.32,9.85,0.0,0.0,0.578,0.0,1.22
+PH0301411015,Saog,Marilao,6.48,3.41,0.016,0.042,0.52,0.0,1.49
+PH0301411016,Tabing Ilog,Marilao,4.16,2.2,0.021,0.017,0.55,0.0,0.03
+PH0301412001,Bagbaguin,City of Meycauayan,35.84,25.73,0.0,0.0,0.63,0.0,0.89
+PH0301412002,Bahay Pare,City of Meycauayan,42.54,31.87,0.0,0.0,0.404,0.0,1.27
+PH0301412003,Bancal,City of Meycauayan,3.54,1.94,0.104,0.0,0.644,0.0,3.03
+PH0301412004,Banga,City of Meycauayan,4.09,2.2,0.045,0.061,0.712,0.0,0.0
+PH0301412005,Bayugo,City of Meycauayan,2.81,1.51,0.228,0.065,0.724,0.0,2.81
+PH0301412006,Calvario,City of Meycauayan,4.52,1.37,0.165,0.151,0.676,0.0,3.06
+PH0301412007,Camalig,City of Meycauayan,25.8,18.56,0.0,0.0,0.205,0.0,0.57
+PH0301412008,Hulo,City of Meycauayan,3.25,1.6,0.14,0.07,0.767,0.0,0.22
+PH0301412009,Iba,City of Meycauayan,16.8,10.5,0.0,0.0,0.774,0.0,0.27
+PH0301412010,Langka,City of Meycauayan,7.68,4.64,0.0,0.0,0.536,0.0,2.23
+PH0301412011,Lawa,City of Meycauayan,5.6,2.12,0.067,0.0,0.502,0.0,2.17
+PH0301412012,Libtong,City of Meycauayan,10.64,4.73,0.0,0.0,0.62,0.0,1.55
+PH0301412013,Liputan,City of Meycauayan,0.14,0.0,0.984,0.987,0.013,0.0,2.11
+PH0301412014,Longos,City of Meycauayan,0.84,0.0,0.823,0.703,0.19,0.025,3.55
+PH0301412015,Malhacan,City of Meycauayan,6.81,2.69,0.031,0.0,0.583,0.001,0.85
+PH0301412016,Pajo,City of Meycauayan,35.17,22.18,0.0,0.0,0.139,0.0,1.22
+PH0301412017,Pandayan,City of Meycauayan,7.63,2.83,0.003,0.0,0.613,0.0,2.0
+PH0301412018,Pantoc,City of Meycauayan,23.26,17.85,0.0,0.0,0.692,0.0,0.57
+PH0301412019,Perez,City of Meycauayan,27.18,19.4,0.0,0.0,0.695,0.0,1.08
+PH0301412020,Poblacion,City of Meycauayan,4.75,3.51,0.0,0.0,1.0,0.0,0.04
+PH0301412021,Saluysoy,City of Meycauayan,2.21,0.0,0.441,0.196,0.396,0.004,3.16
+PH0301412022,Saint Francis (Gasak),City of Meycauayan,4.09,2.94,0.0,0.0,0.929,0.0,0.0
+PH0301412023,Tugatog,City of Meycauayan,3.67,1.29,0.203,0.007,0.554,0.007,0.67
+PH0301412024,Ubihan,City of Meycauayan,0.21,0.0,0.979,0.976,0.012,0.0,1.97
+PH0301412025,Zamora,City of Meycauayan,2.67,1.43,0.306,0.065,0.548,0.0,0.51
+PH0301412026,Caingin,City of Meycauayan,3.49,1.0,0.241,0.004,0.249,0.0,3.03
+PH0301413003,Bangkal,Norzagaray,215.02,136.25,0.0,0.0,0.0,0.0,0.74
+PH0301413004,Baraka,Norzagaray,161.27,75.75,0.0,0.005,0.001,0.0,0.66
+PH0301413006,Bigte,Norzagaray,109.78,70.29,0.0,0.0,0.201,0.0,1.1
+PH0301413007,Bitungol,Norzagaray,98.8,68.47,0.0,0.0,0.065,0.0,0.95
+PH0301413015,Matictic,Norzagaray,69.98,38.84,0.0,0.003,0.041,0.0,0.67
+PH0301413016,Minuyan,Norzagaray,103.12,79.49,0.0,0.015,0.112,0.0,0.55
+PH0301413020,Partida,Norzagaray,72.9,56.24,0.0,0.0,0.082,0.0,0.69
+PH0301413021,Pinagtulayan,Norzagaray,77.35,46.24,0.0,0.0,0.002,0.0,0.78
+PH0301413022,Poblacion,Norzagaray,43.2,30.54,0.0,0.002,0.304,0.0,0.18
+PH0301413024,San Mateo,Norzagaray,186.14,134.33,0.0,0.001,0.007,0.0,0.85
+PH0301413031,Tigbe,Norzagaray,73.6,53.23,0.0,0.0,0.081,0.0,1.88
+PH0301413032,San Lorenzo,Norzagaray,564.73,205.88,0.0,0.005,0.001,0.0,1.09
+PH0301413033,Friendship Village Resources (FVR),Norzagaray,83.71,66.73,0.0,0.0,0.309,0.0,2.43
+PH0301414001,Binuangan,Obando,0.43,0.0,0.917,0.899,0.097,0.0,2.09
+PH0301414002,Catanghalan,Obando,0.5,0.0,0.89,0.879,0.096,0.0,0.35
+PH0301414003,Hulo,Obando,1.8,-0.5,0.52,0.48,0.44,0.0,0.0
+PH0301414004,Lawa,Obando,0.46,0.0,0.902,0.877,0.089,0.0,1.99
+PH0301414005,Salambao,Obando,0.68,0.0,0.889,0.857,0.003,0.125,0.31
+PH0301414006,Paco,Obando,0.62,0.0,0.87,0.84,0.122,0.0,2.08
+PH0301414007,Pag-asa (Pob.),Obando,1.08,0.0,0.74,0.685,0.232,0.0,0.81
+PH0301414008,Paliwas,Obando,0.82,0.0,0.793,0.743,0.193,0.0,1.69
+PH0301414009,Panghulo,Obando,1.69,0.0,0.575,0.524,0.345,0.0,0.65
+PH0301414010,San Pascual,Obando,0.66,0.0,0.835,0.792,0.117,0.008,1.55
+PH0301414011,Tawiran,Obando,0.18,0.0,0.988,0.972,0.023,0.0,2.47
+PH0301415001,Bagbaguin,Pandi,11.86,8.46,0.0,0.001,0.067,0.011,2.06
+PH0301415002,Bagong Barrio,Pandi,31.92,23.38,0.0,0.001,0.186,0.0,0.77
+PH0301415003,Bunsuran III,Pandi,11.28,6.38,0.0,0.0,0.129,0.0,2.15
+PH0301415004,Bunsuran I,Pandi,13.93,7.46,0.0,0.0,0.239,0.0,0.95
+PH0301415005,Bunsuran II,Pandi,6.76,3.66,0.0,0.0,0.117,0.0,4.22
+PH0301415006,Cacarong Bata,Pandi,39.87,24.32,0.0,0.0,0.191,0.0,0.85
+PH0301415007,Cacarong Matanda,Pandi,45.4,30.6,0.0,0.0,0.145,0.0,1.13
+PH0301415008,Cupang,Pandi,19.1,13.25,0.0,0.0,0.087,0.0,2.57
+PH0301415009,Malibong Bata,Pandi,4.65,2.22,0.038,0.0,0.066,0.0,2.35
+PH0301415010,Malibong Matanda,Pandi,11.0,4.97,0.0,0.0,0.065,0.0,1.52
+PH0301415011,Manatal,Pandi,7.62,5.69,0.0,0.0,0.069,0.002,2.54
+PH0301415012,Mapulang Lupa,Pandi,45.79,34.2,0.0,0.0,0.328,0.0,0.04
+PH0301415013,Masagana,Pandi,12.63,7.05,0.0,0.0,0.114,0.0,3.02
+PH0301415014,Masuso,Pandi,14.07,9.48,0.0,0.0,0.08,0.0,1.97
+PH0301415015,Pinagkuartelan,Pandi,58.82,50.4,0.0,0.0,0.163,0.0,1.77
+PH0301415016,Poblacion,Pandi,31.38,19.5,0.0,0.0,0.108,0.0,0.4
+PH0301415017,Real de Cacarong,Pandi,50.97,34.76,0.0,0.0,0.05,0.0,1.56
+PH0301415018,San Roque,Pandi,21.1,13.01,0.0,0.0,0.131,0.0,2.21
+PH0301415019,Siling Bata,Pandi,52.43,41.88,0.0,0.0,0.139,0.0,1.02
+PH0301415020,Siling Matanda,Pandi,69.12,56.02,0.0,0.0,0.036,0.0,1.21
+PH0301415021,Baka-bakahan,Pandi,18.94,14.33,0.0,0.0,0.048,0.0,0.41
+PH0301415022,Santo Niño,Pandi,18.45,11.29,0.0,0.0,0.052,0.0,0.78
+PH0301416001,Binakod,Paombong,0.12,0.0,0.99,0.871,0.001,0.124,2.16
+PH0301416002,Kapitangan,Paombong,2.33,1.09,0.578,0.224,0.052,0.079,0.99
+PH0301416003,Malumot,Paombong,3.59,2.92,0.0,0.0,0.88,0.0,12.23
+PH0301416004,Masukol,Paombong,0.1,0.0,0.995,0.966,0.005,0.027,1.63
+PH0301416006,Pinalagdan,Paombong,2.05,0.37,0.579,0.733,0.018,0.006,1.24
+PH0301416007,Poblacion,Paombong,3.62,2.12,0.065,0.032,0.742,0.0,4.38
+PH0301416009,San Isidro I,Paombong,3.0,1.25,0.228,0.276,0.463,0.0,3.43
+PH0301416010,San Isidro II,Paombong,1.31,0.25,0.763,0.805,0.066,0.076,2.78
+PH0301416011,San Jose,Paombong,0.43,0.0,0.934,0.863,0.026,0.091,3.29
+PH0301416012,San Roque,Paombong,0.48,0.0,0.917,0.889,0.021,0.06,2.47
+PH0301416013,San Vicente,Paombong,1.01,0.0,0.78,0.796,0.159,0.016,3.63
+PH0301416014,Santa Cruz,Paombong,0.31,0.0,0.957,0.867,0.011,0.118,2.24
+PH0301416015,Santo Niño,Paombong,1.74,0.0,0.565,0.518,0.193,0.048,3.7
+PH0301416016,Santo Rosario,Paombong,2.09,0.33,0.533,0.582,0.133,0.021,1.45
+PH0301417001,Agnaya,Plaridel,9.54,7.68,0.0,0.0,0.322,0.0,1.54
+PH0301417002,Bagong Silang,Plaridel,5.61,4.08,0.0,0.0,0.07,0.0,1.82
+PH0301417003,Banga I,Plaridel,10.18,6.58,0.007,0.015,0.354,0.0,1.09
+PH0301417004,Banga II,Plaridel,9.84,6.13,0.031,0.031,0.388,0.0,1.34
+PH0301417005,Bintog,Plaridel,10.48,8.04,0.003,0.023,0.113,0.0,1.39
+PH0301417006,Bulihan,Plaridel,7.69,6.05,0.0,0.0,0.12,0.0,0.99
+PH0301417007,Culianin,Plaridel,11.59,10.46,0.016,0.031,0.093,0.0,0.99
+PH0301417008,Dampol,Plaridel,7.48,4.69,0.059,0.066,0.254,0.0,2.6
+PH0301417010,Lagundi,Plaridel,5.25,3.12,0.0,0.0,0.082,0.0,0.79
+PH0301417011,Lalangan,Plaridel,7.9,5.9,0.0,0.0,0.056,0.0,1.22
+PH0301417012,Lumang Bayan,Plaridel,7.83,1.22,0.152,0.133,0.188,0.0,1.42
+PH0301417014,Parulan,Plaridel,10.03,6.86,0.021,0.033,0.149,0.0,2.39
+PH0301417015,Poblacion,Plaridel,12.05,9.89,0.0,0.025,0.661,0.0,0.36
+PH0301417016,Rueda,Plaridel,4.8,2.35,0.072,0.078,0.045,0.0,1.66
+PH0301417017,San Jose,Plaridel,10.42,8.69,0.001,0.001,0.1,0.0,1.81
+PH0301417018,Santa Ines,Plaridel,12.45,9.69,0.0,0.0,0.267,0.0,3.85
+PH0301417019,Santo Niño,Plaridel,7.78,5.82,0.0,0.0,0.214,0.0,0.94
+PH0301417020,Sipat,Plaridel,8.12,4.77,0.07,0.087,0.127,0.0,2.1
+PH0301417021,Tabang,Plaridel,8.84,4.86,0.0,0.0,0.436,0.0,1.02
+PH0301418001,Balatong A,Pulilan,8.66,7.5,0.0,0.0,0.069,0.0,0.24
+PH0301418002,Balatong B,Pulilan,8.55,6.59,0.0,0.0,0.099,0.0,0.66
+PH0301418003,Cutcot,Pulilan,9.7,7.91,0.002,0.008,0.269,0.0,0.85
+PH0301418005,Dampol I,Pulilan,9.59,5.11,0.041,0.055,0.241,0.0,0.99
+PH0301418006,Dampol II-A,Pulilan,6.87,3.07,0.039,0.065,0.392,0.0,0.33
+PH0301418007,Dampol II-B,Pulilan,3.6,1.57,0.372,0.038,0.16,0.0,1.17
+PH0301418008,Dulong Malabon,Pulilan,3.06,1.73,0.203,0.0,0.04,0.0,1.55
+PH0301418009,Inaon,Pulilan,4.33,2.18,0.064,0.0,0.041,0.0,1.55
+PH0301418010,Longos,Pulilan,9.44,2.09,0.088,0.159,0.238,0.0,1.4
+PH0301418011,Lumbac,Pulilan,8.47,5.5,0.031,0.036,0.169,0.0,1.76
+PH0301418018,Paltao,Pulilan,8.78,6.93,0.015,0.029,0.16,0.0,2.08
+PH0301418020,Penabatan,Pulilan,5.73,3.81,0.0,0.0,0.031,0.0,0.86
+PH0301418022,Poblacion,Pulilan,9.09,6.63,0.033,0.045,0.301,0.0,1.9
+PH0301418025,Santa Peregrina,Pulilan,7.08,5.62,0.0,0.0,0.098,0.0,0.81
+PH0301418026,Santo Cristo,Pulilan,11.22,4.33,0.038,0.076,0.351,0.0,0.4
+PH0301418033,Taal,Pulilan,10.66,6.5,0.044,0.044,0.133,0.0,0.53
+PH0301418034,Tabon,Pulilan,5.46,3.51,0.0,0.0,0.054,0.0,1.14
+PH0301418035,Tibag,Pulilan,7.65,3.87,0.062,0.085,0.325,0.0,1.02
+PH0301418037,Tinejero,Pulilan,7.71,5.79,0.0,0.001,0.087,0.0,1.85
+PH0301419001,Akle,San Ildefonso,97.98,74.56,0.0,0.001,0.101,0.0,0.85
+PH0301419002,Alagao,San Ildefonso,74.43,51.88,0.0,0.0,0.018,0.0,0.82
+PH0301419003,Anyatam,San Ildefonso,11.73,8.01,0.0,0.0,0.138,0.0,1.12
+PH0301419006,Bagong Barrio,San Ildefonso,37.17,25.34,0.0,0.007,0.031,0.0,0.75
+PH0301419007,Basuit,San Ildefonso,37.44,28.91,0.0,0.0,0.019,0.0,1.07
+PH0301419008,Bubulong Munti,San Ildefonso,35.1,23.16,0.0,0.001,0.013,0.0,1.46
+PH0301419009,Bubulong Malaki,San Ildefonso,22.03,17.29,0.0,0.0,0.016,0.0,2.06
+PH0301419010,Buhol na Mangga,San Ildefonso,64.89,43.6,0.0,0.0,0.012,0.0,0.9
+PH0301419011,Bulusukan,San Ildefonso,37.72,25.38,0.0,0.001,0.005,0.0,1.24
+PH0301419012,Calasag,San Ildefonso,10.41,6.85,0.0,0.004,0.076,0.0,1.35
+PH0301419013,Calawitan,San Ildefonso,7.71,6.04,0.0,0.0,0.061,0.0,0.21
+PH0301419014,Casalat,San Ildefonso,74.88,60.7,0.0,0.0,0.003,0.0,1.22
+PH0301419015,Gabihan,San Ildefonso,46.76,31.09,0.0,0.0,0.036,0.0,0.75
+PH0301419016,Garlang,San Ildefonso,10.79,10.0,0.0,0.0,0.075,0.0,2.59
+PH0301419017,Lapnit,San Ildefonso,11.07,6.95,0.0,0.0,0.275,0.0,1.68
+PH0301419018,Maasim,San Ildefonso,16.28,12.78,0.0,0.0,0.067,0.0,1.22
+PH0301419019,Makapilapil,San Ildefonso,10.8,6.46,0.0,0.0,0.084,0.0,1.8
+PH0301419020,Malipampang,San Ildefonso,16.01,10.9,0.0,0.0,0.174,0.0,0.41
+PH0301419021,Matimbubong,San Ildefonso,12.84,8.93,0.0,0.0,0.134,0.0,2.33
+PH0301419022,Nabaong Garlang,San Ildefonso,12.93,10.86,0.0,0.0,0.038,0.0,1.82
+PH0301419023,Palapala,San Ildefonso,30.75,18.09,0.0,0.0,0.06,0.0,1.22
+PH0301419024,Pasong Bangkal,San Ildefonso,57.81,40.06,0.0,0.001,0.032,0.0,0.82
+PH0301419025,Pinaod,San Ildefonso,21.27,13.78,0.0,0.0,0.117,0.0,0.78
+PH0301419026,Poblacion,San Ildefonso,18.4,12.5,0.0,0.0,0.352,0.0,0.33
+PH0301419027,Pulong Tamo,San Ildefonso,7.94,6.25,0.0,0.0,0.045,0.0,0.56
+PH0301419028,San Juan,San Ildefonso,14.64,7.21,0.0,0.0,0.425,0.0,0.8
+PH0301419029,Santa Catalina Bata,San Ildefonso,19.78,13.65,0.0,0.0,0.064,0.0,1.77
+PH0301419030,Santa Catalina Matanda,San Ildefonso,22.82,14.61,0.0,0.001,0.038,0.0,1.81
+PH0301419031,Sapang Dayap,San Ildefonso,54.04,37.41,0.0,0.0,0.01,0.0,1.13
+PH0301419032,Sapang Putik,San Ildefonso,25.25,17.28,0.0,0.0,0.029,0.0,0.86
+PH0301419033,Sapang Putol,San Ildefonso,12.53,7.42,0.0,0.0,0.209,0.0,1.9
+PH0301419034,Sumandig,San Ildefonso,30.38,21.31,0.0,0.0,0.028,0.0,0.76
+PH0301419035,Telepatio,San Ildefonso,10.74,9.24,0.0,0.0,0.023,0.0,1.84
+PH0301419036,Upig,San Ildefonso,33.54,23.73,0.0,0.0,0.038,0.0,0.85
+PH0301419037,Umpucan,San Ildefonso,43.66,26.0,0.0,0.0,0.019,0.0,1.77
+PH0301419038,Mataas na Parang,San Ildefonso,21.41,15.02,0.0,0.0,0.062,0.0,0.36
+PH0301420001,Bagong Buhay I,City of San Jose del Monte,87.5,69.83,0.0,0.0,0.481,0.0,1.13
+PH0301420002,Dulong Bayan,City of San Jose del Monte,38.5,26.77,0.0,0.001,0.114,0.0,1.57
+PH0301420003,Gaya-gaya,City of San Jose del Monte,58.32,46.0,0.0,0.0,0.377,0.0,1.55
+PH0301420004,Kaypian,City of San Jose del Monte,68.46,43.21,0.0,0.001,0.35,0.0,1.59
+PH0301420005,Kaybanban,City of San Jose del Monte,116.64,86.22,0.0,0.0,0.024,0.0,1.62
+PH0301420006,Minuyan I,City of San Jose del Monte,87.28,68.51,0.0,0.0,0.528,0.0,0.0
+PH0301420007,Muzon Proper,City of San Jose del Monte,61.28,52.24,0.0,0.0,0.485,0.0,0.42
+PH0301420008,Poblacion,City of San Jose del Monte,40.81,30.71,0.0,0.0,0.174,0.0,4.68
+PH0301420009,Santo Cristo,City of San Jose del Monte,85.12,54.52,0.0,0.0,0.249,0.0,1.1
+PH0301420010,Sapang Palay,City of San Jose del Monte,50.46,37.37,0.0,0.0,0.112,0.0,1.4
+PH0301420011,Tungkong Mangga,City of San Jose del Monte,139.69,85.61,0.0,0.0,0.075,0.0,1.19
+PH0301420012,Citrus,City of San Jose del Monte,96.81,71.85,0.0,0.0,0.412,0.0,1.17
+PH0301420013,San Martin I,City of San Jose del Monte,98.42,88.55,0.0,0.0,0.451,0.0,0.0
+PH0301420014,Sta. Cruz I,City of San Jose del Monte,99.29,87.3,0.0,0.0,0.5,0.0,0.0
+PH0301420015,Fatima I,City of San Jose del Monte,77.42,68.75,0.0,0.0,0.971,0.0,0.0
+PH0301420016,San Pedro,City of San Jose del Monte,80.08,64.27,0.0,0.0,0.504,0.0,0.35
+PH0301420017,San Rafael II,City of San Jose del Monte,75.37,63.01,0.0,0.0,0.758,0.0,2.24
+PH0301420018,Sto. Niño I,City of San Jose del Monte,98.9,85.8,0.0,0.0,0.292,0.0,0.7
+PH0301420019,Assumption,City of San Jose del Monte,109.13,89.62,0.0,0.0,0.29,0.0,1.91
+PH0301420020,Bagong Buhay II,City of San Jose del Monte,101.77,93.37,0.0,0.0,0.438,0.0,0.0
+PH0301420021,Bagong Buhay III,City of San Jose del Monte,92.26,76.29,0.0,0.0,0.356,0.0,0.69
+PH0301420022,Ciudad Real,City of San Jose del Monte,186.01,116.56,0.0,0.0,0.016,0.0,2.51
+PH0301420023,Fatima II,City of San Jose del Monte,58.2,51.99,0.0,0.0,0.857,0.0,0.02
+PH0301420024,Fatima III,City of San Jose del Monte,71.29,66.62,0.0,0.0,0.889,0.0,0.0
+PH0301420025,Fatima IV,City of San Jose del Monte,64.8,59.36,0.0,0.0,0.926,0.0,0.0
+PH0301420026,Fatima V,City of San Jose del Monte,87.47,74.91,0.0,0.0,0.561,0.0,0.0
+PH0301420027,Francisco Homes-Guijo,City of San Jose del Monte,85.35,74.43,0.0,0.0,0.615,0.0,0.67
+PH0301420028,Francisco Homes-Mulawin,City of San Jose del Monte,71.52,57.06,0.0,0.0,0.536,0.0,2.26
+PH0301420029,Francisco Homes-Narra,City of San Jose del Monte,73.56,57.34,0.0,0.0,0.728,0.0,1.73
+PH0301420030,Francisco Homes-Yakal,City of San Jose del Monte,57.11,45.57,0.0,0.0,0.455,0.0,2.77
+PH0301420031,Graceville,City of San Jose del Monte,73.4,57.3,0.0,0.0,0.438,0.0,1.25
+PH0301420032,Gumaoc Central,City of San Jose del Monte,72.41,58.83,0.0,0.0,0.6,0.0,2.83
+PH0301420033,Gumaoc East,City of San Jose del Monte,74.57,62.73,0.0,0.0,0.811,0.0,4.99
+PH0301420034,Gumaoc West,City of San Jose del Monte,68.46,57.58,0.0,0.0,0.52,0.0,4.67
+PH0301420035,Lawang Pari,City of San Jose del Monte,106.43,91.22,0.0,0.0,0.246,0.0,0.0
+PH0301420036,Maharlika,City of San Jose del Monte,83.79,76.53,0.0,0.0,0.674,0.0,0.3
+PH0301420037,Minuyan II,City of San Jose del Monte,86.41,59.23,0.0,0.0,0.274,0.0,0.0
+PH0301420038,Minuyan III,City of San Jose del Monte,87.15,68.0,0.0,0.0,0.404,0.0,4.92
+PH0301420039,Minuyan IV,City of San Jose del Monte,83.18,68.98,0.0,0.0,0.442,0.0,0.1
+PH0301420040,Minuyan V,City of San Jose del Monte,104.85,90.04,0.0,0.0,0.161,0.0,0.0
+PH0301420041,Minuyan Proper,City of San Jose del Monte,74.18,50.13,0.0,0.0,0.21,0.0,1.59
+PH0301420042,Paradise III,City of San Jose del Monte,157.71,115.3,0.0,0.0,0.004,0.0,1.36
+PH0301420043,Poblacion I,City of San Jose del Monte,50.89,42.09,0.0,0.0,0.423,0.0,1.14
+PH0301420044,San Isidro,City of San Jose del Monte,252.7,187.25,0.0,0.0,0.003,0.0,1.01
+PH0301420045,San Manuel,City of San Jose del Monte,73.7,62.09,0.0,0.0,0.685,0.0,1.6
+PH0301420046,San Martin II,City of San Jose del Monte,83.07,76.74,0.0,0.0,0.811,0.0,1.03
+PH0301420047,San Martin III,City of San Jose del Monte,101.48,89.41,0.0,0.0,0.8,0.0,0.0
+PH0301420048,San Martin IV,City of San Jose del Monte,104.72,93.8,0.0,0.0,0.897,0.0,0.0
+PH0301420049,San Rafael I,City of San Jose del Monte,87.65,78.42,0.0,0.0,0.9,0.0,0.94
+PH0301420050,San Rafael III,City of San Jose del Monte,80.56,70.65,0.0,0.0,0.909,0.0,1.76
+PH0301420051,San Rafael IV,City of San Jose del Monte,74.4,69.55,0.0,0.0,0.857,0.0,1.71
+PH0301420052,San Rafael V,City of San Jose del Monte,82.5,72.92,0.0,0.0,0.917,0.0,1.79
+PH0301420053,San Roque,City of San Jose del Monte,142.29,119.97,0.0,0.0,0.005,0.0,1.43
+PH0301420054,Santa Cruz II,City of San Jose del Monte,104.51,96.64,0.0,0.0,0.861,0.0,0.0
+PH0301420055,Santa Cruz III,City of San Jose del Monte,100.07,88.01,0.0,0.0,0.548,0.0,0.0
+PH0301420056,Santa Cruz IV,City of San Jose del Monte,108.62,100.88,0.0,0.0,0.649,0.0,0.0
+PH0301420057,Santa Cruz V,City of San Jose del Monte,98.44,89.01,0.0,0.0,0.75,0.0,0.0
+PH0301420058,Santo Niño II,City of San Jose del Monte,114.05,100.97,0.0,0.0,0.161,0.0,0.0
+PH0301420059,St. Martin de Porres,City of San Jose del Monte,108.75,91.81,0.0,0.0,0.111,0.0,0.0
+PH0301420060,Muzon East,City of San Jose del Monte,43.68,28.71,0.0,0.0,0.377,0.0,1.81
+PH0301420061,Muzon South,City of San Jose del Monte,49.87,40.08,0.0,0.0,0.707,0.0,1.6
+PH0301420062,Muzon West,City of San Jose del Monte,49.95,39.42,0.0,0.0,0.214,0.0,1.89
+PH0301421001,Bagong Silang,San Miguel,9.52,8.3,0.0,0.0,0.018,0.0,2.08
+PH0301421002,Balaong,San Miguel,31.42,22.96,0.0,0.0,0.013,0.0,1.54
+PH0301421003,Balite,San Miguel,13.87,10.11,0.0,0.001,0.033,0.0,0.78
+PH0301421004,Bantog,San Miguel,13.16,9.95,0.0,0.0,0.061,0.0,0.64
+PH0301421006,Bardias,San Miguel,25.63,22.57,0.0,0.0,0.03,0.0,2.12
+PH0301421007,Baritan,San Miguel,19.88,18.42,0.0,0.0,0.022,0.0,1.9
+PH0301421008,Batasan Bata,San Miguel,11.5,10.06,0.0,0.0,0.075,0.0,1.11
+PH0301421009,Batasan Matanda,San Miguel,9.95,8.85,0.0,0.0,0.034,0.0,1.58
+PH0301421011,Biak-na-Bato,San Miguel,71.05,36.83,0.0,0.001,0.003,0.0,0.95
+PH0301421012,Biclat,San Miguel,20.18,14.2,0.0,0.0,0.037,0.0,1.43
+PH0301421013,Buga,San Miguel,15.03,13.21,0.0,0.0,0.025,0.0,2.37
+PH0301421014,Buliran,San Miguel,22.97,17.32,0.0,0.0,0.036,0.0,1.02
+PH0301421015,Bulualto,San Miguel,12.82,10.23,0.0,0.0,0.045,0.0,0.4
+PH0301421016,Calumpang,San Miguel,54.53,37.6,0.0,0.0,0.024,0.0,0.82
+PH0301421019,Cambio,San Miguel,14.79,13.52,0.0,0.0,0.06,0.0,1.65
+PH0301421020,Camias,San Miguel,16.83,12.07,0.0,0.0,0.074,0.0,1.88
+PH0301421021,Ilog-Bulo,San Miguel,11.68,10.03,0.0,0.0,0.018,0.0,1.84
+PH0301421023,King Kabayo,San Miguel,19.92,17.28,0.0,0.0,0.034,0.0,1.9
+PH0301421024,Labne,San Miguel,23.27,19.02,0.0,0.0,0.01,0.001,1.19
+PH0301421025,Lambakin,San Miguel,41.0,28.52,0.0,0.0,0.011,0.0,1.06
+PH0301421027,Magmarale,San Miguel,29.41,19.44,0.0,0.0,0.02,0.0,0.63
+PH0301421028,Malibay,San Miguel,50.01,35.69,0.0,0.0,0.003,0.0,1.52
+PH0301421030,Mandile,San Miguel,9.15,8.4,0.0,0.0,0.046,0.002,2.08
+PH0301421031,Masalipit,San Miguel,35.24,24.13,0.0,0.009,0.014,0.0,1.34
+PH0301421032,Pacalag,San Miguel,46.6,36.6,0.0,0.0,0.014,0.0,0.78
+PH0301421033,Paliwasan,San Miguel,14.7,11.08,0.0,0.0,0.035,0.0,1.7
+PH0301421035,Partida,San Miguel,33.35,24.95,0.0,0.0,0.021,0.0,0.96
+PH0301421036,Pinambaran,San Miguel,17.57,15.83,0.0,0.001,0.036,0.0,2.56
+PH0301421037,Poblacion,San Miguel,17.18,14.12,0.0,0.005,0.427,0.0,0.88
+PH0301421038,Pulong Bayabas,San Miguel,37.84,30.14,0.0,0.0,0.06,0.0,0.0
+PH0301421039,Sacdalan,San Miguel,11.86,9.11,0.0,0.0,0.034,0.0,0.33
+PH0301421040,Salacot,San Miguel,13.58,11.78,0.0,0.0,0.146,0.0,1.89
+PH0301421041,Salangan,San Miguel,12.33,10.55,0.0,0.002,0.136,0.0,2.66
+PH0301421043,San Agustin,San Miguel,13.45,11.63,0.0,0.005,0.066,0.0,1.72
+PH0301421044,San Jose,San Miguel,18.8,15.98,0.0,0.009,0.249,0.0,3.8
+PH0301421045,San Juan,San Miguel,22.05,17.31,0.0,0.001,0.097,0.0,0.57
+PH0301421046,San Vicente,San Miguel,14.66,12.77,0.0,0.0,0.099,0.0,2.12
+PH0301421047,Santa Ines,San Miguel,29.79,20.75,0.0,0.0,0.035,0.0,0.97
+PH0301421048,Santa Lucia,San Miguel,26.66,21.26,0.0,0.0,0.021,0.0,1.21
+PH0301421049,Santa Rita Bata,San Miguel,16.8,12.52,0.0,0.0,0.138,0.0,1.49
+PH0301421050,Santa Rita Matanda,San Miguel,15.31,11.5,0.0,0.016,0.285,0.0,1.48
+PH0301421051,Sapang,San Miguel,21.22,16.29,0.0,0.0,0.014,0.0,1.41
+PH0301421052,Sibul,San Miguel,60.07,35.22,0.0,0.004,0.027,0.0,1.28
+PH0301421054,Tartaro,San Miguel,35.58,24.72,0.0,0.002,0.051,0.0,1.05
+PH0301421055,Tibagan,San Miguel,29.13,22.03,0.0,0.0,0.047,0.0,0.53
+PH0301421056,Bagong Pag-asa,San Miguel,10.05,8.55,0.0,0.0,0.014,0.0,1.38
+PH0301421057,Pulong Duhat,San Miguel,17.89,15.95,0.0,0.0,0.036,0.0,2.69
+PH0301421058,Maligaya,San Miguel,52.94,31.81,0.0,0.001,0.008,0.0,1.37
+PH0301421059,Tigpalas,San Miguel,17.4,14.62,0.0,0.0,0.378,0.0,3.37
+PH0301422001,BMA-Balagtas,San Rafael,30.63,22.5,0.0,0.0,0.062,0.0,0.0
+PH0301422002,Banca-banca,San Rafael,9.92,7.89,0.0,0.0,0.048,0.0,0.09
+PH0301422003,Caingin,San Rafael,21.65,14.28,0.0,0.026,0.06,0.003,1.0
+PH0301422004,Coral na Bato,San Rafael,37.39,28.53,0.0,0.0,0.015,0.0,0.1
+PH0301422005,Cruz na Daan,San Rafael,19.5,15.22,0.0,0.0,0.453,0.0,0.71
+PH0301422006,Dagat-dagatan,San Rafael,12.01,8.99,0.0,0.0,0.043,0.0,0.9
+PH0301422007,Diliman I,San Rafael,24.19,19.58,0.0,0.0,0.096,0.0,0.54
+PH0301422008,Diliman II,San Rafael,18.9,17.26,0.0,0.0,0.026,0.0,0.84
+PH0301422009,Capihan,San Rafael,19.9,10.96,0.0,0.0,0.136,0.0,0.51
+PH0301422010,Libis,San Rafael,24.63,21.92,0.0,0.037,0.204,0.0,0.0
+PH0301422011,Lico,San Rafael,17.54,7.14,0.0,0.123,0.118,0.01,2.57
+PH0301422012,Maasim,San Rafael,16.22,13.83,0.0,0.0,0.097,0.0,1.16
+PH0301422013,Mabalas-balas,San Rafael,20.49,16.75,0.0,0.0,0.232,0.0,0.39
+PH0301422014,Maguinao,San Rafael,19.26,11.08,0.0,0.0,0.156,0.0,1.42
+PH0301422015,Maronquillo,San Rafael,44.79,24.81,0.0,0.005,0.026,0.0,0.0
+PH0301422016,Paco,San Rafael,10.76,9.74,0.0,0.0,0.039,0.0,0.46
+PH0301422017,Pansumaloc,San Rafael,8.4,7.33,0.0,0.0,0.032,0.0,2.2
+PH0301422018,Pantubig,San Rafael,19.98,9.17,0.0,0.028,0.07,0.0,0.81
+PH0301422019,Pasong Bangkal,San Rafael,49.02,33.57,0.0,0.003,0.009,0.0,1.0
+PH0301422020,Pasong Callos,San Rafael,41.57,29.98,0.0,0.0,0.005,0.0,0.42
+PH0301422021,Pasong Intsik,San Rafael,34.44,23.47,0.0,0.0,0.011,0.0,0.52
+PH0301422022,Pinacpinacan,San Rafael,11.34,8.89,0.0,0.0,0.043,0.0,1.26
+PH0301422023,Poblacion,San Rafael,25.25,21.19,0.0,0.115,0.635,0.0,0.0
+PH0301422024,Pulo,San Rafael,52.78,29.57,0.0,0.006,0.022,0.0,0.4
+PH0301422025,Pulong Bayabas,San Rafael,8.61,7.6,0.0,0.0,0.025,0.0,1.49
+PH0301422026,Salapungan,San Rafael,28.02,21.41,0.0,0.0,0.086,0.0,0.3
+PH0301422027,Sampaloc,San Rafael,17.93,13.9,0.0,0.0,0.161,0.0,0.19
+PH0301422028,San Agustin,San Rafael,14.92,12.13,0.0,0.0,0.178,0.0,1.31
+PH0301422030,San Roque,San Rafael,19.29,9.63,0.0,0.0,0.157,0.0,0.31
+PH0301422031,Talacsan,San Rafael,39.13,24.5,0.0,0.007,0.017,0.0,0.0
+PH0301422032,Tambubong,San Rafael,15.42,7.56,0.0,0.072,0.25,0.002,1.98
+PH0301422033,Tukod,San Rafael,75.76,60.78,0.0,0.0,0.019,0.0,0.89
+PH0301422034,Ulingao,San Rafael,13.85,10.99,0.0,0.0,0.131,0.0,0.14
+PH0301422035,Sapang Pahalang,San Rafael,75.72,53.22,0.0,0.0,0.008,0.0,0.61
+PH0301423001,Bagbaguin,Santa Maria,8.68,4.78,0.019,0.057,0.406,0.0,1.74
+PH0301423002,Balasing,Santa Maria,39.23,23.53,0.0,0.0,0.108,0.0,1.62
+PH0301423003,Buenavista,Santa Maria,29.81,24.14,0.0,0.0,0.126,0.0,0.94
+PH0301423004,Bulac,Santa Maria,43.02,29.58,0.0,0.0,0.163,0.0,0.95
+PH0301423005,Camangyanan,Santa Maria,26.19,18.37,0.0,0.0,0.118,0.0,0.17
+PH0301423006,Catmon,Santa Maria,28.64,17.41,0.0,0.0,0.109,0.0,1.8
+PH0301423007,Cay Pombo,Santa Maria,34.28,24.05,0.0,0.0,0.34,0.0,1.08
+PH0301423008,Caysio,Santa Maria,24.43,14.14,0.0,0.0,0.148,0.0,1.7
+PH0301423009,Guyong,Santa Maria,23.77,10.03,0.0,0.001,0.227,0.0,1.11
+PH0301423010,Lalakhan,Santa Maria,6.96,3.45,0.069,0.088,0.289,0.0,2.3
+PH0301423011,Mag-asawang Sapa,Santa Maria,43.55,32.91,0.0,0.0,0.085,0.0,1.24
+PH0301423013,Mahabang Parang,Santa Maria,13.76,7.68,0.0,0.0,0.308,0.0,1.43
+PH0301423014,Manggahan,Santa Maria,19.88,14.73,0.0,0.0,0.333,0.0,0.85
+PH0301423015,Parada,Santa Maria,30.09,14.81,0.0,0.001,0.158,0.0,0.74
+PH0301423016,Poblacion,Santa Maria,12.83,7.09,0.006,0.013,0.487,0.0,1.75
+PH0301423017,Pulong Buhangin,Santa Maria,49.2,30.58,0.0,0.0,0.144,0.0,1.38
+PH0301423018,San Gabriel,Santa Maria,17.98,10.69,0.0,0.002,0.246,0.0,0.38
+PH0301423019,San Jose Patag,Santa Maria,18.63,9.97,0.0,0.006,0.207,0.0,0.95
+PH0301423020,San Vicente,Santa Maria,32.61,21.89,0.0,0.003,0.224,0.0,1.33
+PH0301423021,Sta. Clara,Santa Maria,10.48,6.48,0.002,0.013,0.396,0.0,1.03
+PH0301423022,Sta. Cruz,Santa Maria,14.22,9.31,0.0,0.0,0.284,0.0,1.03
+PH0301423023,Silangan,Santa Maria,52.92,43.16,0.0,0.0,0.019,0.0,1.13
+PH0301423024,Tabing Bakod,Santa Maria,10.68,5.52,0.0,0.0,0.406,0.0,0.52
+PH0301423025,Tumana,Santa Maria,18.87,9.58,0.004,0.026,0.153,0.0,1.18
+PH0301424001,Bayabas,Doña Remedios Trinidad,198.07,102.86,0.0,0.0,0.003,0.0,0.49
+PH0301424002,Kabayunan,Doña Remedios Trinidad,494.55,271.29,0.0,0.006,0.0,0.0,0.76
+PH0301424003,Camachin,Doña Remedios Trinidad,495.2,286.26,0.0,0.002,0.0,0.0,0.56
+PH0301424004,Camachile,Doña Remedios Trinidad,230.15,96.57,0.0,0.0,0.004,0.0,1.02
+PH0301424005,Kalawakan,Doña Remedios Trinidad,371.66,123.82,0.0,0.001,0.0,0.0,0.91
+PH0301424006,Pulong Sampalok,Doña Remedios Trinidad,73.19,51.21,0.0,0.001,0.011,0.0,0.46
+PH0301424007,Talbak,Doña Remedios Trinidad,166.87,119.25,0.0,0.0,0.002,0.0,0.67
+PH0301424008,Sapang Bulak,Doña Remedios Trinidad,437.42,199.38,0.0,0.005,0.001,0.0,0.68

@@ -1,0 +1,61 @@
+start,name,date_basis,alert_before_start,alert_by_end,days_scored,town,model
+2012-08-06,Habagat August 2012,report_date,True,True,7,Hagonoy,base
+2013-08-19,Maring-enhanced habagat,report_date,True,True,5,Hagonoy,base
+2013-10-14,Typhoon Santi backflood,report_date,True,True,4,Hagonoy,base
+2015-10-23,Typhoon Lando,report_date,True,True,5,Hagonoy,base
+2018-08-11,Karding-enhanced monsoon,documented,True,True,6,Hagonoy,base
+2018-09-18,Typhoon Ompong backflood,report_date,True,True,4,Hagonoy,base
+2020-10-26,Typhoon Quinta,report_date,True,True,3,Hagonoy,base
+2020-11-12,Typhoon Ulysses,documented,False,True,8,Hagonoy,base
+2021-08-01,Fabian-enhanced habagat,report_date,False,False,5,Hagonoy,base
+2022-09-25,Super Typhoon Karding,documented,False,True,7,Hagonoy,base
+2023-07-28,Egay and Falcon habagat,report_date,True,True,7,Hagonoy,base
+2023-09-01,Rain and high tide,report_date,True,True,4,Hagonoy,base
+2024-07-24,Typhoon Carina,documented,True,True,4,Hagonoy,base
+2025-07-21,Crising Dante Emong habagat,report_date,True,True,6,Hagonoy,base
+2023-07-03,High tide in 12 Hagonoy villages,documented,False,False,4,Hagonoy,base
+2025-06-18,High tide at San Roque school,report_date,False,False,4,Hagonoy,base
+2012-08-06,Habagat August 2012,report_date,True,True,7,Hagonoy,all_available_at_issue
+2013-08-19,Maring-enhanced habagat,report_date,True,True,5,Hagonoy,all_available_at_issue
+2013-10-14,Typhoon Santi backflood,report_date,True,True,4,Hagonoy,all_available_at_issue
+2015-10-23,Typhoon Lando,report_date,True,True,5,Hagonoy,all_available_at_issue
+2018-08-11,Karding-enhanced monsoon,documented,True,True,6,Hagonoy,all_available_at_issue
+2018-09-18,Typhoon Ompong backflood,report_date,True,True,4,Hagonoy,all_available_at_issue
+2020-10-26,Typhoon Quinta,report_date,True,True,3,Hagonoy,all_available_at_issue
+2020-11-12,Typhoon Ulysses,documented,False,True,8,Hagonoy,all_available_at_issue
+2021-08-01,Fabian-enhanced habagat,report_date,False,True,5,Hagonoy,all_available_at_issue
+2022-09-25,Super Typhoon Karding,documented,False,True,7,Hagonoy,all_available_at_issue
+2023-07-28,Egay and Falcon habagat,report_date,True,True,7,Hagonoy,all_available_at_issue
+2023-09-01,Rain and high tide,report_date,True,True,4,Hagonoy,all_available_at_issue
+2024-07-24,Typhoon Carina,documented,True,True,4,Hagonoy,all_available_at_issue
+2025-07-21,Crising Dante Emong habagat,report_date,True,True,6,Hagonoy,all_available_at_issue
+2023-07-03,High tide in 12 Hagonoy villages,documented,False,False,4,Hagonoy,all_available_at_issue
+2025-06-18,High tide at San Roque school,report_date,False,False,4,Hagonoy,all_available_at_issue
+2012-08-06,Habagat August 2012,report_date,True,True,7,Calumpit,base
+2013-08-19,Maring-enhanced habagat,report_date,False,False,5,Calumpit,base
+2013-10-14,Typhoon Santi backflood,report_date,True,True,4,Calumpit,base
+2015-10-23,Typhoon Lando,report_date,True,True,5,Calumpit,base
+2018-07-24,Calumpit monsoon flood,report_date,True,True,4,Calumpit,base
+2018-08-11,Karding-enhanced monsoon,documented,False,True,6,Calumpit,base
+2018-09-18,Typhoon Ompong backflood,report_date,True,True,4,Calumpit,base
+2020-10-26,Typhoon Quinta,report_date,True,True,3,Calumpit,base
+2020-11-12,Typhoon Ulysses,documented,False,True,8,Calumpit,base
+2021-08-01,Fabian-enhanced habagat,report_date,False,False,5,Calumpit,base
+2023-07-28,Egay and Falcon habagat,report_date,True,True,7,Calumpit,base
+2025-07-21,Crising Dante Emong habagat,report_date,True,True,6,Calumpit,base
+2025-09-24,Nando and Opong,documented,True,True,5,Calumpit,base
+2016-10-24,Typhoon Lawin backflood,report_date,True,True,2,Calumpit,base
+2012-08-06,Habagat August 2012,report_date,True,True,7,Calumpit,all_available_at_issue
+2013-08-19,Maring-enhanced habagat,report_date,True,True,5,Calumpit,all_available_at_issue
+2013-10-14,Typhoon Santi backflood,report_date,True,True,4,Calumpit,all_available_at_issue
+2015-10-23,Typhoon Lando,report_date,True,True,5,Calumpit,all_available_at_issue
+2018-07-24,Calumpit monsoon flood,report_date,True,True,4,Calumpit,all_available_at_issue
+2018-08-11,Karding-enhanced monsoon,documented,False,True,6,Calumpit,all_available_at_issue
+2018-09-18,Typhoon Ompong backflood,report_date,True,True,4,Calumpit,all_available_at_issue
+2020-10-26,Typhoon Quinta,report_date,True,True,3,Calumpit,all_available_at_issue
+2020-11-12,Typhoon Ulysses,documented,True,True,8,Calumpit,all_available_at_issue
+2021-08-01,Fabian-enhanced habagat,report_date,False,False,5,Calumpit,all_available_at_issue
+2023-07-28,Egay and Falcon habagat,report_date,True,True,7,Calumpit,all_available_at_issue
+2025-07-21,Crising Dante Emong habagat,report_date,True,True,6,Calumpit,all_available_at_issue
+2025-09-24,Nando and Opong,documented,True,True,5,Calumpit,all_available_at_issue
+2016-10-24,Typhoon Lawin backflood,report_date,True,True,2,Calumpit,all_available_at_issue

@@ -1,0 +1,3 @@
+model,evaluation,days,flood_target_days,pr_auc,roc_auc,precision,recall,events,events_detected,event_recall_ci_low,event_recall_ci_high,documented_events,documented_warned_before_start,false_alert_episodes_per_year,alert_days_per_year
+lr_c005|compact,dev_corrected,3903,79,0.202,0.933,0.191,0.722,22,17,0.57,0.9,7,4,4.7,36.2
+lr_c005|compact,T1_corrected,1239,51,0.578,0.953,0.333,0.784,8,6,0.41,0.93,3,3,2.4,40.6

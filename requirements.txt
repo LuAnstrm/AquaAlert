@@ -8,3 +8,11 @@ joblib==1.6.0
 # only needed by live_check.py
 requests==2.34.2
 truststore==0.10.5
+# only needed by the bulacan/ pipeline
+geopandas==1.2.0
+lightgbm==4.7.0
+pyogrio==0.13.0
+pyproj==3.8.0
+scipy==1.18.1
+shapely==2.2.0
+rasterio==1.5.2

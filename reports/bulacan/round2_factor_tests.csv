@@ -1,0 +1,10 @@
+model,evaluation,days,flood_target_days,pr_auc,roc_auc,precision,recall,events,events_detected,event_recall_ci_low,event_recall_ci_high,documented_events,documented_warned_before_start,false_alert_episodes_per_year,alert_days_per_year,gain_ci_low,gain_ci_high,gates_passed,D1_detection,D2_early,D3_false_alarms,D4_alert_burden,D5_beats_rules,upper_bound_only
+base,dev_2011_2025,3908,84,0.207,0.934,0.193,0.726,23,19,0.63,0.93,7,4,4.6,38.1,-0.113,0.084,1,True,False,False,False,False,False
+base+rain_forecast,dev_2011_2025,3908,84,0.235,0.943,0.227,0.69,23,17,0.54,0.87,7,6,3.0,30.8,-0.099,0.152,2,False,True,True,False,False,True
+base+tide,dev_2011_2025,3908,84,0.187,0.932,0.197,0.655,23,18,0.58,0.9,7,3,4.7,33.7,-0.133,0.053,0,False,False,False,False,False,False
+base+wind_pressure,dev_2011_2025,3908,84,0.456,0.953,0.27,0.774,23,19,0.63,0.93,7,4,3.1,29.1,0.137,0.354,2,True,False,False,False,True,False
+base+cyclone,dev_2011_2025,3908,84,0.208,0.935,0.19,0.75,23,19,0.63,0.93,7,5,4.8,40.0,-0.119,0.086,1,True,False,False,False,False,False
+base+el_nino,dev_2011_2025,3908,84,0.195,0.931,0.178,0.75,23,18,0.58,0.9,7,5,4.6,42.7,-0.116,0.063,0,False,False,False,False,False,False
+base+rain_intensity_soil,dev_2011_2025,3908,84,0.239,0.933,0.195,0.738,23,18,0.58,0.9,7,4,5.1,38.4,-0.088,0.14,0,False,False,False,False,False,False
+all_available_at_issue,dev_2011_2025,3908,84,0.443,0.947,0.267,0.762,23,19,0.63,0.93,7,5,3.6,29.0,0.119,0.338,2,True,False,False,False,True,False
+all_with_perfect_rain,dev_2011_2025,3908,84,0.463,0.952,0.284,0.786,23,18,0.58,0.9,7,6,2.9,28.0,0.088,0.396,3,False,True,True,False,True,True

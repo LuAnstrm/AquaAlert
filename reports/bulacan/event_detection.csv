@@ -1,0 +1,122 @@
+start,name,date_basis,alert_before_start,alert_by_end,days_scored,model,evaluation
+2011-09-30,Typhoon Pedring,report_date,True,True,2,lightgbm,leave_one_year_out_2011_2025
+2012-08-06,Habagat August 2012,report_date,True,True,7,lightgbm,leave_one_year_out_2011_2025
+2013-08-19,Maring-enhanced habagat,report_date,False,False,5,lightgbm,leave_one_year_out_2011_2025
+2013-10-14,Typhoon Santi backflood,report_date,True,True,4,lightgbm,leave_one_year_out_2011_2025
+2013-11-12,Flash floods in 13 villages,report_date,False,False,4,lightgbm,leave_one_year_out_2011_2025
+2015-10-23,Typhoon Lando,report_date,True,True,5,lightgbm,leave_one_year_out_2011_2025
+2018-07-15,Intense rain and high tide in 9 villages,report_date,True,True,3,lightgbm,leave_one_year_out_2011_2025
+2018-07-24,Calumpit monsoon flood,report_date,True,True,4,lightgbm,leave_one_year_out_2011_2025
+2018-08-03,Flash floods near 200 mm rain,documented,False,False,4,lightgbm,leave_one_year_out_2011_2025
+2018-08-11,Karding-enhanced monsoon,documented,True,True,6,lightgbm,leave_one_year_out_2011_2025
+2018-09-18,Typhoon Ompong backflood,report_date,False,False,4,lightgbm,leave_one_year_out_2011_2025
+2020-10-27,Typhoon Quinta,report_date,True,True,2,lightgbm,leave_one_year_out_2011_2025
+2020-11-12,Typhoon Ulysses,documented,False,False,8,lightgbm,leave_one_year_out_2011_2025
+2021-08-03,Fabian-enhanced habagat,report_date,False,False,3,lightgbm,leave_one_year_out_2011_2025
+2022-09-25,Super Typhoon Karding,documented,False,True,7,lightgbm,leave_one_year_out_2011_2025
+2023-07-28,Egay and Falcon habagat,report_date,True,True,7,lightgbm,leave_one_year_out_2011_2025
+2023-09-01,Rain and high tide,report_date,True,True,4,lightgbm,leave_one_year_out_2011_2025
+2024-07-24,Typhoon Carina,documented,True,True,4,lightgbm,leave_one_year_out_2011_2025
+2024-09-02,Severe Tropical Storm Enteng,documented,False,True,7,lightgbm,leave_one_year_out_2011_2025
+2025-06-06,Flooding in Bulacan,report_date,False,False,4,lightgbm,leave_one_year_out_2011_2025
+2025-07-21,Crising Dante Emong habagat,report_date,True,True,6,lightgbm,leave_one_year_out_2011_2025
+2025-09-24,Nando and Opong,documented,True,True,5,lightgbm,leave_one_year_out_2011_2025
+2011-09-30,Typhoon Pedring,report_date,True,True,2,logistic_regression,leave_one_year_out_2011_2025
+2012-08-06,Habagat August 2012,report_date,True,True,7,logistic_regression,leave_one_year_out_2011_2025
+2013-08-19,Maring-enhanced habagat,report_date,True,True,5,logistic_regression,leave_one_year_out_2011_2025
+2013-10-14,Typhoon Santi backflood,report_date,True,True,4,logistic_regression,leave_one_year_out_2011_2025
+2013-11-12,Flash floods in 13 villages,report_date,False,False,4,logistic_regression,leave_one_year_out_2011_2025
+2015-10-23,Typhoon Lando,report_date,True,True,5,logistic_regression,leave_one_year_out_2011_2025
+2018-07-15,Intense rain and high tide in 9 villages,report_date,False,False,3,logistic_regression,leave_one_year_out_2011_2025
+2018-07-24,Calumpit monsoon flood,report_date,True,True,4,logistic_regression,leave_one_year_out_2011_2025
+2018-08-03,Flash floods near 200 mm rain,documented,False,False,4,logistic_regression,leave_one_year_out_2011_2025
+2018-08-11,Karding-enhanced monsoon,documented,True,True,6,logistic_regression,leave_one_year_out_2011_2025
+2018-09-18,Typhoon Ompong backflood,report_date,True,True,4,logistic_regression,leave_one_year_out_2011_2025
+2020-10-27,Typhoon Quinta,report_date,False,False,2,logistic_regression,leave_one_year_out_2011_2025
+2020-11-12,Typhoon Ulysses,documented,False,True,8,logistic_regression,leave_one_year_out_2011_2025
+2021-08-03,Fabian-enhanced habagat,report_date,True,True,3,logistic_regression,leave_one_year_out_2011_2025
+2022-09-25,Super Typhoon Karding,documented,False,True,7,logistic_regression,leave_one_year_out_2011_2025
+2023-07-28,Egay and Falcon habagat,report_date,True,True,7,logistic_regression,leave_one_year_out_2011_2025
+2023-09-01,Rain and high tide,report_date,False,False,4,logistic_regression,leave_one_year_out_2011_2025
+2024-07-24,Typhoon Carina,documented,True,True,4,logistic_regression,leave_one_year_out_2011_2025
+2024-09-02,Severe Tropical Storm Enteng,documented,True,True,7,logistic_regression,leave_one_year_out_2011_2025
+2025-06-06,Flooding in Bulacan,report_date,False,False,4,logistic_regression,leave_one_year_out_2011_2025
+2025-07-21,Crising Dante Emong habagat,report_date,True,True,6,logistic_regression,leave_one_year_out_2011_2025
+2025-09-24,Nando and Opong,documented,True,True,5,logistic_regression,leave_one_year_out_2011_2025
+2011-09-30,Typhoon Pedring,report_date,True,True,2,rule_3day_rain,leave_one_year_out_2011_2025
+2012-08-06,Habagat August 2012,report_date,False,True,7,rule_3day_rain,leave_one_year_out_2011_2025
+2013-08-19,Maring-enhanced habagat,report_date,False,False,5,rule_3day_rain,leave_one_year_out_2011_2025
+2013-10-14,Typhoon Santi backflood,report_date,True,True,4,rule_3day_rain,leave_one_year_out_2011_2025
+2013-11-12,Flash floods in 13 villages,report_date,False,False,4,rule_3day_rain,leave_one_year_out_2011_2025
+2015-10-23,Typhoon Lando,report_date,False,False,5,rule_3day_rain,leave_one_year_out_2011_2025
+2018-07-15,Intense rain and high tide in 9 villages,report_date,True,True,3,rule_3day_rain,leave_one_year_out_2011_2025
+2018-07-24,Calumpit monsoon flood,report_date,False,False,4,rule_3day_rain,leave_one_year_out_2011_2025
+2018-08-03,Flash floods near 200 mm rain,documented,False,False,4,rule_3day_rain,leave_one_year_out_2011_2025
+2018-08-11,Karding-enhanced monsoon,documented,False,True,6,rule_3day_rain,leave_one_year_out_2011_2025
+2018-09-18,Typhoon Ompong backflood,report_date,True,True,4,rule_3day_rain,leave_one_year_out_2011_2025
+2020-10-27,Typhoon Quinta,report_date,True,True,2,rule_3day_rain,leave_one_year_out_2011_2025
+2020-11-12,Typhoon Ulysses,documented,False,True,8,rule_3day_rain,leave_one_year_out_2011_2025
+2021-08-03,Fabian-enhanced habagat,report_date,False,False,3,rule_3day_rain,leave_one_year_out_2011_2025
+2022-09-25,Super Typhoon Karding,documented,True,True,7,rule_3day_rain,leave_one_year_out_2011_2025
+2023-07-28,Egay and Falcon habagat,report_date,False,True,7,rule_3day_rain,leave_one_year_out_2011_2025
+2023-09-01,Rain and high tide,report_date,False,False,4,rule_3day_rain,leave_one_year_out_2011_2025
+2024-07-24,Typhoon Carina,documented,True,True,4,rule_3day_rain,leave_one_year_out_2011_2025
+2024-09-02,Severe Tropical Storm Enteng,documented,True,True,7,rule_3day_rain,leave_one_year_out_2011_2025
+2025-06-06,Flooding in Bulacan,report_date,False,False,4,rule_3day_rain,leave_one_year_out_2011_2025
+2025-07-21,Crising Dante Emong habagat,report_date,True,True,6,rule_3day_rain,leave_one_year_out_2011_2025
+2025-09-24,Nando and Opong,documented,True,True,5,rule_3day_rain,leave_one_year_out_2011_2025
+2011-09-30,Typhoon Pedring,report_date,True,True,2,rule_river_discharge,leave_one_year_out_2011_2025
+2012-08-06,Habagat August 2012,report_date,True,True,7,rule_river_discharge,leave_one_year_out_2011_2025
+2013-08-19,Maring-enhanced habagat,report_date,True,True,5,rule_river_discharge,leave_one_year_out_2011_2025
+2013-10-14,Typhoon Santi backflood,report_date,True,True,4,rule_river_discharge,leave_one_year_out_2011_2025
+2013-11-12,Flash floods in 13 villages,report_date,False,False,4,rule_river_discharge,leave_one_year_out_2011_2025
+2015-10-23,Typhoon Lando,report_date,True,True,5,rule_river_discharge,leave_one_year_out_2011_2025
+2018-07-15,Intense rain and high tide in 9 villages,report_date,True,True,3,rule_river_discharge,leave_one_year_out_2011_2025
+2018-07-24,Calumpit monsoon flood,report_date,True,True,4,rule_river_discharge,leave_one_year_out_2011_2025
+2018-08-03,Flash floods near 200 mm rain,documented,False,False,4,rule_river_discharge,leave_one_year_out_2011_2025
+2018-08-11,Karding-enhanced monsoon,documented,False,True,6,rule_river_discharge,leave_one_year_out_2011_2025
+2018-09-18,Typhoon Ompong backflood,report_date,True,True,4,rule_river_discharge,leave_one_year_out_2011_2025
+2020-10-27,Typhoon Quinta,report_date,True,True,2,rule_river_discharge,leave_one_year_out_2011_2025
+2020-11-12,Typhoon Ulysses,documented,False,True,8,rule_river_discharge,leave_one_year_out_2011_2025
+2021-08-03,Fabian-enhanced habagat,report_date,False,False,3,rule_river_discharge,leave_one_year_out_2011_2025
+2022-09-25,Super Typhoon Karding,documented,False,True,7,rule_river_discharge,leave_one_year_out_2011_2025
+2023-07-28,Egay and Falcon habagat,report_date,True,True,7,rule_river_discharge,leave_one_year_out_2011_2025
+2023-09-01,Rain and high tide,report_date,False,False,4,rule_river_discharge,leave_one_year_out_2011_2025
+2024-07-24,Typhoon Carina,documented,False,False,4,rule_river_discharge,leave_one_year_out_2011_2025
+2024-09-02,Severe Tropical Storm Enteng,documented,False,True,7,rule_river_discharge,leave_one_year_out_2011_2025
+2025-06-06,Flooding in Bulacan,report_date,False,False,4,rule_river_discharge,leave_one_year_out_2011_2025
+2025-07-21,Crising Dante Emong habagat,report_date,False,True,6,rule_river_discharge,leave_one_year_out_2011_2025
+2025-09-24,Nando and Opong,documented,True,True,5,rule_river_discharge,leave_one_year_out_2011_2025
+2011-09-30,Typhoon Pedring,report_date,True,True,2,monthly_climatology,leave_one_year_out_2011_2025
+2012-08-06,Habagat August 2012,report_date,True,True,7,monthly_climatology,leave_one_year_out_2011_2025
+2013-08-19,Maring-enhanced habagat,report_date,True,True,5,monthly_climatology,leave_one_year_out_2011_2025
+2013-10-14,Typhoon Santi backflood,report_date,False,False,4,monthly_climatology,leave_one_year_out_2011_2025
+2013-11-12,Flash floods in 13 villages,report_date,False,False,4,monthly_climatology,leave_one_year_out_2011_2025
+2015-10-23,Typhoon Lando,report_date,False,False,5,monthly_climatology,leave_one_year_out_2011_2025
+2018-07-15,Intense rain and high tide in 9 villages,report_date,True,True,3,monthly_climatology,leave_one_year_out_2011_2025
+2018-07-24,Calumpit monsoon flood,report_date,True,True,4,monthly_climatology,leave_one_year_out_2011_2025
+2018-08-03,Flash floods near 200 mm rain,documented,True,True,4,monthly_climatology,leave_one_year_out_2011_2025
+2018-08-11,Karding-enhanced monsoon,documented,True,True,6,monthly_climatology,leave_one_year_out_2011_2025
+2018-09-18,Typhoon Ompong backflood,report_date,True,True,4,monthly_climatology,leave_one_year_out_2011_2025
+2020-10-27,Typhoon Quinta,report_date,False,False,2,monthly_climatology,leave_one_year_out_2011_2025
+2020-11-12,Typhoon Ulysses,documented,False,False,8,monthly_climatology,leave_one_year_out_2011_2025
+2021-08-03,Fabian-enhanced habagat,report_date,True,True,3,monthly_climatology,leave_one_year_out_2011_2025
+2022-09-25,Super Typhoon Karding,documented,False,False,7,monthly_climatology,leave_one_year_out_2011_2025
+2023-07-28,Egay and Falcon habagat,report_date,True,True,7,monthly_climatology,leave_one_year_out_2011_2025
+2023-09-01,Rain and high tide,report_date,True,True,4,monthly_climatology,leave_one_year_out_2011_2025
+2024-07-24,Typhoon Carina,documented,True,True,4,monthly_climatology,leave_one_year_out_2011_2025
+2024-09-02,Severe Tropical Storm Enteng,documented,True,True,7,monthly_climatology,leave_one_year_out_2011_2025
+2025-06-06,Flooding in Bulacan,report_date,False,False,4,monthly_climatology,leave_one_year_out_2011_2025
+2025-07-21,Crising Dante Emong habagat,report_date,True,True,6,monthly_climatology,leave_one_year_out_2011_2025
+2025-09-24,Nando and Opong,documented,True,True,5,monthly_climatology,leave_one_year_out_2011_2025
+2026-08-10,Luis Maymay habagat,report_date,True,True,23,logistic_regression,holdout_2026
+2026-08-10,Luis Maymay habagat,report_date,True,True,23,rule_3day_rain,holdout_2026
+2026-08-10,Luis Maymay habagat,report_date,True,True,23,rule_river_discharge,holdout_2026
+2023-07-28,Egay and Falcon habagat,report_date,True,True,7,logistic_regression,live_like_inputs_2023_2026
+2023-09-01,Rain and high tide,report_date,False,True,4,logistic_regression,live_like_inputs_2023_2026
+2024-07-24,Typhoon Carina,documented,True,True,4,logistic_regression,live_like_inputs_2023_2026
+2024-09-02,Severe Tropical Storm Enteng,documented,False,True,7,logistic_regression,live_like_inputs_2023_2026
+2025-06-06,Flooding in Bulacan,report_date,False,False,4,logistic_regression,live_like_inputs_2023_2026
+2025-07-21,Crising Dante Emong habagat,report_date,True,True,6,logistic_regression,live_like_inputs_2023_2026
+2025-09-24,Nando and Opong,documented,False,True,5,logistic_regression,live_like_inputs_2023_2026
+2026-08-10,Luis Maymay habagat,report_date,True,True,23,logistic_regression,live_like_inputs_2023_2026

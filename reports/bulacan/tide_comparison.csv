@@ -1,0 +1,3 @@
+model,evaluation,days,flood_target_days,pr_auc,roc_auc,precision,recall,events,events_detected,event_recall_ci_low,event_recall_ci_high,documented_events,documented_warned_before_start,false_alert_episodes_per_year,alert_days_per_year,gain_ci_low,gain_ci_high,gates_passed,D1_detection,D2_early,D3_false_alarms,D4_alert_burden,D5_beats_rules
+compact (no tide),dev,3903,79,0.202,0.933,0.191,0.722,22,17,0.57,0.9,7,4,2.6,19.9,-0.126,0.107,2,False,False,True,True,False
+compact + predicted tide,dev,3903,79,0.187,0.931,0.176,0.709,22,17,0.57,0.9,7,5,2.7,21.3,-0.14,0.092,2,False,False,True,True,False

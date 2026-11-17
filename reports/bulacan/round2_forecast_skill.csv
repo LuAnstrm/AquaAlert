@@ -1,0 +1,13 @@
+point,lead_days,days,correlation,mean_obs_on_heavy_days,mean_fc_on_heavy_days,heavy_days,heavy_days_with_fc_25mm
+calumpit,1,1015,0.57,63.5,28.0,10,6
+calumpit,2,1014,0.55,63.5,25.5,10,4
+malolos,1,1015,0.63,63.5,27.9,10,6
+malolos,2,1014,0.6,63.5,26.7,10,5
+san_miguel,1,1015,0.64,66.5,26.5,13,6
+san_miguel,2,1014,0.55,66.5,25.6,13,5
+sjdm,1,1015,0.68,68.5,33.2,24,15
+sjdm,2,1014,0.6,68.5,25.5,24,10
+angat_watershed,1,1015,0.56,77.0,30.1,20,10
+angat_watershed,2,1014,0.47,77.0,36.0,20,8
+upper_pampanga,1,1015,0.69,67.8,46.0,15,14
+upper_pampanga,2,1014,0.65,67.8,50.4,15,9

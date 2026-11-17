@@ -1,0 +1,19 @@
+start,name,date_basis,alert_before_start,alert_by_end,days_scored,model
+2024-07-24,Typhoon Carina,documented,True,True,4,base
+2024-09-02,Severe Tropical Storm Enteng,documented,True,True,7,base
+2025-06-06,Flooding in Bulacan,report_date,False,False,4,base
+2025-07-21,Crising Dante Emong habagat,report_date,False,True,6,base
+2025-09-24,Nando and Opong,documented,True,True,5,base
+2026-08-10,Luis Maymay habagat,report_date,True,True,23,base
+2024-07-24,Typhoon Carina,documented,False,True,4,base+rain_forecast
+2024-09-02,Severe Tropical Storm Enteng,documented,True,True,7,base+rain_forecast
+2025-06-06,Flooding in Bulacan,report_date,False,False,4,base+rain_forecast
+2025-07-21,Crising Dante Emong habagat,report_date,False,True,6,base+rain_forecast
+2025-09-24,Nando and Opong,documented,True,True,5,base+rain_forecast
+2026-08-10,Luis Maymay habagat,report_date,True,True,23,base+rain_forecast
+2024-07-24,Typhoon Carina,documented,True,True,4,all_factors_live
+2024-09-02,Severe Tropical Storm Enteng,documented,True,True,7,all_factors_live
+2025-06-06,Flooding in Bulacan,report_date,False,False,4,all_factors_live
+2025-07-21,Crising Dante Emong habagat,report_date,True,True,6,all_factors_live
+2025-09-24,Nando and Opong,documented,True,True,5,all_factors_live
+2026-08-10,Luis Maymay habagat,report_date,True,True,23,all_factors_live

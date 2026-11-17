@@ -1,0 +1,28 @@
+test,days,target_days,pr_auc,roc_auc,events_detected,events,alert_days
+locked finalist,3903,79,0.202,0.933,17,22,299
+flood dates moved -2 days,3909,79,0.126,0.898,20,22,601
+flood dates moved -1 days,3903,79,0.176,0.923,18,22,333
+flood dates moved +1 days,3903,79,0.251,0.94,17,22,262
+flood dates moved +2 days,3909,79,0.267,0.946,17,22,268
+without Typhoon Pedring,3901,77,0.19,0.931,16,21,291
+without Habagat August 2012,3901,72,0.187,0.927,17,21,297
+without Maring-enhanced habagat,3902,75,0.199,0.932,16,21,298
+without Typhoon Santi backflood,3903,77,0.196,0.932,16,21,281
+without Flash floods in 13 villages,3903,77,0.208,0.939,17,21,295
+without Typhoon Lando,3902,75,0.197,0.93,16,21,267
+without Intense rain and high tide in 9 villages,3902,77,0.19,0.931,16,21,297
+without Calumpit monsoon flood,3902,76,0.194,0.931,17,21,321
+without Flash floods near 200 mm rain,3903,77,0.207,0.937,18,21,293
+without Karding-enhanced monsoon,3903,75,0.185,0.929,16,21,294
+without Typhoon Ompong backflood,3902,76,0.198,0.931,17,21,296
+without Typhoon Quinta,3901,77,0.194,0.931,17,21,300
+without Typhoon Ulysses,3902,72,0.178,0.936,14,21,251
+without Fabian-enhanced habagat,3902,77,0.206,0.934,18,21,304
+without Super Typhoon Karding,3903,74,0.18,0.929,16,21,294
+without Egay and Falcon habagat,3902,73,0.184,0.928,16,21,317
+without Rain and high tide,3903,77,0.2,0.933,17,21,283
+without Typhoon Carina,3902,76,0.181,0.93,16,21,328
+without Severe Tropical Storm Enteng,3903,74,0.184,0.929,17,21,297
+without Flooding in Bulacan,3903,77,0.214,0.943,18,21,321
+without Crising Dante Emong habagat,3901,73,0.176,0.928,16,21,298
+without Nando and Opong,3902,75,0.182,0.929,16,21,296

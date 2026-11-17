@@ -1,0 +1,56 @@
+kind,start,end,date_basis,name,towns,source_url
+event,2011-09-30,2011-09-30,report_date,Typhoon Pedring,,https://www.philstar.com/headlines/2011/09/30/732172/headlines
+event,2012-08-06,2012-08-11,report_date,Habagat August 2012,Calumpit;Obando;Malolos;Hagonoy,https://newsinfo.inquirer.net/?p=243951
+event,2013-08-19,2013-08-21,report_date,Maring-enhanced habagat,Hagonoy;Meycauayan;Marilao;Obando;Bulakan;Bocaue;Paombong;Malolos;Calumpit;Guiguinto;Balagtas,https://www.philstar.com/nation/2013/08/19/1109111/63-villages-bulacan-submerged-floodwaters
+event,2013-10-14,2013-10-14,report_date,Typhoon Santi backflood,Calumpit;Hagonoy,https://www.philstar.com/nation/2013/10/14/1244875/2-bulacan-towns-brace-more-flooding
+event,2013-11-12,2013-11-12,report_date,Flash floods in 13 villages,,https://www.philstar.com/nation/2013/11/12/1255571/flash-floods-hit-13-bulacan-villages
+event,2015-10-23,2015-10-25,report_date,Typhoon Lando,Calumpit;Hagonoy;San Ildefonso;San Miguel,https://www.pressreader.com/philippines/manila-bulletin/20151023/282613146633196
+event,2018-07-15,2018-07-15,report_date,Intense rain and high tide in 9 villages,,https://mb.com.ph/2018/07/15/9-villages-in-bulacan-flooded-due-to-intense-rainfall-high-tide
+event,2018-07-24,2018-07-25,report_date,Calumpit monsoon flood,Calumpit,https://mb.com.ph/2018/07/24/29-villages-in-calumpit-under-1-to-4-feet-of-floods-16577-families-affected-1/
+event,2018-08-03,2018-08-03,documented,Flash floods near 200 mm rain,Santa Maria;Marilao;Bocaue,https://www.gmanetwork.com/news/topstories/regions/662876/flash-floods-hit-sta-maria-marilao-and-bocaue-in-bulacan/story
+event,2018-08-11,2018-08-13,documented,Karding-enhanced monsoon,Meycauayan;Hagonoy;Marilao;Baliwag;Balagtas;Bocaue;Guiguinto;Calumpit,https://mb.com.ph/2018/08/13/monsoon-rains-inundate-82-villages-in-bulacan
+event,2018-09-18,2018-09-19,report_date,Typhoon Ompong backflood,Calumpit;Hagonoy,https://www.gmanetwork.com/news/topstories/regions/668289/17-barangays-in-calumpit-bulacan-still-flooded-even-after-ompong-left/story/?amp
+event,2020-10-26,2020-10-27,report_date,Typhoon Quinta,Hagonoy;Calumpit,https://www.pressreader.com/philippines/sunstar-pampanga/20201027/281599537996627
+event,2020-11-12,2020-11-17,documented,Typhoon Ulysses,San Ildefonso;San Miguel;Calumpit;Hagonoy,http://prffwc.synthasite.com/resources/PRB%20flood-2020-Ulysses.pdf
+event,2021-08-01,2021-08-03,report_date,Fabian-enhanced habagat,Malolos;Calumpit;Hagonoy,https://www.philstar.com/nation/2021/08/01/2116676/state-calamity-calumpit-malolos-due-flooding
+event,2022-09-25,2022-09-28,documented,Super Typhoon Karding,San Miguel;Hagonoy;Bulakan,https://news.abs-cbn.com/news/09/26/22/typhoon-karding-floods-bulacan-towns
+event,2023-07-28,2023-08-01,report_date,Egay and Falcon habagat,Calumpit;Malolos;Meycauayan;Paombong;Pandi;Guiguinto;Bocaue;San Rafael;Obando;Balagtas;Angat;Marilao;Bustos;Plaridel;Hagonoy;Bulakan;San Ildefonso;San Miguel,https://mb.com.ph/2023/7/28/14-towns-in-bulacan-affected-by-heavy-flooding-due-to-typhoon-egay
+event,2023-09-01,2023-09-01,report_date,Rain and high tide,Hagonoy,https://www.abs-cbn.com/news/09/01/23/parts-of-bulacan-submerged-in-floods-due-to-rains-high-tide
+event,2024-07-24,2024-07-25,documented,Typhoon Carina,Hagonoy,https://www.pna.gov.ph/articles/1229683
+event,2024-09-02,2024-09-05,documented,Severe Tropical Storm Enteng,Marilao;Meycauayan;Balagtas;Guiguinto;Santa Maria,https://www.gmanetwork.com/news/topstories/regions/919479/floods-submerge-parts-of-bulacan-amid-habagat-enhanced-rains/story/
+event,2025-06-06,2025-06-06,report_date,Flooding in Bulacan,,https://adinet.ahacentre.org/report/philippines-flooding-in-bulacan-region--iii-20250606
+event,2025-07-21,2025-07-25,report_date,Crising Dante Emong habagat,Calumpit;Hagonoy;Paombong;Bocaue;Guiguinto;Marilao;Obando;San Miguel;Balagtas;Meycauayan,https://mb.com.ph/2025/07/22/calumpit-bulacan-under-state-of-calamity
+event,2025-09-24,2025-09-26,documented,Nando and Opong,Calumpit,https://mb.com.ph/2025/09/26/floods-inundate-17-calumpit-bulacan-villages
+event,2026-08-10,2026-08-31,report_date,Luis Maymay habagat,Malolos;Calumpit;Hagonoy;San Miguel;Paombong;Angat;Bocaue;Guiguinto;Pulilan;Balagtas;Marilao,https://www.philstar.com/nation/2026/08/12/2548689/high-tide-rain-inundate-149-bulacan-villages
+mask,2011-01-01,2011-09-29,coverage_gap,Early 2011 not reviewed,,
+mask,2011-10-01,2011-12-31,coverage_gap,Late 2011 not reviewed,,
+mask,2012-01-01,2012-08-05,coverage_gap,Flood start before first report in August 2012 unknown,,
+mask,2012-08-12,2012-09-30,undated_report,Flooding continued for weeks and Karen report lacks an exact date,,https://newsinfo.inquirer.net/?p=272412
+mask,2013-08-22,2013-09-05,undated_report,Maring flood end date unknown,,https://promdino.blogspot.com/2013/08/bulacan-under-state-of-calamity-again.html
+mask,2014-06-01,2014-11-30,coverage_gap,Mario flooding has no Bulacan-specific date and other 2014 storms are unverified,,https://newsinfo.inquirer.net/639585/mario-unleashes-fury-up-north-as-it-moves-away-from-ph/
+mask,2015-10-17,2015-10-22,undated_report,Lando flood start before report unknown,,https://newsinfo.inquirer.net/734873/after-lando-pampanga-bulacan-fight-floods
+mask,2016-06-01,2016-11-30,coverage_gap,Only one verified 2016 Bulacan record found,,
+mask,2017-06-01,2017-11-30,coverage_gap,No verified Bulacan records found for the 2017 wet season,,
+mask,2018-07-16,2018-07-23,undated_report,Calumpit flood start before report unknown,,
+mask,2018-09-14,2018-09-17,undated_report,Ompong flood start before report unknown,,
+mask,2019-06-01,2019-11-30,coverage_gap,No verified Bulacan records found for the 2019 wet season,,
+mask,2020-10-15,2020-10-26,undated_report,Pepito flooding reported without an exact date,,https://newsinfo.inquirer.net/1351447/pepito-leaves-p30-m-farm-damage-in-bulacan
+mask,2020-10-28,2020-11-11,undated_report,Quinta and Rolly period flood end unknown,,
+mask,2021-07-15,2021-07-31,undated_report,More than two weeks of Fabian-enhanced rain before the report,,https://www.pna.gov.ph/articles/1148932
+mask,2022-10-25,2022-11-05,coverage_gap,Paeng impact in Bulacan could not be verified,,
+mask,2023-08-02,2023-08-20,undated_report,Egay flood end date unknown,,https://www.philstar.com/headlines/2023/08/02/2285589/bulacan-pampanga-placed-under-state-calamity
+mask,2024-07-26,2024-08-05,undated_report,Carina flood end date unknown,,
+mask,2024-10-20,2024-11-20,coverage_gap,Kristine and Pepito impact in Bulacan could not be verified,,
+mask,2025-07-14,2025-07-20,undated_report,Days of rain before the first report,,
+mask,2025-07-26,2025-08-05,undated_report,July 2025 flood end date unknown,,
+mask,2025-09-27,2025-10-05,undated_report,September 2025 flood end date unknown,,
+mask,2025-11-01,2025-11-30,coverage_gap,Tino and Uwan impact in Bulacan could not be verified,,
+mask,2026-08-01,2026-08-09,undated_report,Flood start before the August 10 report unknown,,https://tribune.net.ph/2026/08/03/pagasa-warns-of-flooding-in-pampanga-river-basin-due-to-td-luisph
+mask,2026-09-01,2026-09-30,coverage_gap,Flood end date in September 2026 unknown,,https://mb.com.ph/2026/09/01/pagasa-warns-pampanga-floodwaters-may-still-rise-from-upstream-runoff
+test_event,2009-10-02,2009-10-02,report_date,Calumpit backflood before Pepeng,Calumpit,https://philstar.com/headlines/2009/10/02/510141/back-floods-hit-bulacan-town
+test_event,2009-10-12,2009-10-12,report_date,Hagonoy and Calumpit backflood after Pepeng,Hagonoy;Calumpit,https://philstar.com/nation/2009/10/12/512983/18-bulacan-barangays-still-flooded
+tidal_event,2023-07-03,2023-07-03,documented,High tide in 12 Hagonoy villages,Hagonoy,https://mb.com.ph/2023/7/4/high-tide-causes-deep-flood-in-12-hagonoy-bulacan-vilages
+tidal_event,2026-04-21,2026-04-21,documented,High tide and local thunderstorms in Hagonoy,Hagonoy,https://adinet.ahacentre.org/report/philippines-flooding-in-bulacan-region-iii-20260421
+event,2016-10-24,2016-10-24,report_date,Typhoon Lawin backflood,Calumpit,https://www.gmanetwork.com/news/topstories/regions/586158/floods-in-calumpit-bulacan-still-waist-deep-after-typhoon-lawin/story
+tidal_event,2025-06-18,2025-06-18,report_date,High tide at San Roque school,Hagonoy,https://newscorebulacan.net/hagonoy-schools-float-in-high-tide-waters/
+tidal_event,2026-08-09,2026-08-09,documented,High tide about 4.8 ft in coastal Hagonoy,Hagonoy,https://www.gmanetwork.com/news/topstories/regions/997873/habagat-high-tide-cause-water-levels-to-rise-in-bulacan-coastal-areas/story/

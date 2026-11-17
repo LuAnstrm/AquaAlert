@@ -1,0 +1,24 @@
+start,name,date_basis,local_rain,upstream_rain,river_flow,high_tide,low_local_rain,is_high_upstream_rain,is_high_river_flow,is_high_high_tide
+2011-09-30,Typhoon Pedring,report_date,137.9,195.0,3514.6,4.2,False,True,True,True
+2012-08-06,Habagat August 2012,report_date,52.3,168.0,1505.61,3.12,False,True,True,False
+2013-08-19,Maring-enhanced habagat,report_date,37.87,130.27,1085.43,3.89,True,False,False,True
+2013-10-14,Typhoon Santi backflood,report_date,98.83,141.87,2064.38,3.94,False,True,True,True
+2013-11-12,Flash floods in 13 villages,report_date,14.97,54.7,501.34,3.56,True,False,False,False
+2015-10-23,Typhoon Lando,report_date,123.13,281.53,5092.31,3.44,False,True,True,False
+2018-07-15,Intense rain and high tide in 9 villages,report_date,130.6,147.8,1602.25,4.03,False,True,True,True
+2018-07-24,Calumpit monsoon flood,report_date,65.57,152.43,1431.19,3.6,False,True,True,False
+2018-08-03,Flash floods near 200 mm rain,documented,37.33,85.23,594.66,3.68,True,False,False,False
+2018-08-11,Karding-enhanced monsoon,documented,75.7,155.93,1050.96,4.09,False,True,False,True
+2018-09-18,Typhoon Ompong backflood,report_date,64.13,118.0,1709.02,3.61,False,False,True,False
+2020-10-27,Typhoon Quinta,report_date,78.97,235.83,1523.05,3.65,False,True,True,False
+2020-11-12,Typhoon Ulysses,documented,170.27,190.83,1249.26,3.49,False,True,True,False
+2021-08-03,Fabian-enhanced habagat,report_date,44.53,89.43,646.14,3.56,True,False,False,False
+2022-09-25,Super Typhoon Karding,documented,62.67,167.63,900.57,3.61,False,True,False,False
+2023-07-28,Egay and Falcon habagat,report_date,58.87,126.57,1220.8,3.5,False,False,True,False
+2023-09-01,Rain and high tide,report_date,64.53,86.73,479.84,3.9,False,False,False,True
+2024-07-24,Typhoon Carina,documented,197.67,187.83,949.6,,False,True,False,False
+2024-09-02,Severe Tropical Storm Enteng,documented,71.03,165.03,848.18,3.77,False,True,False,True
+2025-06-06,Flooding in Bulacan,report_date,33.63,102.37,348.95,3.34,True,False,False,False
+2025-07-21,Crising Dante Emong habagat,report_date,103.83,171.13,1092.96,3.64,False,True,False,False
+2025-09-24,Nando and Opong,documented,95.97,126.9,1229.27,3.53,False,False,True,False
+2026-08-10,Luis Maymay habagat,report_date,99.5,244.87,2431.2,3.8,False,True,True,True
