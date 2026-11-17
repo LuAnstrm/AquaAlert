@@ -1,0 +1,4 @@
+data/external/boundaries/*.zip filter=lfs diff=lfs merge=lfs -text
+data/external/noah/*.zip filter=lfs diff=lfs merge=lfs -text
+data/external/factors/*.tif filter=lfs diff=lfs merge=lfs -text
+data/external/factors/*.csv filter=lfs diff=lfs merge=lfs -text
